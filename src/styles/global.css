@@ -1,0 +1,268 @@
+/* ============================================================================
+   THEME  —  light is the default art direction; dark is the cinematic one.
+   ThemeContext sets data-theme="light|dark" on <html>. No attribute = light.
+   ========================================================================= */
+:root {
+  color-scheme: light;
+
+  /* LIGHT — warm white, editorial luxury commerce */
+  --bg: #faf8f3;
+  --bg-1: #f4f0e7;
+  --bg-2: #ece7da;   /* raised surfaces: cards, drawers, summary panels */
+  --bg-3: #e7e1d2;   /* inputs, chips */
+
+  --ink: #0d0c0a;                       /* dark black — primary text */
+  --ink-dim: #23211c;                   /* body, metadata — near-black, fully legible */
+  --ink-faint: #4a473f;                 /* labels, captions — clear dark grey */
+  --ink-disabled: #8f8b7f;
+
+  --line: rgba(13, 12, 10, 0.16);
+  --line-strong: rgba(13, 12, 10, 0.42);
+
+  --btn-text: var(--bg);                /* text sitting on a filled --ink button */
+  --hover-wash: rgba(13, 12, 10, 0.055);
+  --scrim: rgba(24, 21, 15, 0.46);
+  --header-solid: rgba(250, 248, 243, 0.9);
+  --header-over: rgba(250, 248, 243, 0.0);
+  --surface-flag: rgba(250, 248, 243, 0.94);
+  --shadow-lg: 0 30px 70px rgba(40, 33, 18, 0.18);
+  --word-shadow: 0 2px 30px rgba(40, 33, 18, 0.12);
+  --img-aside-filter: brightness(0.98) contrast(1.02);
+  --hero-img-filter: brightness(1.02) contrast(0.99) saturate(0.95);
+  --hero-wash: linear-gradient(180deg, rgba(250, 248, 243, 0.14), rgba(250, 248, 243, 0) 30%, rgba(250, 248, 243, 0.06) 76%, rgba(250, 248, 243, 0.26));
+  --hero-scrim: linear-gradient(90deg, rgba(250, 248, 243, 0.92) 0%, rgba(250, 248, 243, 0.66) 22%, rgba(250, 248, 243, 0.24) 40%, rgba(250, 248, 243, 0) 56%);
+  --hero-scrim-mobile: linear-gradient(180deg, rgba(250, 248, 243, 0.42), rgba(250, 248, 243, 0.82) 46%, rgba(250, 248, 243, 0.96));
+  --hero-concrete: #d4cdc1;
+  --hero-text: #0d0c0a;
+  --hero-text-dim: #23211c;
+
+  --plate-ink: 23, 21, 15;             /* rgb for generative product plates */
+  --plate-0: #e7e0cf;
+  --plate-1: #d3ccb9;
+
+  --accent: #a83228;                   /* from the Azraa mark — used sparingly */
+  --accent-soft: rgba(168, 50, 40, 0.12);
+  --ok: #4c7a54;
+  --warn: #8a5e1c;
+  --err: #b23b34;
+
+  --serif: 'Cormorant Garamond', 'Times New Roman', Georgia, serif;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+
+  --label: 0.24em;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --pad: clamp(1.25rem, 4vw, 3.5rem);
+  --header-h: 4.75rem;
+  --maxw: 82rem;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg: #0b0b0c;
+  --bg-1: #101011;
+  --bg-2: #161618;
+  --bg-3: #1e1e21;
+
+  --ink: #f3f0e9;
+  --ink-dim: rgba(243, 240, 233, 0.78);
+  --ink-faint: rgba(243, 240, 233, 0.56);
+  --ink-disabled: rgba(243, 240, 233, 0.32);
+
+  --line: rgba(243, 240, 233, 0.16);
+  --line-strong: rgba(243, 240, 233, 0.38);
+
+  --btn-text: #111;
+  --hover-wash: rgba(243, 240, 233, 0.05);
+  --scrim: rgba(6, 6, 7, 0.62);
+  --header-solid: rgba(11, 11, 12, 0.82);
+  --header-over: linear-gradient(180deg, rgba(8, 8, 9, 0.55), rgba(8, 8, 9, 0));
+  --surface-flag: rgba(11, 11, 12, 0.82);
+  --shadow-lg: 0 30px 70px rgba(0, 0, 0, 0.5);
+  --word-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
+  --img-aside-filter: brightness(0.55) grayscale(0.2);
+  --hero-img-filter: brightness(0.58) contrast(1.06) saturate(0.86);
+  --hero-wash: linear-gradient(180deg, rgba(8, 8, 9, 0.32), rgba(8, 8, 9, 0.08) 34%, rgba(8, 8, 9, 0.1) 72%, rgba(8, 8, 9, 0.55));
+  --hero-scrim: linear-gradient(90deg, rgba(8, 8, 9, 0.88) 0%, rgba(8, 8, 9, 0.6) 24%, rgba(8, 8, 9, 0.24) 44%, rgba(8, 8, 9, 0) 60%);
+  --hero-scrim-mobile: linear-gradient(180deg, rgba(8, 8, 9, 0.3), rgba(8, 8, 9, 0.55) 55%, rgba(8, 8, 9, 0.85));
+  --hero-concrete: #0d0d0e;
+  --hero-text: #f3f0e9;
+  --hero-text-dim: rgba(243, 240, 233, 0.7);
+
+  --plate-ink: 243, 240, 233;
+  --plate-0: #26262a;
+  --plate-1: #0e0e10;
+
+  --accent: #d9564c;
+  --accent-soft: rgba(217, 86, 76, 0.16);
+  --ok: #7fae86;
+  --warn: #d8b271;
+  --err: #e88;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: var(--bg);
+  -webkit-text-size-adjust: 100%;
+  transition: background-color 0.4s var(--ease);
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 300;
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  /* Cormorant defaults to old-style figures; keep numerals lining everywhere */
+  font-variant-numeric: lining-nums;
+  font-feature-settings: 'lnum' 1, 'tnum' 0;
+  transition: background-color 0.4s var(--ease), color 0.4s var(--ease);
+}
+
+::selection {
+  background: var(--accent-soft);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+:where(a, button, input, select, textarea):focus-visible {
+  outline: 2px solid var(--line-strong);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+.u-wrap {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--pad);
+}
+
+.u-hidden {
+  display: none !important;
+}
+
+.u-visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 200;
+  padding: 0.6rem 1rem;
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 0.75rem;
+  letter-spacing: var(--label);
+  text-transform: uppercase;
+  transform: translateY(-160%);
+  transition: transform 0.3s var(--ease);
+}
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* ---------- structural layers ---------- */
+
+.page {
+  position: relative;
+}
+
+.experience {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.experience canvas {
+  display: block;
+}
+
+.scroll-driver {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+/* Lenis smooth-scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ---------- editorial primitives ---------- */
+
+.label {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: clamp(0.62rem, 0.9vw, 0.74rem);
+  letter-spacing: var(--label);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.display {
+  font-family: var(--serif);
+  font-weight: 300;
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+}
+
+.wordmark {
+  font-family: var(--serif);
+  font-weight: 300;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* reduced motion: nothing eases, nothing drifts */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

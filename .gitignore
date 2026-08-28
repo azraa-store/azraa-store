@@ -1,0 +1,17 @@
+node_modules
+dist
+dist-ssr
+*.local
+.env
+.env.*
+!.env.example
+.DS_Store
+.vite
+_*.mjs
+
+# inventory runtime data (the tool creates these on first run)
+inventory/stock.json
+inventory/history.json
+inventory/flags.json
+inventory/.lock
+__pycache__/
