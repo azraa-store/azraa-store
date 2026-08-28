@@ -11,6 +11,7 @@
   transition: color 0.2s;
 }
 .theme-toggle:hover { color: var(--ink); }
+@media (max-width: 600px) { .theme-toggle { width: 2rem; height: 2rem; } }
 .mmenu__region .theme-toggle {
   width: auto; height: auto; padding: 0.4rem 0.6rem;
   border: 1px solid var(--line); border-radius: 2px;

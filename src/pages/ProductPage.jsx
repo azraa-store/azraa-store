@@ -104,7 +104,6 @@ export default function ProductPage() {
           {product.images?.primary == null && (
             <p className="pdp__frame-note">
               Product photography is being finalised.
-              {product.hero && <> The interactive study of this piece runs on the <Link to="/">home film</Link>.</>}
             </p>
           )}
         </div>

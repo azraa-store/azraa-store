@@ -112,6 +112,9 @@
 html {
   background: var(--bg);
   -webkit-text-size-adjust: 100%;
+  /* clip (not hidden) contains off-canvas panels without creating a
+     scroll container — so position: sticky keeps working */
+  overflow-x: clip;
   transition: background-color 0.4s var(--ease);
 }
 
@@ -121,7 +124,7 @@ body {
   font-family: var(--sans);
   font-weight: 300;
   line-height: 1.5;
-  overflow-x: hidden;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   /* Cormorant defaults to old-style figures; keep numerals lining everywhere */

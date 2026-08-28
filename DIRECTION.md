@@ -182,3 +182,21 @@ about the site changed.
   `--hero-scrim` is a shorter, lighter left gradient (clears by 56%, not 66%);
   `--hero-wash` is a whisper; dark `--hero-img-filter` lifted `0.5 → 0.58`.
 - Uses the same clean 4K `hero-range.jpg` from the previous update.
+
+### Update — bigger nav text, phone-responsive pass
+
+- **Header nav** was `0.68rem` — bumped to `0.82rem` (tracking `0.12em`), the
+  duplicate override rule removed, and the collapse-to-burger breakpoint moved
+  `1240 → 1300px` so the larger text never crowds the bar.
+- **Phones** (`site.css`, small `extras.css` addition):
+  - product grids (`.grid--3/.grid--4`) hold **two columns** down to 340px
+    (were single-column below 560); category cards (`.cats--4`) go two-up at
+    ≤620px. Cards compact on ≤560 — name/price stack, the "Retail & wholesale"
+    tag hides, plate flags shrink.
+  - `--header-h` `4.75 → 4.25rem` on ≤600, with the logo (36px), icons and
+    country pill tightened; section and page-hero top paddings pulled in on ≤560
+    so there's far less dead space between the hero and the first section.
+  - `html`/`body` set to `overflow-x: clip` (not `hidden`, so `position: sticky`
+    still works) — kills a hairline horizontal scroll from the off-canvas cart
+    drawer at ~320px. Verified: no horizontal scroll on any route, 320–1024px.
+- Removed the stale PDP note that linked to the deleted "home film".
