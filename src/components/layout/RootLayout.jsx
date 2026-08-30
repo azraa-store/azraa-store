@@ -3,6 +3,8 @@ import Header from '../chrome/Header.jsx';
 import Footer from '../chrome/Footer.jsx';
 import CartDrawer from '../chrome/CartDrawer.jsx';
 import FxNote from '../chrome/FxNote.jsx';
+import WhatsAppFab from '../chrome/WhatsAppFab.jsx';
+import AzraaBot from '../chrome/AzraaBot.jsx';
 
 const BARE = ['/sign-in', '/sign-up', '/reset-password'];
 
@@ -31,6 +33,8 @@ export default function RootLayout() {
       <Footer />
       <CartDrawer />
       <FxNote />
+      <WhatsAppFab />
+      <AzraaBot />
     </div>
   );
 }

@@ -200,3 +200,54 @@ about the site changed.
     still works) — kills a hairline horizontal scroll from the off-canvas cart
     drawer at ~320px. Verified: no horizontal scroll on any route, 320–1024px.
 - Removed the stale PDP note that linked to the deleted "home film".
+
+### Update — WhatsApp contact
+
+`src/config/site.js` holds the public contact channels — `WHATSAPP` (`display`
+"+91 90035 41640", `e164` "919003541640") and `whatsappLink()` for a
+prefilled `wa.me` link. Surfaced three ways:
+
+- **Floating button** (`components/chrome/WhatsAppFab.jsx`, in `RootLayout`) —
+  fixed bottom-right on every page: a green `#25d366` "WhatsApp" pill on
+  desktop, an icon-only circle on phones (`≤640px`). `.wa-fab` in `extras.css`.
+- **Contact page** — a "WhatsApp" block at the top of the contact info list.
+- **Footer** — a "WhatsApp · +91 90035 41640" link in the brand column.
+
+The label is just "WhatsApp" (not "WhatsApp us") everywhere.
+
+To change the number, edit `src/config/site.js` only.
+
+### Update — AZRAA Bot (customer-service assistant)
+
+A chat assistant in the bottom-right corner of every page, stacked below the
+WhatsApp button (which steps aside while the chat is open via
+`:root[data-bot-open]`).
+
+**Pieces**
+- `config/site.js` — unchanged number config, reused for the WhatsApp handoff.
+- `data/faqs.js` — curated Q&A (wholesale, trade accounts, shipping, delivery
+  cost, returns, payment, currency, sizing, stock, orders, accounts, company,
+  categories, human handoff), kept in sync with the legal docs + logistics.
+- `services/assistant.js` — the engine. `askAssistant({messages, context})` is
+  the only call the UI makes. **Local mode (default):** an intent router over the
+  live catalogue, region-aware pricing (`services/pricing.js`), inventory
+  (`services/inventory.js`) and the FAQ set — product search, price/MOQ lookups,
+  a per-product MOQ summary, stock, sizing, shipping/returns/payment, navigation.
+  Returns a shaped reply — `{ content, chips, products, links, handoff }`.
+  **Model mode:** if `VITE_ASSISTANT_ENDPOINT` is set, each turn is POSTed there
+  and answered by a model server-side (e.g. `claude-opus-5`), returning the same
+  shape. The model key + system prompt never touch the browser. If the endpoint
+  errors, it silently falls back to the local engine.
+- `context/AssistantContext.jsx` — open state, the message thread (persisted to
+  `localStorage` `azraa.bot.thread`, trimmed to 40 turns), an unread badge, and
+  the per-turn `context` object (country, currency, rates, cart count, path).
+- `components/chrome/AzraaBot.jsx` — the UI: a circular `--ink` launcher with a
+  one-time breathing ring, and a panel (a 24×38rem card bottom-right on desktop,
+  a full-screen sheet ≤640px). Bot messages render text, mini product cards
+  (Link to the PDP), navigation links (solid pill + `→`) and quick-reply chips
+  (dashed pill = "ask this"). Theme-aware via tokens; `Esc` closes; reduced
+  motion respected; body scroll locked only for the mobile sheet.
+- `.env.example` documents `VITE_ASSISTANT_ENDPOINT` and the backend contract.
+
+Wired in `App.jsx` (`AssistantProvider` inside `CartProvider`) and rendered from
+`RootLayout.jsx`.

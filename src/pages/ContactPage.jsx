@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Seo from '../components/ui/Seo.jsx';
 import Button from '../components/ui/Button.jsx';
 import { Field, TextInput, TextArea, Select } from '../components/ui/Field.jsx';
+import { WHATSAPP, whatsappLink } from '../config/site.js';
 
 const TOPICS = ['Wholesale enquiry', 'An existing order', 'Product question', 'Partnership', 'Something else'];
 
@@ -17,6 +18,20 @@ export default function ContactPage() {
 
       <div className="contact-grid">
         <div className="contact-info">
+          <div>
+            <h3>WhatsApp</h3>
+            <p className="muted">Quickest for quotes, stock and order questions.</p>
+            <p>
+              <a
+                className="link"
+                href={whatsappLink()}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {WHATSAPP.display}
+              </a>
+            </p>
+          </div>
           <div>
             <h3>Wholesale desk</h3>
             <p className="muted">Trade enquiries, quotes and account terms.</p>
