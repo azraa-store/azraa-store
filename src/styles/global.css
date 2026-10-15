@@ -23,18 +23,20 @@
   --hover-wash: rgba(13, 12, 10, 0.055);
   --scrim: rgba(24, 21, 15, 0.46);
   --header-solid: rgba(250, 248, 243, 0.9);
-  --header-over: rgba(250, 248, 243, 0.0);
+  --header-over: linear-gradient(180deg, rgba(250, 248, 243, 0.85), rgba(250, 248, 243, 0.4));
   --surface-flag: rgba(250, 248, 243, 0.94);
   --shadow-lg: 0 30px 70px rgba(40, 33, 18, 0.18);
   --word-shadow: 0 2px 30px rgba(40, 33, 18, 0.12);
   --img-aside-filter: brightness(0.98) contrast(1.02);
   --hero-img-filter: brightness(1.02) contrast(0.99) saturate(0.95);
   --hero-wash: linear-gradient(180deg, rgba(250, 248, 243, 0.14), rgba(250, 248, 243, 0) 30%, rgba(250, 248, 243, 0.06) 76%, rgba(250, 248, 243, 0.26));
-  --hero-scrim: linear-gradient(90deg, rgba(250, 248, 243, 0.92) 0%, rgba(250, 248, 243, 0.66) 22%, rgba(250, 248, 243, 0.24) 40%, rgba(250, 248, 243, 0) 56%);
+  --hero-scrim: linear-gradient(90deg, rgba(250, 248, 243, 0.68) 0%, rgba(250, 248, 243, 0.46) 28%, rgba(250, 248, 243, 0.26) 46%, rgba(250, 248, 243, 0.06) 64%, rgba(250, 248, 243, 0) 78%);
   --hero-scrim-mobile: linear-gradient(180deg, rgba(250, 248, 243, 0.42), rgba(250, 248, 243, 0.82) 46%, rgba(250, 248, 243, 0.96));
   --hero-concrete: #d4cdc1;
   --hero-text: #0d0c0a;
   --hero-text-dim: #23211c;
+  --hero-eyebrow: #83603f;
+  --hero-gold: #c9a66b;
 
   --plate-ink: 23, 21, 15;             /* rgb for generative product plates */
   --plate-0: #e7e0cf;
@@ -84,11 +86,12 @@
   --img-aside-filter: brightness(0.55) grayscale(0.2);
   --hero-img-filter: brightness(0.58) contrast(1.06) saturate(0.86);
   --hero-wash: linear-gradient(180deg, rgba(8, 8, 9, 0.32), rgba(8, 8, 9, 0.08) 34%, rgba(8, 8, 9, 0.1) 72%, rgba(8, 8, 9, 0.55));
-  --hero-scrim: linear-gradient(90deg, rgba(8, 8, 9, 0.88) 0%, rgba(8, 8, 9, 0.6) 24%, rgba(8, 8, 9, 0.24) 44%, rgba(8, 8, 9, 0) 60%);
+  --hero-scrim: linear-gradient(90deg, rgba(8, 8, 9, 0.92) 0%, rgba(8, 8, 9, 0.78) 28%, rgba(8, 8, 9, 0.55) 46%, rgba(8, 8, 9, 0.18) 64%, rgba(8, 8, 9, 0) 78%);
   --hero-scrim-mobile: linear-gradient(180deg, rgba(8, 8, 9, 0.3), rgba(8, 8, 9, 0.55) 55%, rgba(8, 8, 9, 0.85));
   --hero-concrete: #0d0d0e;
   --hero-text: #f3f0e9;
   --hero-text-dim: rgba(243, 240, 233, 0.7);
+  --hero-eyebrow: #c9a06c;
 
   --plate-ink: 243, 240, 233;
   --plate-0: #26262a;

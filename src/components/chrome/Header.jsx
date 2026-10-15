@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import Logo from './Logo.jsx';
 import CountryPicker from './CountryPicker.jsx';
@@ -6,30 +6,55 @@ import ThemeToggle from './ThemeToggle.jsx';
 import MobileMenu from './MobileMenu.jsx';
 import SearchOverlay from './SearchOverlay.jsx';
 import { useCart } from '../../context/CartContext.jsx';
+import { useWishlist } from '../../context/WishlistContext.jsx';
 import { useAuth } from '../../context/AuthContext.jsx';
 
+// Primary nav, grouped the way a fashion retailer organises a header: a
+// standalone Home link, then labelled groups (Collections / Wholesale /
+// Company) that open a dropdown of their member pages.
 export const NAV = [
   { to: '/', label: 'Home', end: true },
-  { to: '/shop', label: 'Shop' },
-  { to: '/shop/men', label: 'Men' },
-  { to: '/shop/shoes', label: 'Shoes' },
-  { to: '/shop/bags', label: 'Bags' },
-  { to: '/shop/ladies', label: 'Ladies' },
-  { to: '/wholesale', label: 'Wholesale' },
-  { to: '/about', label: 'About' },
-  { to: '/contact', label: 'Contact' },
+  {
+    label: 'Collections',
+    base: '/shop',
+    items: [
+      { to: '/shop', label: 'Shop All', end: true },
+      { to: '/shop/men', label: 'Men' },
+      { to: '/shop/ladies', label: 'Ladies' },
+      { to: '/shop/shoes', label: 'Shoes' },
+      { to: '/shop/bags', label: 'Bags' },
+    ],
+  },
+  {
+    label: 'Wholesale',
+    base: '/wholesale',
+    items: [
+      { to: '/wholesale', label: 'Buy Wholesale', end: true },
+      { to: '/wholesale/enquiry', label: 'Trade Account' },
+    ],
+  },
+  {
+    label: 'Company',
+    items: [
+      { to: '/about', label: 'About' },
+      { to: '/contact', label: 'Contact' },
+    ],
+  },
 ];
 
 export default function Header() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const { count, setOpen: setCartOpen } = useCart();
+  const { count: wishCount } = useWishlist();
   const { isAuthed } = useAuth();
 
   const isHome = pathname === '/';
   const [scrolled, setScrolled] = useState(!isHome);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [openGroup, setOpenGroup] = useState(null);
+  const closeTimer = useRef(null);
 
   useEffect(() => {
     if (!isHome) { setScrolled(true); return; }
@@ -39,7 +64,16 @@ export default function Header() {
     return () => window.removeEventListener('scroll', onScroll);
   }, [isHome]);
 
-  useEffect(() => { setMenuOpen(false); setSearchOpen(false); }, [pathname]);
+  useEffect(() => { setMenuOpen(false); setSearchOpen(false); setOpenGroup(null); }, [pathname]);
+
+  const openGroupNow = (label) => {
+    clearTimeout(closeTimer.current);
+    setOpenGroup(label);
+  };
+  const closeGroupSoon = () => {
+    clearTimeout(closeTimer.current);
+    closeTimer.current = setTimeout(() => setOpenGroup(null), 150);
+  };
 
   return (
     <>
@@ -53,20 +87,76 @@ export default function Header() {
           </div>
 
           <nav className="hdr__nav" aria-label="Primary">
-            {NAV.map((item) => (
-              <NavLink
-                key={item.to}
-                to={item.to}
-                end={item.end}
-                className={({ isActive }) => `hdr__link ${isActive ? 'is-active' : ''}`}
-              >
-                {item.label}
-              </NavLink>
-            ))}
+            {NAV.map((item) => {
+              if (!item.items) {
+                return (
+                  <NavLink
+                    key={item.to}
+                    to={item.to}
+                    end={item.end}
+                    className={({ isActive }) => `hdr__link ${isActive ? 'is-active' : ''}`}
+                  >
+                    {item.label}
+                  </NavLink>
+                );
+              }
+              const isGroupActive = item.items.some((sub) =>
+                sub.end ? pathname === sub.to : pathname.startsWith(sub.to)
+              );
+              const isOpen = openGroup === item.label;
+              return (
+                <div
+                  key={item.label}
+                  className="hdr__group"
+                  onMouseEnter={() => openGroupNow(item.label)}
+                  onMouseLeave={closeGroupSoon}
+                >
+                  {item.base ? (
+                    <NavLink
+                      to={item.base}
+                      className={() => `hdr__link hdr__link--group ${isGroupActive ? 'is-active' : ''}`}
+                      onFocus={() => openGroupNow(item.label)}
+                    >
+                      {item.label}
+                    </NavLink>
+                  ) : (
+                    <button
+                      type="button"
+                      className={`hdr__link hdr__link--group ${isGroupActive ? 'is-active' : ''}`}
+                      aria-expanded={isOpen}
+                      onClick={() => setOpenGroup(isOpen ? null : item.label)}
+                      onFocus={() => openGroupNow(item.label)}
+                    >
+                      {item.label}
+                    </button>
+                  )}
+                  <div className={`hdr__dropdown ${isOpen ? 'is-open' : ''}`}>
+                    {item.items.map((sub) => (
+                      <NavLink
+                        key={sub.to}
+                        to={sub.to}
+                        end={sub.end}
+                        className={({ isActive }) => `hdr__dropdown-link ${isActive ? 'is-active' : ''}`}
+                      >
+                        {sub.label}
+                      </NavLink>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
           </nav>
 
           <div className="hdr__right">
             <button className="hdr__icon" aria-label="Search" onClick={() => setSearchOpen(true)}><SearchIcon /></button>
+            <button
+              className="hdr__icon hdr__icon--wish"
+              aria-label={`Wishlist, ${wishCount} item${wishCount === 1 ? '' : 's'}`}
+              onClick={() => navigate('/wishlist')}
+            >
+              <HeartIcon />
+              {wishCount > 0 && <span className="hdr__icon-count">{wishCount}</span>}
+            </button>
             <button
               className="hdr__icon hdr__icon--account"
               aria-label={isAuthed ? 'Your account' : 'Sign in'}
@@ -84,7 +174,7 @@ export default function Header() {
         </div>
       </header>
 
-      <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} nav={NAV} isAuthed={isAuthed} />
+      <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} nav={NAV} isAuthed={isAuthed} wishCount={wishCount} />
       <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} />
     </>
   );
@@ -93,6 +183,11 @@ export default function Header() {
 const SearchIcon = () => (
   <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.4">
     <circle cx="11" cy="11" r="6.5" /><path d="m20 20-3.6-3.6" />
+  </svg>
+);
+const HeartIcon = () => (
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.4">
+    <path d="M12 20.3 4.6 13c-2-2-2-5.3 0-7.3 2-2 5.2-2 7.1 0l.3.3.3-.3c2-2 5.2-2 7.1 0 2 2 2 5.3 0 7.3L12 20.3Z" />
   </svg>
 );
 const UserIcon = () => (

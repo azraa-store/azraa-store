@@ -72,6 +72,7 @@
   letter-spacing: var(--label);
   text-transform: uppercase;
   border: 1px solid transparent;
+  border-radius: 4px;
   cursor: pointer;
   transition: background 0.35s var(--ease), color 0.35s var(--ease), border-color 0.35s var(--ease), opacity 0.2s;
   white-space: nowrap;
@@ -86,6 +87,28 @@
 
 .btn--outline { border-color: var(--line-strong); color: var(--ink); }
 .btn--outline:hover:not(:disabled) { border-color: var(--ink); background: var(--hover-wash); }
+
+/* the hero's outline CTA sits on top of a busy photo in light theme, where a
+   bare outline nearly disappears — fill it gold there. Dark theme's version
+   already reads fine against the photo, so it keeps the plain outline look. */
+.home-hero__cta .btn--outline {
+  background: var(--hero-gold);
+  border-color: var(--hero-gold);
+  color: #1d1710;
+}
+.home-hero__cta .btn--outline:hover:not(:disabled) {
+  background: #b88f56;
+  border-color: #b88f56;
+}
+:root[data-theme='dark'] .home-hero__cta .btn--outline {
+  background: transparent;
+  border-color: var(--line-strong);
+  color: var(--ink);
+}
+:root[data-theme='dark'] .home-hero__cta .btn--outline:hover:not(:disabled) {
+  background: var(--hover-wash);
+  border-color: var(--ink);
+}
 
 .btn--ghost { color: var(--ink-dim); }
 .btn--ghost:hover:not(:disabled) { color: var(--ink); background: var(--hover-wash); }
@@ -158,6 +181,7 @@
 }
 .hdr.is-over {
   background: var(--header-over);
+  backdrop-filter: blur(8px) saturate(1.05);
 }
 .hdr.is-solid {
   background: var(--header-solid);
@@ -169,6 +193,7 @@
   max-width: var(--maxw);
   margin-inline: auto;
   padding-inline: var(--pad);
+  padding-left: clamp(0.85rem, 2vw, 1.5rem);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -199,7 +224,45 @@
   white-space: nowrap;
 }
 .hdr__link:hover { color: var(--ink); border-bottom-color: var(--line-strong); }
-.hdr__link.is-active { border-bottom-color: var(--ink); }
+.hdr__link.is-active { border-bottom-color: var(--ink); font-weight: 600; }
+
+.hdr__group { position: relative; display: flex; }
+.hdr__link--group { background: none; }
+.hdr__dropdown {
+  position: absolute;
+  top: calc(100% + 0.65rem);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 11rem;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-50%) translateY(-4px);
+  transition: opacity 0.18s var(--ease), transform 0.18s var(--ease), visibility 0.18s;
+  z-index: 20;
+}
+.hdr__dropdown.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+.hdr__dropdown-link {
+  padding: 0.55rem 0.7rem;
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-dim);
+  border-radius: 2px;
+  white-space: nowrap;
+}
+.hdr__dropdown-link:hover { background: var(--hover-wash); color: var(--ink); }
+.hdr__dropdown-link.is-active { color: var(--ink); font-weight: 500; }
 
 .hdr__right {
   display: flex;
@@ -210,6 +273,7 @@
   gap: clamp(0.4rem, 1.2vw, 0.9rem);
 }
 .hdr__icon {
+  position: relative;
   display: grid;
   place-items: center;
   width: 2.2rem;
@@ -218,6 +282,21 @@
   transition: color 0.2s;
 }
 .hdr__icon:hover { color: var(--ink); }
+.hdr__icon-count {
+  position: absolute;
+  top: -2px;
+  right: -4px;
+  min-width: 1.05rem;
+  height: 1.05rem;
+  padding: 0 0.2rem;
+  display: grid;
+  place-items: center;
+  background: var(--ink);
+  color: var(--btn-text);
+  font-size: 0.6rem;
+  font-weight: 500;
+  border-radius: 999px;
+}
 .hdr__bag {
   position: relative;
   display: grid;
@@ -253,6 +332,7 @@
 @media (max-width: 600px) {
   :root { --header-h: 4.25rem; }
   .hdr__icon--account { display: none; }
+  .hdr__icon--wish { display: none; }
   .logo__mark { height: 36px; }
   .cpick__cur { display: none; }
   .cpick__toggle { padding: 0.35rem 0.4rem; border-color: transparent; }
@@ -276,9 +356,9 @@
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.4rem 0.55rem;
+  padding: 0.4rem 0.6rem;
   border: 1px solid var(--line);
-  border-radius: 2px;
+  border-radius: 6px;
   font-size: 0.68rem;
   letter-spacing: 0.1em;
   color: var(--ink-dim);
@@ -287,6 +367,7 @@
 .cpick__toggle:hover { border-color: var(--line-strong); color: var(--ink); }
 .cpick__flag { font-size: 0.95rem; line-height: 1; }
 .cpick__cur { color: var(--ink-faint); }
+.cpick__chevron { color: var(--ink-faint); flex: none; }
 .cpick__panel {
   position: absolute;
   top: calc(100% + 0.5rem);
@@ -340,11 +421,17 @@
 .mmenu__link {
   font-family: var(--serif);
   font-weight: 300;
-  font-size: 1.9rem;
+  font-size: 1.3rem;
   color: var(--ink-dim);
   padding: 0.35rem 0;
 }
 .mmenu__link.is-active { color: var(--ink); }
+.mmenu__group-trigger { display: flex; align-items: center; justify-content: space-between; width: 100%; text-align: left; }
+.mmenu__chevron { font-family: var(--sans); font-size: 1rem; font-weight: 300; color: var(--ink-faint); }
+.mmenu__sublist { max-height: 0; overflow: hidden; display: flex; flex-direction: column; transition: max-height 0.3s var(--ease); padding-left: 1.1rem; }
+.mmenu__group.is-open .mmenu__sublist { max-height: 20rem; }
+.mmenu__sublink { font-family: var(--sans); font-size: 0.95rem; letter-spacing: 0.03em; color: var(--ink-faint); padding: 0.55rem 0; }
+.mmenu__sublink.is-active { color: var(--ink); }
 .mmenu__foot { border-top: 1px solid var(--line); padding-top: 1.4rem; display: flex; flex-direction: column; gap: 1rem; }
 .mmenu__account { font-size: 0.8rem; letter-spacing: 0.08em; color: var(--ink); }
 .mmenu__region { display: flex; align-items: center; gap: 0.8rem; font-size: 0.7rem; letter-spacing: var(--label); text-transform: uppercase; color: var(--ink-faint); }
@@ -492,9 +579,26 @@
   color: var(--ink);
   border-radius: 2px;
 }
-.pcard__flag--ws { left: auto; right: 0.7rem; color: var(--ink-dim); }
+.pcard__flag--ws { left: auto; right: 0.7rem; top: 2.65rem; color: var(--ink-dim); }
 .pcard__flag--low { color: var(--warn); }
 .pcard__flag--out { color: var(--ink-faint); }
+.pcard__wish {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  place-items: center;
+  background: var(--surface-flag);
+  backdrop-filter: blur(4px);
+  color: var(--ink-dim);
+  border-radius: 999px;
+  transition: color 0.2s, transform 0.2s;
+  z-index: 2;
+}
+.pcard__wish:hover { color: var(--ink); transform: scale(1.06); }
+.pcard__wish.is-on { color: var(--err); }
 .pcard__quick {
   position: absolute;
   left: 0.7rem;
@@ -528,6 +632,7 @@
   .pcard__meta { font-size: 0.72rem; margin-top: 0.35rem; }
   .pcard__flag--ws { display: none; }
   .pcard__flag { top: 0.5rem; left: 0.5rem; font-size: 0.5rem; padding: 0.22rem 0.4rem; }
+  .pcard__wish { top: 0.5rem; right: 0.5rem; width: 1.7rem; height: 1.7rem; }
 }
 
 /* ============================================================================
@@ -608,10 +713,9 @@
   font-size: 0.62rem;
   letter-spacing: var(--label);
   text-transform: uppercase;
-  color: var(--ink-faint);
+  color: var(--hero-eyebrow);
   margin-bottom: clamp(0.9rem, 2.4vw, 1.5rem);
 }
-.home-hero--still .home-hero__eyebrow,
 .home-hero--still .home-hero__tag { color: var(--hero-text-dim); }
 .home-hero--still .home-hero__word { color: var(--hero-text); }
 
@@ -757,6 +861,23 @@
 .pdp__info > .label { display: block; }
 .pdp__sticky { position: static; }
 .pdp__name { font-family: var(--serif); font-weight: 300; font-size: clamp(1.9rem, 4vw, 2.8rem); line-height: 1.05; margin: 0.5rem 0 0.9rem; }
+.pdp__title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+.pdp__title-row .pdp__name { flex: 1; }
+.pdp__wish {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.9rem;
+  padding: 0.4rem 0.2rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  transition: color 0.2s;
+}
+.pdp__wish:hover { color: var(--ink); }
+.pdp__wish.is-on { color: var(--err); }
 .pdp__price { display: flex; align-items: baseline; gap: 0.8rem; font-size: 1.2rem; margin-bottom: 1.2rem; }
 .pdp__unit { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); }
 .pdp__summary { color: var(--ink-dim); line-height: 1.7; margin-bottom: 1.8rem; }

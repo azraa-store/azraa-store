@@ -7,6 +7,7 @@ import ProductCard from '../components/commerce/ProductCard.jsx';
 import Price from '../components/ui/Price.jsx';
 import { getProductBySlug } from '../services/catalog.js';
 import { useCart } from '../context/CartContext.jsx';
+import { useWishlist } from '../context/WishlistContext.jsx';
 import { useRegion } from '../context/RegionContext.jsx';
 import { resolvePrice } from '../services/pricing.js';
 import { LOGISTICS } from '../data/logistics.js';
@@ -16,6 +17,7 @@ export default function ProductPage() {
   const { slug } = useParams();
   const navigate = useNavigate();
   const { add } = useCart();
+  const { has, toggle } = useWishlist();
   const { currency, locale, rates } = useRegion();
 
   const [product, setProduct] = useState(null);
@@ -110,7 +112,21 @@ export default function ProductPage() {
 
         <div className="pdp__info">
           <span className="label">{product.subcategory}</span>
-          <h1 className="pdp__name">{product.name}</h1>
+          <div className="pdp__title-row">
+            <h1 className="pdp__name">{product.name}</h1>
+            <button
+              type="button"
+              className={`pdp__wish ${has(product.id) ? 'is-on' : ''}`}
+              aria-label={has(product.id) ? 'Remove from wishlist' : 'Save to wishlist'}
+              aria-pressed={has(product.id)}
+              onClick={() => toggle(product.id)}
+            >
+              <svg viewBox="0 0 24 24" width="19" height="19" fill={has(product.id) ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="1.5">
+                <path d="M12 20.3 4.6 13c-2-2-2-5.3 0-7.3 2-2 5.2-2 7.1 0l.3.3.3-.3c2-2 5.2-2 7.1 0 2 2 2 5.3 0 7.3L12 20.3Z" />
+              </svg>
+              {has(product.id) ? 'Saved' : 'Save'}
+            </button>
+          </div>
 
           <div className="pdp__price">
             <Price product={product} mode={mode} />

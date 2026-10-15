@@ -38,7 +38,15 @@ trimmed.save(OUT / "logo-original.png")
 tw, th = trimmed.size
 tp = trimmed.load()
 
-# 2. colour version: keep RGB, knock white out to transparent (min-channel alpha)
+# the wordmark ("AZRAA") sits below the figure/tuxedo emblem — row profiling
+# shows the ink coverage trough (figure tapering out) then ramping back up
+# (the much wider letterforms starting) right around this row.
+WORDMARK_Y = 494
+
+# 2. colour version: keep RGB (emblem keeps its red), knock white out to
+#    transparent (min-channel alpha). The wordmark itself is forced to solid
+#    black so the lettering reads as one consistent colour instead of
+#    alternating black/red letter-to-letter.
 color = Image.new("RGBA", (tw, th), (0, 0, 0, 0))
 cp = color.load()
 for y in range(th):
@@ -46,18 +54,34 @@ for y in range(th):
         r, g, b, a = tp[x, y]
         ink = 255 - min(r, g, b)                # 0 white .. 255 solid
         alpha = int(a / 255 * min(255, int(ink * 1.3)))
-        cp[x, y] = (r, g, b, alpha)
+        if y >= WORDMARK_Y:
+            cp[x, y] = (0, 0, 0, alpha)
+        else:
+            cp[x, y] = (r, g, b, alpha)
 color.save(OUT / "logo-color.png")
 
-# 3. monochrome warm off-white for the dark theme
+# 3. dark-theme rendering: the black ink (tuxedo + wordmark) flips to a warm
+#    off-white so it reads against a near-black page, but the figure's red
+#    stays red — it should never go fully white/monochrome on a dark bg.
 mono = Image.new("RGBA", (tw, th), (0, 0, 0, 0))
 mp = mono.load()
 for y in range(th):
     for x in range(tw):
         r, g, b, a = tp[x, y]
         ink = 255 - min(r, g, b)
-        boosted = 0 if ink < 10 else min(255, int(24 + ink * 1.9))
-        mp[x, y] = (INK[0], INK[1], INK[2], int(a / 255 * boosted))
+        if ink < 10:
+            mp[x, y] = (0, 0, 0, 0)
+            continue
+        boosted = min(255, int(24 + ink * 1.9))
+        alpha = int(a / 255 * boosted)
+        is_red = y < WORDMARK_Y and (r - g > 30) and (r - b > 30)
+        if is_red:
+            rr = min(255, int(r * 1.1 + 20))
+            gg = int(g * 0.9)
+            bb = int(b * 0.9)
+            mp[x, y] = (rr, gg, bb, alpha)
+        else:
+            mp[x, y] = (INK[0], INK[1], INK[2], alpha)
 mono.save(OUT / "logo-mono.png")
 
 # 4. favicons — the mark centred on the warm site background, square
