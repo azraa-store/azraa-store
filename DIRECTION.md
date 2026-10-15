@@ -251,3 +251,23 @@ WhatsApp button (which steps aside while the chat is open via
 
 Wired in `App.jsx` (`AssistantProvider` inside `CartProvider`) and rendered from
 `RootLayout.jsx`.
+
+### Update — languages + name
+
+- **The assistant introduces itself as “AZRAA”**, not “AZRAA Bot” (header, greeting
+  and disclaimer). The component file stays `AzraaBot.jsx`.
+- **First open shows a language gate** — English, हिन्दी, বাংলা, Kiswahili,
+  Français, العربية. The choice is stored (`localStorage` `azraa.bot.lang`) and
+  can be changed from a globe button in the header. Arabic sets the panel `dir`
+  to `rtl` (a small `.bot-panel[dir='rtl']` block flips the tails, the card arrow
+  and the link arrow).
+- `i18n/assistant.js` — `LANGUAGES`, a key-major string table, `t(lang, key,
+  vars)`, `routeLabel(lang, to)`, `langDir(code)`. **Non-English is a first pass —
+  have a native speaker review it, especially the policy answers.**
+- `data/faqs.js` — `answer` is now `{ en, hi, bn, sw, fr, ar }`; English is
+  authoritative.
+- The engine routes on **English keywords only**, so chip `send` values stay
+  English (tapping a translated chip still routes) while every string a customer
+  reads goes through `t()`. Non-English greetings lead with a WhatsApp handoff,
+  since free-text matching in those languages mostly falls through to the
+  localised fallback.

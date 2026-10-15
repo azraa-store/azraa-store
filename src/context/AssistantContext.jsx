@@ -3,9 +3,11 @@ import { useLocation } from 'react-router-dom';
 import { useRegion } from './RegionContext.jsx';
 import { useCart } from './CartContext.jsx';
 import { askAssistant, greeting, assistantMode } from '../services/assistant.js';
+import { DEFAULT_LANG, isSupportedLang } from '../i18n/assistant.js';
 
 const AssistantContext = createContext(null);
 const THREAD_KEY = 'azraa.bot.thread';
+const LANG_KEY = 'azraa.bot.lang';
 const MAX_TURNS = 40; // keep the stored transcript bounded
 
 let seq = 0;
@@ -21,6 +23,15 @@ function loadThread() {
   }
 }
 
+function loadLang() {
+  try {
+    const v = localStorage.getItem(LANG_KEY);
+    return isSupportedLang(v) ? v : null;
+  } catch {
+    return null;
+  }
+}
+
 export function AssistantProvider({ children }) {
   const { countryCode, country, currency, locale, rates } = useRegion();
   const { count } = useCart();
@@ -30,6 +41,7 @@ export function AssistantProvider({ children }) {
   const [busy, setBusy] = useState(false);
   const [unread, setUnread] = useState(0);
   const [thread, setThread] = useState(() => loadThread() || []);
+  const [lang, setLangState] = useState(() => loadLang()); // null until the visitor picks
   const openRef = useRef(open);
   openRef.current = open;
 
@@ -43,14 +55,15 @@ export function AssistantProvider({ children }) {
     rates,
     cartCount: count,
     path: pathname,
+    lang: lang || DEFAULT_LANG,
   };
 
-  // seed the opening message the first time the panel is opened
+  // seed the opening message once a language is chosen and the panel is open
   useEffect(() => {
-    if (open && thread.length === 0) {
+    if (open && lang && thread.length === 0) {
       setThread([{ id: uid(), ...greeting(ctxRef.current) }]);
     }
-  }, [open, thread.length]);
+  }, [open, lang, thread.length]);
 
   // persist (trimmed)
   useEffect(() => {
@@ -62,6 +75,15 @@ export function AssistantProvider({ children }) {
     }
   }, [thread]);
 
+  const setLang = useCallback((code) => {
+    if (!isSupportedLang(code)) return;
+    setLangState(code);
+    try { localStorage.setItem(LANG_KEY, code); } catch { /* ignore */ }
+    const nextCtx = { ...ctxRef.current, lang: code };
+    // (re-)introduce in the chosen language
+    setThread((t) => (t.length === 0 ? [{ id: uid(), ...greeting(nextCtx) }] : [...t, { id: uid(), ...greeting(nextCtx) }]));
+  }, []);
+
   const send = useCallback(
     async (text) => {
       const content = String(text || '').trim();
@@ -71,7 +93,6 @@ export function AssistantProvider({ children }) {
       setThread((t) => [...t, userMsg]);
       setBusy(true);
 
-      // history the engine/backend sees (roles + content only)
       const history = [...thread, userMsg]
         .filter((m) => m.role === 'user' || m.role === 'assistant')
         .map((m) => ({ role: m.role, content: m.content }));
@@ -86,8 +107,7 @@ export function AssistantProvider({ children }) {
           {
             id: uid(),
             role: 'assistant',
-            content:
-              "Something went wrong on my end. Please try again, or reach us on WhatsApp or the contact form.",
+            content: 'Something went wrong. Please try again, or reach us on WhatsApp or the contact form.',
             chips: [],
             products: [],
             links: [{ label: 'Contact us', to: '/contact' }],
@@ -123,8 +143,13 @@ export function AssistantProvider({ children }) {
   }, [open]);
 
   const value = useMemo(
-    () => ({ open, setOpen, toggle, openPanel, thread, send, reset, busy, unread, mode: assistantMode }),
-    [open, toggle, openPanel, thread, send, reset, busy, unread]
+    () => ({
+      open, setOpen, toggle, openPanel,
+      thread, send, reset, busy, unread,
+      lang, setLang, needsLanguage: !lang,
+      mode: assistantMode,
+    }),
+    [open, toggle, openPanel, thread, send, reset, busy, unread, lang, setLang]
   );
 
   return <AssistantContext.Provider value={value}>{children}</AssistantContext.Provider>;

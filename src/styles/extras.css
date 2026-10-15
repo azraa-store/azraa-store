@@ -270,6 +270,58 @@
 }
 .bot-panel__close:hover { color: var(--ink); background: var(--hover-wash); }
 
+/* ---------- language gate ---------- */
+.bot-langgate {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-align: center;
+  padding: 1.5rem 1.4rem 2rem;
+}
+.bot-langgate__mark {
+  width: 3rem;
+  height: 3rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--bg);
+  margin-bottom: 0.4rem;
+}
+.bot-langgate__title {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  color: var(--ink);
+}
+.bot-langgate__sub {
+  font-size: 0.8rem;
+  line-height: 1.55;
+  color: var(--ink-faint);
+  max-width: 20rem;
+  margin-bottom: 0.9rem;
+}
+.bot-langgate__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.55rem;
+  width: 100%;
+  max-width: 20rem;
+}
+.bot-langgate__opt {
+  padding: 0.7rem 0.6rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  background: var(--bg-2);
+  color: var(--ink);
+  font-size: 0.9rem;
+  transition: border-color 0.2s, background 0.2s, transform 0.15s;
+}
+.bot-langgate__opt:hover { border-color: var(--ink); background: var(--bg-1); transform: translateY(-1px); }
+.bot-langgate__opt.is-on { border-color: var(--ink); background: var(--hover-wash); }
+
 .bot-panel__body {
   flex: 1;
   overflow-y: auto;
@@ -500,6 +552,15 @@
   .bot-panel { transform: translateY(10px); }
   .bot-panel.is-open { transform: none; }
 }
+
+/* ---------- right-to-left (Arabic) ---------- */
+.bot-panel[dir='rtl'] .bot-msg__bubble { border-bottom-left-radius: 13px; border-bottom-right-radius: 4px; }
+.bot-panel[dir='rtl'] .bot-msg--user .bot-msg__bubble { border-bottom-right-radius: 13px; border-bottom-left-radius: 4px; }
+.bot-panel[dir='rtl'] .bot-card { grid-template-columns: auto 1fr 2.4rem; }
+.bot-panel[dir='rtl'] .bot-card__go { transform: scaleX(-1); }
+.bot-panel[dir='rtl'] .bot-card:hover { transform: translateX(-2px); }
+.bot-panel[dir='rtl'] .bot-link::after { content: '←'; }
+.bot-panel[dir='rtl'] .bot-typing { border-bottom-left-radius: 13px; border-bottom-right-radius: 4px; }
 
 /* ---------- price states / purchase mode ---------- */
 .price--soon { color: var(--ink-faint); font-style: italic; font-size: 0.92em; }

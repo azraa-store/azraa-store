@@ -62,16 +62,24 @@ Header nav links are Inter (the body face), regular weight, full `--ink`, and th
 nav is centred in the bar with the logo left and the search / account / country /
 theme / bag controls right.
 
-**AZRAA Bot** — a customer-service assistant, bottom-right on every page
-(`components/chrome/AzraaBot.jsx` + `context/AssistantContext.jsx`). It answers
-about products, pricing (region-aware), stock, wholesale/MOQ, delivery, returns,
-payment and site navigation, and hands off to WhatsApp for a person. The engine
-(`services/assistant.js`) runs **locally** off the site's own catalogue / pricing
-/ inventory / FAQ data by default — no key in the browser. Set
-`VITE_ASSISTANT_ENDPOINT` and every turn is POSTed to that backend instead, which
-runs the conversation against a model (e.g. `claude-opus-5`) server-side and
-returns the same shaped reply; the UI is unchanged either way. Curated Q&A lives
-in `data/faqs.js`; the number is in `config/site.js`.
+**The AZRAA assistant** — customer service, bottom-right on every page
+(`components/chrome/AzraaBot.jsx` + `context/AssistantContext.jsx`; it introduces
+itself as “AZRAA”). It answers about products, pricing (region-aware), stock,
+wholesale/MOQ, delivery, returns, payment and site navigation, and hands off to
+WhatsApp for a person. First open asks the visitor to pick a language —
+**English, हिन्दी, বাংলা, Kiswahili, Français, العربية** (Arabic renders RTL) —
+stored in `localStorage` and changeable from the header globe. Strings live in
+`i18n/assistant.js` (non-English is a first pass — native review recommended);
+the FAQ answers in `data/faqs.js` are keyed by language. Routing stays English
+keyword matching, so chip `send` values are English while chip labels are
+translated.
+
+The engine (`services/assistant.js`) runs **locally** off the site's own
+catalogue / pricing / inventory / FAQ data by default — no key in the browser.
+Set `VITE_ASSISTANT_ENDPOINT` and every turn is POSTed to that backend instead,
+which runs the conversation against a model (e.g. `claude-opus-5`) server-side
+and returns the same shaped reply; the UI is unchanged either way. The WhatsApp
+number is in `config/site.js`.
 
 ---
 
@@ -197,7 +205,8 @@ server-side in the charge currency before payment.
 ```
 src/
   config/       site.js — public contact channels (WhatsApp number + wa.me link)
-  data/         countries · categories · products · colors · logistics · faqs
+  i18n/         assistant.js — assistant languages + string table (6 languages)
+  data/         countries · categories · products · colors · logistics · faqs (per-language answers)
   services/     catalog · auth · orders · wholesale · pricing · fx · region
                 inventory · assistant · payments/{index,razorpay,paystack,flutterwave,paypal}
   context/      ThemeContext · RegionContext · AuthContext · CartContext · AssistantContext
