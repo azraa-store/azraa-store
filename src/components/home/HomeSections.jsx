@@ -4,6 +4,7 @@ import Reveal from '../ui/Reveal.jsx';
 import Button from '../ui/Button.jsx';
 import ProductCard from '../commerce/ProductCard.jsx';
 import ProductImage from '../ui/ProductImage.jsx';
+import CountryPicker from '../chrome/CountryPicker.jsx';
 import { activeCategories } from '../../data/categories.js';
 import { getFeatured, isStorefrontReady } from '../../services/catalog.js';
 import { useRegion } from '../../context/RegionContext.jsx';
@@ -145,12 +146,13 @@ export function RegionalSection() {
     <section className="hsec hsec--regional">
       <div className="u-wrap">
         <Reveal className="hsec__head">
-          <span className="label">Asia &amp; Africa</span>
-          <h2 className="hsec__title">Shop from your region</h2>
+          <span className="label">Worldwide</span>
+          <h2 className="hsec__title">We ship anywhere in the world</h2>
           <p className="hsec__lede">
-            Prices are shown in USD by default and convert to your local currency
-            at live rates. Pick your country and the whole store follows — currency,
-            payment methods, delivery. You’re currently shopping as <strong>{country.name}</strong>.
+            AZRAA is a global store — order from any country. Prices show in USD
+            by default and convert automatically to your local currency and
+            payment methods where we support them; everywhere else checks out
+            in USD. You’re currently shopping as <strong>{country.name}</strong>.
           </p>
         </Reveal>
         <div className="regions">
@@ -162,6 +164,13 @@ export function RegionalSection() {
               </button>
             </Reveal>
           ))}
+          <Reveal className="region" delay={regions.length * 55}>
+            <div className="region__btn region__btn--pick">
+              <span className="region__name">Anywhere else</span>
+              <span className="region__note">Choose your country for local pricing where we support it.</span>
+              <CountryPicker align="left" />
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>

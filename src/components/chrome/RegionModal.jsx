@@ -23,26 +23,13 @@ export default function RegionModal() {
       <div className="rmodal__scrim" onClick={dismissWelcome} />
       <div className="rmodal__panel">
         <span className="rmodal__mark">AZRAA</span>
-        <h2 id="rmodal-title" className="rmodal__title">Choose your region</h2>
+        <h2 id="rmodal-title" className="rmodal__title">Shop AZRAA from anywhere</h2>
         <p className="rmodal__lede">
-          We’ll show prices, delivery and payment options for where you shop.
-          Prices are shown in USD by default — you can change this any time.
+          AZRAA is a global store — we ship worldwide and anyone can order,
+          wherever you are. Prices show in USD by default and switch
+          automatically to your local currency and payment options where we
+          support them. You can change this any time from the header.
         </p>
-
-        <div className="rmodal__grid">
-          <button className="rmodal__region" onClick={() => setCountry('IN')}>
-            <span className="rmodal__flag">🇮🇳</span>
-            <span>India</span><small>₹ INR</small>
-          </button>
-          <button className="rmodal__region" onClick={() => setCountry('NG')}>
-            <span className="rmodal__flag">🇳🇬</span>
-            <span>Nigeria</span><small>₦ NGN</small>
-          </button>
-          <button className="rmodal__region" onClick={() => setCountry('US')}>
-            <span className="rmodal__flag">🌍</span>
-            <span>Other</span><small>$ USD</small>
-          </button>
-        </div>
 
         {detected && (
           <p className="rmodal__detected">
@@ -67,10 +54,10 @@ export default function RegionModal() {
 
         <div className="rmodal__actions">
           <button className="rmodal__detect" onClick={detect} disabled={detecting}>
-            {detecting ? 'Detecting…' : 'Detect my region'}
+            {detecting ? 'Detecting…' : 'Detect my country'}
           </button>
-          {!showAll && <button className="rmodal__more" onClick={() => setShowAll(true)}>All countries</button>}
-          <button className="rmodal__skip" onClick={dismissWelcome}>Skip</button>
+          {!showAll && <button className="rmodal__more" onClick={() => setShowAll(true)}>Choose my country</button>}
+          <button className="rmodal__skip" onClick={dismissWelcome}>Continue in USD</button>
         </div>
       </div>
     </div>

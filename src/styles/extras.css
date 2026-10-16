@@ -32,17 +32,6 @@
 .rmodal__mark { font-family: var(--serif); letter-spacing: 0.42em; text-transform: uppercase; font-size: 1rem; color: var(--ink); }
 .rmodal__title { font-family: var(--serif); font-weight: 300; font-size: 1.9rem; margin: 0.8rem 0 0.5rem; }
 .rmodal__lede { color: var(--ink-dim); font-size: 0.88rem; line-height: 1.6; margin-bottom: 1.4rem; }
-.rmodal__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
-.rmodal__region {
-  display: flex; flex-direction: column; align-items: center; gap: 0.25rem;
-  padding: 1rem 0.5rem;
-  border: 1px solid var(--line); border-radius: 3px;
-  font-size: 0.82rem; color: var(--ink);
-  transition: border-color 0.2s, background 0.2s;
-}
-.rmodal__region:hover { border-color: var(--ink); background: var(--hover-wash); }
-.rmodal__region small { color: var(--ink-faint); font-size: 0.68rem; letter-spacing: 0.06em; }
-.rmodal__flag { font-size: 1.3rem; line-height: 1; }
 .rmodal__detected { font-size: 0.82rem; color: var(--ink-dim); margin-top: 1rem; }
 .rmodal__all { display: block; margin-top: 1rem; font-size: 0.72rem; letter-spacing: var(--label); text-transform: uppercase; color: var(--ink-faint); }
 .rmodal__all select { margin-top: 0.5rem; }
@@ -52,7 +41,6 @@
 .rmodal__more, .rmodal__skip { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); }
 .rmodal__more:hover, .rmodal__skip:hover { color: var(--ink); }
 .rmodal__skip { margin-left: auto; }
-@media (max-width: 400px) { .rmodal__grid { grid-template-columns: 1fr; } }
 
 /* ---------- fx note ---------- */
 .fxnote {
