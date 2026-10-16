@@ -5,6 +5,7 @@ import Button from '../components/ui/Button.jsx';
 import Price from '../components/ui/Price.jsx';
 import { PRODUCTS } from '../data/products.js';
 import { LOGISTICS } from '../data/logistics.js';
+import { isStorefrontReady } from '../services/catalog.js';
 
 const AUDIENCE = [
   ['Retailers', 'Independent shops and chains stocking rails and shelves.'],
@@ -22,7 +23,9 @@ const STEPS = [
 ];
 
 export default function WholesalePage() {
-  const tee = PRODUCTS.find((p) => p.id === 'azr-tee-round');
+  // The example links to the product page, which 404s for anything not yet
+  // storefront-ready — pick a product that's actually live.
+  const tee = PRODUCTS.find((p) => p.id === 'azr-tee-round' && isStorefrontReady(p)) || PRODUCTS.find(isStorefrontReady);
 
   return (
     <div className="wpage">

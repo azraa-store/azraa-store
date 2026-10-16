@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PRODUCTS } from '../../data/products.js';
 import { CATEGORIES } from '../../data/categories.js';
+import { isStorefrontReady } from '../../services/catalog.js';
 import ProductImage from '../ui/ProductImage.jsx';
 import Price from '../ui/Price.jsx';
 
@@ -27,7 +28,7 @@ export default function SearchOverlay({ open, onClose }) {
   const results = useMemo(() => {
     const s = q.trim().toLowerCase();
     if (!s) return [];
-    return PRODUCTS.filter((p) =>
+    return PRODUCTS.filter(isStorefrontReady).filter((p) =>
       [p.name, p.summary, p.category, p.subcategory, ...(p.tags || [])].join(' ').toLowerCase().includes(s)
     ).slice(0, 6);
   }, [q]);

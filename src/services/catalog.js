@@ -5,7 +5,15 @@ import { PRODUCTS, getProduct, getHeroProduct, anyPrice } from '../data/products
 import { activeCategories, getCategory, isActiveCategory } from '../data/categories.js';
 
 const delay = (ms) => new Promise((r) => setTimeout(r, ms));
-const storefront = () => PRODUCTS.filter((p) => isActiveCategory(p.category));
+
+// A product only shows up on the storefront once it has real photography —
+// a primary shot plus at least a back view (gallery[0] = front, [1] = back).
+// Everything else stays in the data (pricing, inventory, copy already done)
+// but is hidden everywhere — grid, search, featured, related, and direct
+// product-page access — until its photos are complete.
+const hasFrontAndBack = (p) => Boolean(p.images?.primary) && (p.images?.gallery?.length || 0) >= 2;
+export const isStorefrontReady = (p) => isActiveCategory(p.category) && hasFrontAndBack(p);
+const storefront = () => PRODUCTS.filter(isStorefrontReady);
 
 export async function listCategories() {
   await delay(0);
@@ -49,7 +57,7 @@ export async function listProducts({ category, subcategory, search, sort, featur
 export async function getProductBySlug(slug) {
   await delay(20);
   const p = getProduct(slug);
-  if (!p || !isActiveCategory(p.category)) return null;
+  if (!p || !isStorefrontReady(p)) return null;
   const related = storefront()
     .filter((r) => r.id !== p.id && (r.category === p.category || r.subcategory === p.subcategory))
     .slice(0, 3);

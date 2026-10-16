@@ -5,11 +5,16 @@ import Button from '../ui/Button.jsx';
 import ProductCard from '../commerce/ProductCard.jsx';
 import ProductImage from '../ui/ProductImage.jsx';
 import { activeCategories } from '../../data/categories.js';
-import { getFeatured } from '../../services/catalog.js';
+import { getFeatured, isStorefrontReady } from '../../services/catalog.js';
 import { useRegion } from '../../context/RegionContext.jsx';
 import { PRODUCTS } from '../../data/products.js';
 
-const sampleFor = (slug) => PRODUCTS.find((p) => p.category === slug);
+// Prefer a product with real front/back photography within the category;
+// fall back to the category's placeholder plate rather than borrowing a
+// photo from a different category, which would misrepresent what it sells.
+const sampleFor = (slug) =>
+  PRODUCTS.find((p) => p.category === slug && isStorefrontReady(p)) ||
+  PRODUCTS.find((p) => p.category === slug);
 
 /* ─────────── Shop by category ─────────── */
 export function CategoriesSection() {
