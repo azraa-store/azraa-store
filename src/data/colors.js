@@ -9,6 +9,14 @@ export const COLORS = {
   Red: { name: 'Red', hex: '#9c2b25' },
   Blue: { name: 'Blue', hex: '#2f4a6b' },
   Yellow: { name: 'Yellow', hex: '#d7b34c' },
+  Beige: { name: 'Beige', hex: '#d8c9ab' },
+  Brown: { name: 'Brown', hex: '#4a3528' },
+  Charcoal: { name: 'Charcoal', hex: '#36363a' },
+  Cream: { name: 'Cream', hex: '#efe6d3' },
+  Tan: { name: 'Tan', hex: '#c7a97a' },
+  Olive: { name: 'Olive', hex: '#5c6240' },
+  Sage: { name: 'Sage', hex: '#a3b093' },
+  Multi: { name: 'Multi', hex: '#6b5a4d' },
 };
 
 export const colorList = (names = []) => names.map((n) => COLORS[n]).filter(Boolean);

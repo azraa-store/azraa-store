@@ -10,7 +10,7 @@ export const CATEGORIES = [
     tagline: 'Everyday cotton, cleanly cut',
     blurb:
       'Tees and singlets built to a wholesale standard and finished like a small run. Full size and colour runs, packed for retail floors and single orders alike.',
-    subcategories: ['T-shirts', 'Singlets'],
+    subcategories: ['T-shirts', 'Singlets', 'Hoodies & Sweatshirts', 'Joggers & Sweatpants', 'Polos', 'Shirts & Denim'],
   },
   {
     slug: 'shoes',
