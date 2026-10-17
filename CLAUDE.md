@@ -13,6 +13,14 @@ npm run preview    # serve the production build, http://localhost:4173
 
 No test suite, linter, or type checker is configured. There is no single-test command.
 
+Backend (Node/Express, separate from the frontend — see `## Backend` below):
+
+```bash
+cd backend
+npm install
+npm run dev        # http://localhost:10000, reads backend/.env (copy from .env.example)
+```
+
 Python inventory CLI (standalone, stdlib only, separate from the frontend):
 
 ```bash
@@ -74,6 +82,10 @@ Live categories: Men, Shoes, Bags, Ladies. Food exists in `data/categories.js` w
 ### Payments
 
 Modular provider registry in `services/payments/`, enabled per country (India: Razorpay/PayPal; Nigeria: Paystack/Flutterwave/PayPal; GH/KE/ZA: Flutterwave/PayPal; elsewhere: PayPal). Only publishable keys ever go client-side (`import.meta.env`); with none set, a provider runs in mock mode so checkout is end-to-end testable without real credentials. Each provider file documents the backend call it's standing in for. Final charge amounts must be (re-)validated server-side in the charge currency — the client-side price is not trusted for the actual charge.
+
+### Backend
+
+`backend/` is a separate Node/Express app (its own `package.json`, not part of the Vite build) that holds secrets and server-only logic the frontend can't: payment provider order creation + verification (one route file per provider in `backend/src/routes/payments/`, matching the "LIVE:" contracts documented in `src/services/payments/*.js`) and Cloudflare Turnstile token verification. Deployed separately on Render with `rootDir: backend` (see `render.yaml` at repo root) — the Vercel frontend deploy is unaffected by this folder. Everything else (catalogue, auth, orders, inventory) is intended to talk to Supabase directly from the frontend rather than routing through this service. Secret keys (`SUPABASE_SERVICE_ROLE_KEY`, `TURNSTILE_SECRET_KEY`, every provider secret key) live only in Render's env var dashboard, never committed — see `backend/.env.example` for the full list and `backend/README.md` for endpoint shapes.
 
 ### AZRAA assistant
 
