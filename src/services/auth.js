@@ -16,6 +16,8 @@ export const signUp = (...args) => impl.signUp(...args);
 export const signIn = (...args) => impl.signIn(...args);
 export const signOut = (...args) => impl.signOut(...args);
 export const requestPasswordReset = (...args) => impl.requestPasswordReset(...args);
+export const signInWithMagicLink = (...args) => impl.signInWithMagicLink(...args);
+export const changeEmail = (...args) => impl.changeEmail(...args);
 export const updateProfile = (...args) => impl.updateProfile(...args);
 export const saveAddress = (...args) => impl.saveAddress(...args);
 export const deleteAddress = (...args) => impl.deleteAddress(...args);

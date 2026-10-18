@@ -217,6 +217,54 @@ function Profile() {
         <Field label="Company (for wholesale)"><TextInput value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} /></Field>
         <Button type="submit" size="sm" disabled={busy}>{busy ? 'Saving…' : saved ? 'Saved ✓' : 'Save changes'}</Button>
       </form>
+      <ChangeEmail />
     </div>
+  );
+}
+
+function ChangeEmail() {
+  const { changeEmail } = useAuth();
+  const [form, setForm] = useState({ newEmail: '', currentPassword: '' });
+  const [error, setError] = useState(null);
+  const [busy, setBusy] = useState(false);
+  const [sent, setSent] = useState(false);
+
+  const submit = async (e) => {
+    e.preventDefault();
+    setBusy(true);
+    setError(null);
+    try {
+      await changeEmail(form);
+      setSent(true);
+      setForm({ newEmail: '', currentPassword: '' });
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <form onSubmit={submit} className="acct-form">
+      <h3 className="acct-form__h">Change email address</h3>
+      {sent ? (
+        <p className="auth__ok">
+          Check your inbox to confirm the change. Your current email stays active until you do.
+        </p>
+      ) : (
+        <>
+          <Field label="New email address" required>
+            <TextInput type="email" autoComplete="email" value={form.newEmail}
+              onChange={(e) => setForm({ ...form, newEmail: e.target.value })} required />
+          </Field>
+          <Field label="Current password" hint="Confirms it's really you." required>
+            <TextInput type="password" autoComplete="current-password" value={form.currentPassword}
+              onChange={(e) => setForm({ ...form, currentPassword: e.target.value })} required />
+          </Field>
+          {error && <p className="auth__error">{error}</p>}
+          <Button type="submit" size="sm" disabled={busy}>{busy ? 'Updating…' : 'Update email'}</Button>
+        </>
+      )}
+    </form>
   );
 }

@@ -85,6 +85,30 @@ export async function requestPasswordReset(email) {
   return { ok: true, email: email.trim().toLowerCase() };
 }
 
+export async function signInWithMagicLink(email) {
+  await delay(500);
+  email = email.trim().toLowerCase();
+  // A real backend emails a one-click sign-in link. Here we just acknowledge
+  // (there's no session to establish without a real email round trip).
+  return { ok: true, email };
+}
+
+export async function changeEmail({ newEmail, currentPassword }) {
+  await delay(450);
+  const email = localStorage.getItem(SESSION_KEY);
+  const users = readUsers();
+  if (!email || !users[email]) throw new Error('Not signed in.');
+  if (users[email].password !== obf(currentPassword)) throw new Error('Current password is incorrect.');
+  const next = newEmail.trim().toLowerCase();
+  if (next === email) throw new Error("That's already your email address.");
+  if (users[next]) throw new Error('An account with this email already exists.');
+  users[next] = { ...users[email], email: next };
+  delete users[email];
+  writeUsers(users);
+  localStorage.setItem(SESSION_KEY, next);
+  return { ok: true, user: publicUser(users[next]) };
+}
+
 export async function updateProfile(patch) {
   await delay(400);
   const email = localStorage.getItem(SESSION_KEY);

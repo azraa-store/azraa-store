@@ -45,6 +45,12 @@ export function AuthProvider({ children }) {
         setUser(null);
       },
       resetPassword: auth.requestPasswordReset,
+      signInWithMagicLink: auth.signInWithMagicLink,
+      async changeEmail(data) {
+        const result = await auth.changeEmail(data);
+        if (result.user) setUser(result.user);
+        return result;
+      },
       async updateProfile(patch) {
         const u = await auth.updateProfile(patch);
         setUser(u);

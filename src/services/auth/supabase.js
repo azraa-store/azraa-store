@@ -86,6 +86,34 @@ export async function requestPasswordReset(email) {
   return { ok: true, email: trimmed };
 }
 
+export async function signInWithMagicLink(email) {
+  const trimmed = email.trim().toLowerCase();
+  const { error } = await supabase.auth.signInWithOtp({
+    email: trimmed,
+    options: { emailRedirectTo: `${window.location.origin}/account` },
+  });
+  if (error) throw new Error(mapAuthError(error));
+  return { ok: true, email: trimmed };
+}
+
+// Reauthenticates by re-verifying the current password (rather than
+// Supabase's nonce-based reauthenticate() flow) before changing the login
+// email. updateUser({ email }) doesn't take effect until the confirmation
+// link is clicked — with "Secure email change" on, Supabase sends that link
+// to both the old and new address.
+export async function changeEmail({ newEmail, currentPassword }) {
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) throw new Error('Not signed in.');
+  const { error: reauthError } = await supabase.auth.signInWithPassword({
+    email: user.email,
+    password: currentPassword,
+  });
+  if (reauthError) throw new Error('Current password is incorrect.');
+  const { error } = await supabase.auth.updateUser({ email: newEmail.trim().toLowerCase() });
+  if (error) throw new Error(mapAuthError(error));
+  return { ok: true };
+}
+
 export async function updateProfile(patch) {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) throw new Error('Not signed in.');
