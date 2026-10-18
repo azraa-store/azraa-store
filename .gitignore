@@ -16,17 +16,9 @@ inventory/flags.json
 inventory/.lock
 __pycache__/
 
-# product photography that reproduces real third-party IP (exact logos, a
-# licensed character/franchise, a movie poster with real actors' likenesses,
-# real companies'/bands' marks) — never commit these, this repo is public.
-# See the EXCLUDED set in scripts/process-products.py for why each is here.
-assets/products/american-gangster-layered-sleeve-tee-*.png
-assets/products/black-graphic-hoodie-*.png
-assets/products/black-hoodie-*.png
-assets/products/green-slytherin-varsity-sweatshirt-*.png
-assets/products/marbled-x-face-graphic-hoodie-*.png
-assets/products/mineral-wash-off-record-t-shirt-*.png
-assets/products/minimalist-ivory-hoodie-*.png
-assets/products/red-autozone-polo-*.png
-assets/products/speckled-cream-polo-*.png
-assets/products/the-pumpkin-king-black-colour-*.png
+# Product photography and video that reproduce real third-party IP (exact
+# logos, a licensed character/franchise, a movie poster with real actors'
+# likenesses, real companies'/bands' marks) live here, outside assets/ and
+# public/, and NEVER get committed — this repo is public. See the EXCLUDED
+# set in scripts/process-products.py and memory for why each one is here.
+trademark/
