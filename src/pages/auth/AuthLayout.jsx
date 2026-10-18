@@ -13,7 +13,7 @@ export default function AuthLayout({ title, intro, children, alt }) {
         {alt && <p className="auth__alt">{alt}</p>}
       </div>
       <aside className="auth__aside" aria-hidden="true">
-        <img src="/textures/garment-reference.png" alt="" />
+        <img src="/textures/auth-aside.jpg" alt="" />
         <p className="auth__aside-quote">One garment at a time, made completely.</p>
       </aside>
     </div>
