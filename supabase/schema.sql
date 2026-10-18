@@ -35,15 +35,16 @@ create policy "Users can insert own profile"
   with check (auth.uid() = id);
 
 -- Auto-create a profiles row whenever someone signs up, seeded with the
--- name passed to supabase.auth.signUp({ options: { data: { name } } }).
+-- name and phone passed to
+-- supabase.auth.signUp({ options: { data: { name, phone } } }).
 create or replace function public.handle_new_user()
 returns trigger
 language plpgsql
 security definer set search_path = public
 as $$
 begin
-  insert into public.profiles (id, name)
-  values (new.id, new.raw_user_meta_data->>'name');
+  insert into public.profiles (id, name, phone)
+  values (new.id, new.raw_user_meta_data->>'name', new.raw_user_meta_data->>'phone');
   return new;
 end;
 $$;

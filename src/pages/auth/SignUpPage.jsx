@@ -2,13 +2,21 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import AuthLayout from './AuthLayout.jsx';
 import Button from '../../components/ui/Button.jsx';
-import { Field, TextInput } from '../../components/ui/Field.jsx';
+import { Field, TextInput, Select } from '../../components/ui/Field.jsx';
+import PasswordChecklist from '../../components/ui/PasswordChecklist.jsx';
 import { useAuth } from '../../context/AuthContext.jsx';
+import { useRegion } from '../../context/RegionContext.jsx';
+import { PHONE_COUNTRIES, findPhoneCountry } from '../../data/phoneCountries.js';
+import { isPasswordValid } from '../../utils/passwordPolicy.js';
 
 export default function SignUpPage() {
   const { signUp } = useAuth();
   const navigate = useNavigate();
-  const [form, setForm] = useState({ name: '', email: '', password: '' });
+  const { countryCode } = useRegion();
+  const defaultPhoneCountry = findPhoneCountry(countryCode) ? countryCode : 'US';
+  const [form, setForm] = useState({
+    name: '', email: '', password: '', phoneCountry: defaultPhoneCountry, phoneNumber: '',
+  });
   const [error, setError] = useState(null);
   const [busy, setBusy] = useState(false);
   const [confirmSent, setConfirmSent] = useState(false);
@@ -18,7 +26,12 @@ export default function SignUpPage() {
     setBusy(true);
     setError(null);
     try {
-      const { needsConfirmation } = await signUp(form);
+      if (!isPasswordValid(form.password)) throw new Error("Password doesn't meet the requirements below.");
+      const digits = form.phoneNumber.replace(/\D/g, '');
+      if (digits.length < 4) throw new Error('Enter a valid phone number.');
+      const dialCode = findPhoneCountry(form.phoneCountry)?.dialCode || '';
+      const phone = `${dialCode}${digits}`;
+      const { needsConfirmation } = await signUp({ ...form, phone });
       if (needsConfirmation) {
         setConfirmSent(true);
         setBusy(false);
@@ -51,10 +64,24 @@ export default function SignUpPage() {
             <TextInput type="email" autoComplete="email" value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })} required />
           </Field>
-          <Field label="Password" hint="At least 8 characters." required>
+          <Field label="Password" required>
             <TextInput type="password" autoComplete="new-password" value={form.password}
               onChange={(e) => setForm({ ...form, password: e.target.value })} required />
           </Field>
+          <PasswordChecklist value={form.password} />
+          <div className="field-row field-row--phone">
+            <Field label="Country" required>
+              <Select value={form.phoneCountry} onChange={(e) => setForm({ ...form, phoneCountry: e.target.value })}>
+                {PHONE_COUNTRIES.map((c) => (
+                  <option key={c.code} value={c.code}>{c.flag} {c.dialCode}</option>
+                ))}
+              </Select>
+            </Field>
+            <Field label="Phone number" required>
+              <TextInput type="tel" autoComplete="tel-national" value={form.phoneNumber}
+                onChange={(e) => setForm({ ...form, phoneNumber: e.target.value })} required />
+            </Field>
+          </div>
           {error && <p className="auth__error">{error}</p>}
           <Button type="submit" block disabled={busy}>{busy ? 'Creating…' : 'Create account'}</Button>
           <p className="auth__minor">

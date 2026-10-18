@@ -17,6 +17,10 @@ export default defineConfig({
           if (!id.includes('node_modules')) return;
           if (/[\\/]node_modules[\\/](react|react-dom|scheduler)[\\/]/.test(id)) return 'react';
           if (id.includes('gsap') || id.includes('lenis')) return 'motion';
+          // Only used by the sign-up page's phone country picker — leave it
+          // out of the eagerly-loaded vendor chunk so it code-splits with
+          // SignUpPage's own lazy chunk instead.
+          if (id.includes('country-codes-list')) return;
           return 'vendor';
         },
       },

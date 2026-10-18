@@ -3,7 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import AuthLayout from './AuthLayout.jsx';
 import Button from '../../components/ui/Button.jsx';
 import { Field, TextInput } from '../../components/ui/Field.jsx';
+import PasswordChecklist from '../../components/ui/PasswordChecklist.jsx';
 import { supabase, isSupabaseConfigured } from '../../lib/supabaseClient.js';
+import { isPasswordValid } from '../../utils/passwordPolicy.js';
 
 /**
  * Landing page for the link in the password-reset email (requestPasswordReset
@@ -25,8 +27,8 @@ export default function ResetConfirmPage() {
       setError('Password reset links only work once Supabase is configured.');
       return;
     }
-    if (password.length < 8) {
-      setError('Password must be at least 8 characters.');
+    if (!isPasswordValid(password)) {
+      setError("Password doesn't meet the requirements below.");
       return;
     }
     setBusy(true);
@@ -46,10 +48,11 @@ export default function ResetConfirmPage() {
         <p className="auth__ok">Password updated. Taking you to your account.</p>
       ) : (
         <form onSubmit={submit} className="auth__form">
-          <Field label="New password" hint="At least 8 characters." required>
+          <Field label="New password" required>
             <TextInput type="password" autoComplete="new-password" value={password}
               onChange={(e) => setPassword(e.target.value)} required />
           </Field>
+          <PasswordChecklist value={password} />
           {error && <p className="auth__error">{error}</p>}
           <Button type="submit" block disabled={busy}>{busy ? 'Updating…' : 'Update password'}</Button>
         </form>

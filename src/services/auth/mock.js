@@ -5,6 +5,8 @@
 // Passwords are stored only for this local demo and are lightly obfuscated, not
 // secured. Do NOT reuse this approach against a real backend.
 
+import { isPasswordValid } from '../../utils/passwordPolicy.js';
+
 const USERS_KEY = 'azraa.users';
 const SESSION_KEY = 'azraa.session';
 
@@ -43,11 +45,11 @@ export async function getSession() {
   }
 }
 
-export async function signUp({ name, email, password }) {
+export async function signUp({ name, email, password, phone }) {
   await delay(500);
   email = email.trim().toLowerCase();
-  if (!name || !email || !password) throw new Error('All fields are required.');
-  if (password.length < 8) throw new Error('Password must be at least 8 characters.');
+  if (!name || !email || !password || !phone) throw new Error('All fields are required.');
+  if (!isPasswordValid(password)) throw new Error('Password must be at least 8 characters, with upper and lower case, a number and a symbol.');
   const users = readUsers();
   if (users[email]) throw new Error('An account with this email already exists.');
   users[email] = {
@@ -57,7 +59,7 @@ export async function signUp({ name, email, password }) {
     password: obf(password),
     createdAt: new Date().toISOString(),
     addresses: [],
-    account: { phone: '', company: '', marketingOptIn: false },
+    account: { phone, company: '', marketingOptIn: false },
   };
   writeUsers(users);
   localStorage.setItem(SESSION_KEY, email);

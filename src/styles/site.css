@@ -133,8 +133,18 @@
   margin-bottom: 0.5rem;
 }
 .field__hint { font-size: 0.76rem; color: var(--ink-faint); margin-top: 0.4rem; }
+.pw-checklist {
+  list-style: none; display: grid; gap: 0.25rem;
+  margin: 0.5rem 0 0.2rem; padding: 0;
+  font-size: 0.76rem; color: var(--ink-disabled);
+}
+.pw-checklist li { display: flex; align-items: center; gap: 0.45rem; transition: color 0.15s var(--ease); }
+.pw-checklist li span { width: 1em; text-align: center; }
+.pw-checklist li.is-met { color: var(--ink-dim); }
+.pw-checklist li.is-met span { color: var(--accent, #a83228); }
 .field__error { font-size: 0.76rem; color: var(--err); margin-top: 0.4rem; }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0 1rem; }
+.field-row--phone { grid-template-columns: 9rem 1fr; }
 
 .input {
   width: 100%;

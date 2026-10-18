@@ -4,10 +4,11 @@
 // dispatch between the two transparently.
 //
 // Schema: supabase/schema.sql (profiles + addresses tables, RLS policies,
-// and the trigger that creates a profiles row on sign-up) — run once in the
+// and the trigger that creates a profiles row on sign-up), run once in the
 // Supabase SQL editor before this backend will work.
 
 import { supabase } from '../../lib/supabaseClient.js';
+import { isPasswordValid } from '../../utils/passwordPolicy.js';
 
 function mapAuthError(error) {
   const msg = error?.message || 'Something went wrong.';
@@ -51,13 +52,13 @@ export async function getSession() {
   return session ? loadProfile(session.user) : null;
 }
 
-export async function signUp({ name, email, password }) {
-  if (!name || !email || !password) throw new Error('All fields are required.');
-  if (password.length < 8) throw new Error('Password must be at least 8 characters.');
+export async function signUp({ name, email, password, phone }) {
+  if (!name || !email || !password || !phone) throw new Error('All fields are required.');
+  if (!isPasswordValid(password)) throw new Error('Password must be at least 8 characters, with upper and lower case, a number and a symbol.');
   const { data, error } = await supabase.auth.signUp({
     email: email.trim().toLowerCase(),
     password,
-    options: { data: { name: name.trim() } },
+    options: { data: { name: name.trim(), phone } },
   });
   if (error) throw new Error(mapAuthError(error));
   if (!data.session) return { user: null, needsConfirmation: true };
