@@ -168,7 +168,7 @@ function localAnswer(raw, context) {
   }
 
   // 9, payment / currency
-  if (/\b(pay|payment|card|paypal|razorpay|paystack|flutterwave|checkout method)\b/.test(text)) {
+  if (/\b(pay|payment|card|paypal|razorpay|paystack|checkout method)\b/.test(text)) {
     return faqReply(byId('payment'), lang);
   }
   if (/\b(currency|exchange rate|convert|in (usd|inr|naira|rupees|dollars|pounds)|change (the )?currency)\b/.test(text)) {

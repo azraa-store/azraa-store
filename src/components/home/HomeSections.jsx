@@ -139,8 +139,8 @@ export function RegionalSection() {
   const regions = [
     { code: 'US', name: 'United States', note: 'Priced in $ USD · PayPal' },
     { code: 'IN', name: 'India', note: 'Priced in ₹ INR · Razorpay & PayPal' },
-    { code: 'NG', name: 'Nigeria', note: 'Priced in ₦ NGN · Paystack, Flutterwave & PayPal' },
-    { code: 'GH', name: 'Ghana', note: 'Priced in GH₵ · Flutterwave & PayPal' },
+    { code: 'NG', name: 'Nigeria', note: 'Priced in ₦ NGN · Paystack & PayPal' },
+    { code: 'GH', name: 'Ghana', note: 'Priced in GH₵ · Paystack & PayPal' },
   ];
   return (
     <section className="hsec hsec--regional">

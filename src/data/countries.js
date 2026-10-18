@@ -16,22 +16,22 @@ export const COUNTRIES = {
   NG: {
     code: 'NG', name: 'Nigeria', flag: '🇳🇬', region: 'Africa',
     currency: 'NGN', locale: 'en-NG', taxLabel: 'VAT', taxRate: 0.075,
-    paymentMethods: ['paystack', 'flutterwave', 'paypal'],
+    paymentMethods: ['paystack', 'paypal'],
   },
   GH: {
     code: 'GH', name: 'Ghana', flag: '🇬🇭', region: 'Africa',
     currency: 'GHS', locale: 'en-GH', taxLabel: 'VAT', taxRate: 0.15,
-    paymentMethods: ['flutterwave', 'paypal'],
+    paymentMethods: ['paystack', 'paypal'],
   },
   KE: {
     code: 'KE', name: 'Kenya', flag: '🇰🇪', region: 'Africa',
     currency: 'KES', locale: 'en-KE', taxLabel: 'VAT', taxRate: 0.16,
-    paymentMethods: ['flutterwave', 'paypal'],
+    paymentMethods: ['paystack', 'paypal'],
   },
   ZA: {
     code: 'ZA', name: 'South Africa', flag: '🇿🇦', region: 'Africa',
     currency: 'ZAR', locale: 'en-ZA', taxLabel: 'VAT', taxRate: 0.15,
-    paymentMethods: ['flutterwave', 'paypal'],
+    paymentMethods: ['paystack', 'paypal'],
   },
   BD: {
     code: 'BD', name: 'Bangladesh', flag: '🇧🇩', region: 'Asia',

@@ -9,11 +9,10 @@
 
 import razorpay from './razorpay.js';
 import paystack from './paystack.js';
-import flutterwave from './flutterwave.js';
 import paypal from './paypal.js';
 import { getCountry } from '../../data/countries.js';
 
-const REGISTRY = { razorpay, paystack, flutterwave, paypal };
+const REGISTRY = { razorpay, paystack, paypal };
 
 /** Providers available for a country, in the country's configured display order. */
 export function providersForCountry(countryCode) {

@@ -7,7 +7,7 @@ const DOCS = {
     body: [
       ['What we collect', 'Account details you provide, order and delivery information, wholesale enquiry details, and standard technical data (device, approximate location for regional pricing). We do not sell personal data.'],
       ['How we use it', 'To process orders and enquiries, provide support, prevent fraud, and, only with consent, send occasional updates.'],
-      ['Payments', 'Card and payment details are handled by our payment providers (Razorpay, Paystack, Flutterwave, PayPal). AZRAA never stores full card numbers.'],
+      ['Payments', 'Card and payment details are handled by our payment providers (Razorpay, Paystack, PayPal). AZRAA never stores full card numbers.'],
       ['Your rights', 'You can access, correct or delete your account data, and object to marketing at any time.'],
       ['Contact', 'A data protection contact address will be published here.'],
     ],

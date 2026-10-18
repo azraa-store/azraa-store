@@ -40,7 +40,7 @@ React 18 + React Router 6 + GSAP/Lenis on Vite. **All backend is mock services +
 - `src/config/site.js` — single source of truth for public contact channels (WhatsApp number/link).
 - `src/i18n/assistant.js` — assistant UI languages + string table (en/hi/bn/sw/fr/ar). Routing/intent matching is English-keyword-only regardless of UI language; only labels/content are translated.
 - `src/data/` — static catalogue data: countries, categories, products, colors, logistics, faqs (FAQ answers are per-language objects `{en,hi,bn,sw,fr,ar}`).
-- `src/services/` — the mock backend: `catalog`, `auth`, `orders`, `wholesale`, `pricing`, `fx`, `region`, `inventory`, `assistant`, `payments/{index,razorpay,paystack,flutterwave,paypal}`.
+- `src/services/` — the mock backend: `catalog`, `auth`, `orders`, `wholesale`, `pricing`, `fx`, `region`, `inventory`, `assistant`, `payments/{index,razorpay,paystack,paypal}`.
 - `src/context/` — app-wide React state: `ThemeContext`, `RegionContext`, `AuthContext`, `CartContext`, `AssistantContext`.
 - `src/components/chrome/` — site-wide shell: `Header`, `MobileMenu`, `SearchOverlay`, `CountryPicker`, `ThemeToggle`, `RegionModal`, `CartDrawer`, `Footer`, `FxNote`, `WhatsAppFab`, `AzraaBot`, `Logo`.
 - `src/components/home/`, `commerce/`, `ui/` — page-section, product-card, and shared primitive components respectively.
@@ -73,7 +73,7 @@ Live categories: Men, Shoes, Bags, Ladies. Food exists in `data/categories.js` w
 
 ### Payments
 
-Modular provider registry in `services/payments/`, enabled per country (India: Razorpay/PayPal; Nigeria: Paystack/Flutterwave/PayPal; GH/KE/ZA: Flutterwave/PayPal; elsewhere: PayPal). Only publishable keys ever go client-side (`import.meta.env`); with none set, a provider runs in mock mode so checkout is end-to-end testable without real credentials. Each provider file documents the backend call it's standing in for. Final charge amounts must be (re-)validated server-side in the charge currency — the client-side price is not trusted for the actual charge.
+Modular provider registry in `services/payments/`, enabled per country (India: Razorpay/PayPal; Nigeria/GH/KE/ZA: Paystack/PayPal; elsewhere: PayPal). Flutterwave was removed (not in use); if it's reintroduced later, mirror the existing provider-file pattern rather than reaching for a different integration approach. Only publishable keys ever go client-side (`import.meta.env`); with none set, a provider runs in mock mode so checkout is end-to-end testable without real credentials. Each provider file documents the backend call it's standing in for. Final charge amounts must be (re-)validated server-side in the charge currency — the client-side price is not trusted for the actual charge.
 
 The backend that handles this server-side validation (plus Cloudflare Turnstile verification) lives in a **separate repo**, `azraa-store/azraa-backend`, deployed independently on Render — nothing from it belongs in this repo, and this repo should never hold backend secret keys.
 
