@@ -28,7 +28,7 @@ export const CATEGORIES = [
     navLabel: 'Bags',
     active: true,
     tagline: 'Carry, considered',
-    blurb: 'Everyday carry in leather and canvas — cross-body and sling shapes, made to last.',
+    blurb: 'Everyday carry in leather and canvas, cross-body and sling shapes, made to last.',
     subcategories: ['Sling bags'],
   },
   {
@@ -44,7 +44,7 @@ export const CATEGORIES = [
     slug: 'food',
     name: 'Food',
     navLabel: 'Food',
-    active: false, // planned — not shown in the storefront yet
+    active: false, // planned, not shown in the storefront yet
     tagline: 'Rice, grains and staples',
     blurb: 'Rice and staple foods, sourced and moved at scale. Coming soon.',
     subcategories: ['Rice', 'Grains', 'Staples'],

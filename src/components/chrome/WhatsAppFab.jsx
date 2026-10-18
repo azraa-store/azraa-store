@@ -24,7 +24,7 @@ export default function WhatsAppFab() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`WhatsApp ${WHATSAPP.display}`}
-      title={`WhatsApp — ${WHATSAPP.display}`}
+      title={`WhatsApp, ${WHATSAPP.display}`}
     >
       <span className="wa-fab__icon"><WhatsAppIcon /></span>
       <span className="wa-fab__label">WhatsApp</span>

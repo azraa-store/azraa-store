@@ -60,7 +60,7 @@ export default function CartDrawer() {
                     </div>
                   </div>
                   <div className="drawer__line">
-                    <span>{price.status ? '—' : totals.money(line.lineAmount)}</span>
+                    <span>{price.status ? 'Soon' : totals.money(line.lineAmount)}</span>
                     <button className="drawer__remove" onClick={() => remove(product.id, mode, variant)}>Remove</button>
                   </div>
                 </div>

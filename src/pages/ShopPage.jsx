@@ -42,7 +42,7 @@ export default function ShopPage() {
   };
 
   const title = q
-    ? `Search — “${q}”`
+    ? `Search, “${q}”`
     : cat
       ? cat.name
       : 'All products';

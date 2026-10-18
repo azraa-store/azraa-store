@@ -20,7 +20,7 @@ export default function Price({ product, mode, usd, inr, className = '' }) {
     ? resolvePrice(product, mode, currency, rates, locale)
     : displayPrice(product, currency, rates, locale);
 
-  if (p.status) return <span className={`price price--soon ${className}`}>—</span>;
+  if (p.status) return <span className={`price price--soon ${className}`}>Soon</span>;
 
   return <span className={`price ${className}`}><span className="price__amount">{p.formatted}</span></span>;
 }

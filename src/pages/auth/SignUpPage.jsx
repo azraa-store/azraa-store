@@ -28,7 +28,7 @@ export default function SignUpPage() {
   return (
     <AuthLayout
       title="Create account"
-      intro="For faster checkout, order history, and — once approved — wholesale account pricing."
+      intro="For faster checkout, order history, and, once approved, wholesale account pricing."
       alt={<>Already have an account? <Link to="/sign-in" className="link">Sign in</Link>.</>}
     >
       <form onSubmit={submit} className="auth__form">

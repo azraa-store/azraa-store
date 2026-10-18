@@ -81,7 +81,7 @@ export function WholesaleSection() {
           <h2 className="hsec__title">Wholesale is how AZRAA works</h2>
           <p className="hsec__lede">
             We supply retailers, distributors, resellers and bulk buyers across
-            Asia and Africa. Every product is available to order in volume —
+            Asia and Africa. Every product is available to order in volume,
             lower unit price, wholesale logistics, and terms set to your account.
           </p>
           <ul className="wholesale-band__points">
@@ -106,7 +106,7 @@ export function WholesaleSection() {
 
 /* ─────────── Why AZRAA ─────────── */
 const WHY = [
-  ['Quality', 'Every line is selected, specced and checked to a retail standard — whatever the order size.'],
+  ['Quality', 'Every line is selected, specced and checked to a retail standard, whatever the order size.'],
   ['Wholesale', 'Built for businesses and bulk buyers: retail and wholesale pricing on the same catalogue.'],
   ['Reach', 'Serving customers and trade partners across Asia and Africa, with regional currency and payment.'],
   ['Reliability', 'Honest stock, clear lead times, and a professional purchasing experience end to end.'],
@@ -149,7 +149,7 @@ export function RegionalSection() {
           <span className="label">Worldwide</span>
           <h2 className="hsec__title">We ship anywhere in the world</h2>
           <p className="hsec__lede">
-            AZRAA is a global store — order from any country. Prices show in USD
+            AZRAA is a global store, order from any country. Prices show in USD
             by default and convert automatically to your local currency and
             payment methods where we support them; everywhere else checks out
             in USD. You’re currently shopping as <strong>{country.name}</strong>.
@@ -188,16 +188,16 @@ export function AboutSection() {
           <p className="hsec__lede">
             AZRAA is a wholesale-focused commerce company supplying clothing,
             footwear and accessories to businesses and consumers across Asia and
-            Africa. We buy well, hold real stock, and make purchasing —
-            one piece or one container — straightforward.
+            Africa. We buy well, hold real stock, and make purchasing
+            (one piece or one container) straightforward.
           </p>
           <Button to="/about" variant="link">More about the company →</Button>
         </Reveal>
         <Reveal className="about-band__stats" delay={100}>
           {[
             ['4', 'live product lines'],
-            ['2', 'core markets — India & Nigeria'],
-            ['1', 'standard — retail-grade, any volume'],
+            ['2', 'core markets, India & Nigeria'],
+            ['1', 'standard, retail-grade, any volume'],
           ].map(([n, l]) => (
             <div key={l} className="about-stat">
               <span className="about-stat__n">{n}</span>
@@ -220,11 +220,11 @@ export function NewsletterSection() {
       <div className="u-wrap news-band">
         <Reveal>
           <h2 className="news-band__title">Stay in touch</h2>
-          <p className="news-band__lede">New stock, restocks and trade terms — a few times a season, nothing more.</p>
+          <p className="news-band__lede">New stock, restocks and trade terms, a few times a season, nothing more.</p>
         </Reveal>
         <Reveal delay={80} className="news-band__form-wrap">
           {done ? (
-            <p className="news-band__done">Thank you — check your inbox to confirm.</p>
+            <p className="news-band__done">Thank you, check your inbox to confirm.</p>
           ) : (
             <form className="news-band__form" onSubmit={(e) => { e.preventDefault(); if (email.trim()) setDone(true); }}>
               <input type="email" required placeholder="Email address" aria-label="Email address" value={email} onChange={(e) => setEmail(e.target.value)} />

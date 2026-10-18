@@ -115,7 +115,7 @@ export default function CheckoutPage() {
               {!user && (
                 <p className="checkout__hint">
                   Have an account? <Link to="/sign-in" className="link">Sign in</Link> for saved
-                  addresses and order history — or continue as a guest.
+                  addresses and order history, or continue as a guest.
                 </p>
               )}
               <Field label="Email address" required>
@@ -130,7 +130,7 @@ export default function CheckoutPage() {
               <h2 className="checkout__h">Delivery address</h2>
               <Field label="Country / region" required>
                 <Select value={countryCode} onChange={(e) => setCountry(e.target.value)}>
-                  {countryList().map((c) => <option key={c.code} value={c.code}>{c.name} — {c.currency}</option>)}
+                  {countryList().map((c) => <option key={c.code} value={c.code}>{c.name}, {c.currency}</option>)}
                 </Select>
               </Field>
               <Field label="Full name" required><TextInput value={address.name} onChange={(e) => setAddress({ ...address, name: e.target.value })} /></Field>
@@ -151,7 +151,7 @@ export default function CheckoutPage() {
             <section>
               <h2 className="checkout__h">Shipping method</h2>
               <p className="checkout__hint">
-                This is a <strong>{totals.orderMode}</strong> order —{' '}
+                This is a <strong>{totals.orderMode}</strong> order ,{' '}
                 <strong>{totals.logisticsLabel}</strong> applies, {totals.logisticsBase} standard.
               </p>
               <div className="radio-list">

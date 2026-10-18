@@ -76,7 +76,7 @@ function Overview({ user }) {
           <Link to="/account/addresses" className="link">Manage</Link>
         </div>
         <div className="acct-card">
-          <span className="acct-card__n">—</span>
+          <span className="acct-card__n">N/A</span>
           <span className="acct-card__l">Wholesale account</span>
           <Link to="/wholesale/enquiry" className="link">Apply</Link>
         </div>
@@ -123,7 +123,7 @@ function Orders({ user }) {
               <span className="acct-order__date">{new Date(o.createdAt).toLocaleDateString()}</span>
             </div>
             <span className="acct-order__items">{o.items.reduce((n, i) => n + i.qty, 0)} items · {o.orderType || 'retail'}</span>
-            <span className="acct-order__total">{o.display?.total || '—'}</span>
+            <span className="acct-order__total">{o.display?.total || 'N/A'}</span>
             <span className={`acct-order__status acct-order__status--${o.status}`}>{o.status}</span>
             {o.status === 'confirmed' && (
               <button className="acct-order__cancel" disabled={busy === o.id} onClick={() => cancel(o.id)}>

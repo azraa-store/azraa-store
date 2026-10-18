@@ -1,6 +1,6 @@
 // Sample catalogue. Shape = the API contract.
 //
-// PRICING — every product carries a RETAIL and a WHOLESALE price, each as
+// PRICING, every product carries a RETAIL and a WHOLESALE price, each as
 // { inr, usd }. INR figures are the supplied source of truth; the USD figure is
 // the canonical cross-rate reference, derived once at CONFIG_INR_PER_USD.
 //   • customer in India  -> the exact INR figure
@@ -37,7 +37,7 @@ export const PRODUCTS = [
     images: { primary: null, gallery: [], byColor: {} },
     summary: 'A clean crew-neck tee for everyday wear, priced for volume.',
     description:
-      'A clean-lined crew-neck tee built for daily wear. Soft, mid-weight jersey with a smooth, dry handle and a ribbed neckline that holds its shape wash after wash. Regular fit — close to the body without clinging — with twin-needle hems for durability. The everyday staple of the range.',
+      'A clean-lined crew-neck tee built for daily wear. Soft, mid-weight jersey with a smooth, dry handle and a ribbed neckline that holds its shape wash after wash. Regular fit, close to the body without clinging, with twin-needle hems for durability. The everyday staple of the range.',
     details: [
       'Ribbed crew neckline',
       'Regular fit, straight hem',
@@ -64,7 +64,7 @@ export const PRODUCTS = [
     unit: 'piece',
     plate: { motif: 'CN' },
     images: { primary: null, gallery: [], byColor: {} },
-    summary: 'A collared polo-style tee — smart, breathable, easy to layer.',
+    summary: 'A collared polo-style tee, smart, breathable, easy to layer.',
     description:
       'A collared tee that sits between a polo and a t-shirt. A structured, flat-knit collar and a short placket lift it for smart-casual wear, while the soft jersey body keeps it easy. Regular fit, ribbed cuffs on the sleeves, a straight hem you can wear in or out.',
     details: ['Flat-knit collar, short button placket', 'Ribbed sleeve cuffs', 'Regular fit, straight hem'],
@@ -90,7 +90,7 @@ export const PRODUCTS = [
     images: { primary: null, gallery: [], byColor: {} },
     summary: 'A cut-away training singlet with a dropped armhole.',
     description:
-      'A training singlet cut for movement — a dropped armhole and a slightly scooped neck give the shoulders room, and the lightweight jersey moves sweat off the skin. Cut close through the body so it stays put under a hoodie or on its own.',
+      'A training singlet cut for movement, a dropped armhole and a slightly scooped neck give the shoulders room, and the lightweight jersey moves sweat off the skin. Cut close through the body so it stays put under a hoodie or on its own.',
     details: ['Dropped armhole', 'Scooped neck', 'Close fit through the body', 'Lightweight jersey'],
     fit: 'Close fit. Size up for a relaxed cut.',
     care: ['Machine wash cold', 'Do not bleach', 'Dry flat', 'Do not iron'],
@@ -112,7 +112,7 @@ export const PRODUCTS = [
     unit: 'piece',
     plate: { motif: 'SS' },
     images: { primary: null, gallery: [], byColor: {} },
-    summary: 'The everyday vest — a plain, mid-weight base layer.',
+    summary: 'The everyday vest, a plain, mid-weight base layer.',
     description:
       'The plain vest, done properly. Mid-weight jersey with standard-width straps and a straight neckline, cut for a regular fit so it works as a base layer or on its own. Bound edges at the neck and armholes hold their shape.',
     details: ['Standard straps', 'Bound neck and armhole edges', 'Regular fit', 'Mid-weight jersey'],
@@ -140,7 +140,7 @@ export const PRODUCTS = [
     images: { primary: null, gallery: [], byColor: {} },
     summary: 'A clean derby in leather, made to be resoled.',
     description:
-      'A pared-back derby shoe with a leather upper and a low, even heel. A plain rounded toe and minimal stitching keep it versatile — equally at home with trousers or denim. Built on a construction that can be resoled, so it lasts.',
+      'A pared-back derby shoe with a leather upper and a low, even heel. A plain rounded toe and minimal stitching keep it versatile, equally at home with trousers or denim. Built on a construction that can be resoled, so it lasts.',
     details: ['Leather upper', 'Plain rounded toe', 'Low stacked heel', 'Resoleable construction', 'Sizes in UK'],
     fit: 'True to size; half sizes round up. Wide feet may prefer a half size up.',
     care: ['Wipe clean with a soft cloth', 'Condition the leather periodically', 'Use shoe trees to hold shape', 'Air-dry away from direct heat'],
@@ -212,7 +212,7 @@ export const PRODUCTS = [
     images: { primary: null, gallery: [], byColor: {} },
     summary: 'A leather-strap sandal with a moulded footbed.',
     description:
-      'A more considered sandal — leather straps over a moulded footbed that shapes to the foot with wear. Brushed metal buckles, a stitched-edge sole and a low heel. Made to be worn every day through the warm months.',
+      'A more considered sandal, leather straps over a moulded footbed that shapes to the foot with wear. Brushed metal buckles, a stitched-edge sole and a low heel. Made to be worn every day through the warm months.',
     details: ['Leather straps, brushed buckles', 'Moulded footbed', 'Stitched-edge sole, low heel', 'Sizes in EU'],
     fit: 'True to size. The footbed moulds in over the first few wears.',
     care: ['Wipe clean with a soft cloth', 'Condition the leather occasionally', 'Air-dry away from heat'],
@@ -277,11 +277,11 @@ export const PRODUCTS = [
     tags: ['leather', 'bag', 'ladies'],
   },
 
-  /* ─────────────────────────────  MEN — STREET  ─────────────────────────────
+  /* ─────────────────────────────  MEN, STREET  ─────────────────────────────
      Photographed range delivered 2026-10-16 (front + back where available,
      see assets/products/ + scripts/process-products.py). Eight of the
      delivered designs reproduced real third-party IP and are intentionally
-     left out of this catalogue — ask before adding any of them back. */
+     left out of this catalogue, ask before adding any of them back. */
   {
     id: 'azr-tee-minimalist-black',
     slug: 'minimalist-black-t-shirt',
@@ -293,7 +293,7 @@ export const PRODUCTS = [
     images: { primary: '/products/minimalist-black-t-shirt-front.jpg', gallery: ['/products/minimalist-black-t-shirt-front.jpg', '/products/minimalist-black-t-shirt-back.jpg'], byColor: {} },
     summary: 'A clean, boxier-cut black tee in heavyweight cotton.',
     description:
-      'A plain black tee cut with a slightly dropped shoulder and a boxier body than a basic crew. Heavyweight cotton jersey that holds its shape, a ribbed neckline, and clean hems front and back. No print, no branding — just a well-made staple.',
+      'A plain black tee cut with a slightly dropped shoulder and a boxier body than a basic crew. Heavyweight cotton jersey that holds its shape, a ribbed neckline, and clean hems front and back. No print, no branding, just a well-made staple.',
     details: ['Ribbed crew neckline', 'Dropped shoulder, boxier fit', 'Heavyweight cotton jersey', 'Full colour and size runs held for wholesale'],
     fit: 'Relaxed fit. True to size; size down for a closer fit.',
     care: ['Machine wash cold, inside out', 'Do not bleach', 'Tumble dry low or dry flat', 'Warm iron if needed'],
@@ -317,7 +317,7 @@ export const PRODUCTS = [
     images: { primary: '/products/floating-charcoal-hoodie-front.jpg', gallery: ['/products/floating-charcoal-hoodie-front.jpg'], byColor: {} },
     summary: 'A plain full-zip hoodie in brushed charcoal fleece.',
     description:
-      'A full-zip hoodie in brushed cotton fleece, cut with a dropped shoulder and a roomy hood. Metal zip pull, a kangaroo pocket, and ribbed cuffs and hem. Unbranded — reads as a clean layering piece rather than a graphic tee.',
+      'A full-zip hoodie in brushed cotton fleece, cut with a dropped shoulder and a roomy hood. Metal zip pull, a kangaroo pocket, and ribbed cuffs and hem. Unbranded, reads as a clean layering piece rather than a graphic tee.',
     details: ['Full-length zip, metal pull', 'Kangaroo pocket', 'Ribbed cuffs and hem', 'Dropped shoulder, relaxed body'],
     fit: 'Relaxed fit. True to size; size down for a closer fit.',
     care: ['Machine wash cold, inside out', 'Do not bleach', 'Tumble dry low', 'Warm iron if needed'],
@@ -340,7 +340,7 @@ export const PRODUCTS = [
     images: { primary: '/products/olive-green-hoodie-front.jpg', gallery: ['/products/olive-green-hoodie-front.jpg'], byColor: {} },
     summary: 'A full-zip hoodie in a deep, muted olive.',
     description:
-      'The same clean full-zip hoodie block in a deep olive brushed fleece — a kangaroo pocket, roomy hood and ribbed cuffs and hem. Unbranded, built for everyday layering rather than a statement print.',
+      'The same clean full-zip hoodie block in a deep olive brushed fleece, a kangaroo pocket, roomy hood and ribbed cuffs and hem. Unbranded, built for everyday layering rather than a statement print.',
     details: ['Full-length zip', 'Kangaroo pocket', 'Ribbed cuffs and hem', 'Dropped shoulder, relaxed body'],
     fit: 'Relaxed fit. True to size; size down for a closer fit.',
     care: ['Machine wash cold, inside out', 'Do not bleach', 'Tumble dry low', 'Warm iron if needed'],
@@ -363,7 +363,7 @@ export const PRODUCTS = [
     images: { primary: '/products/sage-green-hoodie-front.jpg', gallery: ['/products/sage-green-hoodie-front.jpg'], byColor: {} },
     summary: 'A pullover hoodie in a soft, washed sage.',
     description:
-      'A pullover hoodie in a soft sage fleece — drawstring hood, front pouch pocket and ribbed cuffs and hem. A lighter, more muted colour option alongside the charcoal and olive zip hoodies.',
+      'A pullover hoodie in a soft sage fleece, drawstring hood, front pouch pocket and ribbed cuffs and hem. A lighter, more muted colour option alongside the charcoal and olive zip hoodies.',
     details: ['Pullover, drawstring hood', 'Front pouch pocket', 'Ribbed cuffs and hem', 'Relaxed body'],
     fit: 'Relaxed fit. True to size; size down for a closer fit.',
     care: ['Machine wash cold, inside out', 'Do not bleach', 'Tumble dry low', 'Warm iron if needed'],
@@ -387,7 +387,7 @@ export const PRODUCTS = [
     images: { primary: '/products/color-blocked-hoodie-front.jpg', gallery: ['/products/color-blocked-hoodie-front.jpg'], byColor: {} },
     summary: 'A full-zip hoodie in three-tone brown, white and charcoal blocking.',
     description:
-      'A full-zip hoodie built from three colour-blocked fleece panels — charcoal shoulders, a white chest band and a brown body. Metal zip pull, kangaroo pocket, ribbed cuffs and hem. The most graphic silhouette in the range without any print or branding.',
+      'A full-zip hoodie built from three colour-blocked fleece panels, charcoal shoulders, a white chest band and a brown body. Metal zip pull, kangaroo pocket, ribbed cuffs and hem. The most graphic silhouette in the range without any print or branding.',
     details: ['Three-panel colour block', 'Full-length zip, metal pull', 'Kangaroo pocket', 'Ribbed cuffs and hem'],
     fit: 'Relaxed fit. True to size; size down for a closer fit.',
     care: ['Machine wash cold, inside out', 'Do not bleach', 'Tumble dry low', 'Warm iron if needed'],
@@ -433,7 +433,7 @@ export const PRODUCTS = [
     images: { primary: '/products/charcoal-half-zip-sweatshirt-front.jpg', gallery: ['/products/charcoal-half-zip-sweatshirt-front.jpg', '/products/charcoal-half-zip-sweatshirt-back.jpg'], byColor: {} },
     summary: 'A funnel-neck half-zip sweatshirt in heavyweight charcoal fleece.',
     description:
-      'A funnel-neck sweatshirt with a short front zip, cut in heavyweight brushed fleece. Ribbed stand collar, dropped shoulder and ribbed cuffs and hem — smarter than a hoodie, still easy to wear.',
+      'A funnel-neck sweatshirt with a short front zip, cut in heavyweight brushed fleece. Ribbed stand collar, dropped shoulder and ribbed cuffs and hem, smarter than a hoodie, still easy to wear.',
     details: ['Funnel neck, short front zip', 'Ribbed stand collar', 'Dropped shoulder', 'Ribbed cuffs and hem'],
     fit: 'Relaxed fit. True to size; size down for a closer fit.',
     care: ['Machine wash cold, inside out', 'Do not bleach', 'Tumble dry low', 'Warm iron if needed'],
@@ -503,7 +503,7 @@ export const PRODUCTS = [
     images: { primary: '/products/olive-green-joggers-front.jpg', gallery: ['/products/olive-green-joggers-front.jpg', '/products/olive-green-joggers-back.jpg'], byColor: {} },
     summary: 'Tapered drawstring joggers in olive fleece.',
     description:
-      'The same tapered jogger block in olive — elasticated drawstring waist, side pockets, a back patch pocket and ribbed hems.',
+      'The same tapered jogger block in olive, elasticated drawstring waist, side pockets, a back patch pocket and ribbed hems.',
     details: ['Elasticated drawstring waist', 'Side pockets, back patch pocket', 'Tapered leg, ribbed hem'],
     fit: 'Relaxed through the hip and thigh, tapered leg. True to size.',
     care: ['Machine wash cold, inside out', 'Do not bleach', 'Tumble dry low', 'Warm iron if needed'],
@@ -572,7 +572,7 @@ export const PRODUCTS = [
     images: { primary: '/products/minimalist-tan-sweatpants-front.jpg', gallery: ['/products/minimalist-tan-sweatpants-front.jpg', '/products/minimalist-tan-sweatpants-back.jpg'], byColor: {} },
     summary: 'Tapered sweatpants in warm tan fleece.',
     description:
-      'The same tapered sweatpant block in a warm tan — elasticated drawstring waist, side pockets, back patch pocket and ribbed hem.',
+      'The same tapered sweatpant block in a warm tan, elasticated drawstring waist, side pockets, back patch pocket and ribbed hem.',
     details: ['Elasticated drawstring waist', 'Side pockets, back patch pocket', 'Tapered leg, ribbed hem'],
     fit: 'Relaxed through the hip and thigh, tapered leg. True to size.',
     care: ['Machine wash cold, inside out', 'Do not bleach', 'Tumble dry low', 'Warm iron if needed'],
@@ -689,7 +689,7 @@ export const PRODUCTS = [
     images: { primary: '/products/tropical-skull-print-polo-shirt-front.jpg', gallery: ['/products/tropical-skull-print-polo-shirt-front.jpg', '/products/tropical-skull-print-polo-shirt-back.jpg'], byColor: {} },
     summary: 'An all-over tropical skull and pineapple print polo.',
     description:
-      'A white polo covered edge to edge in an illustrated skull, pineapple and palm print. Soft stretch piqué, two-button placket, regular fit — a statement piece against the rest of the plainer range.',
+      'A white polo covered edge to edge in an illustrated skull, pineapple and palm print. Soft stretch piqué, two-button placket, regular fit, a statement piece against the rest of the plainer range.',
     details: ['All-over illustrated print', 'Soft stretch piqué', 'Two-button placket', 'Regular fit, straight hem'],
     fit: 'Regular fit. True to size.',
     care: ['Machine wash cold, inside out', 'Do not bleach', 'Tumble dry low or dry flat', 'Warm iron if needed'],
@@ -736,7 +736,7 @@ export const PRODUCTS = [
     images: { primary: '/products/steel-blue-overshirt-front.jpg', gallery: ['/products/steel-blue-overshirt-front.jpg'], byColor: {} },
     summary: 'A brushed-cotton overshirt in steel blue.',
     description:
-      'A heavier brushed-cotton overshirt in steel blue, cut to layer over a tee or henley. Twin patch pockets, button cuffs and a woven interior label — a shacket-weight piece between a shirt and a jacket.',
+      'A heavier brushed-cotton overshirt in steel blue, cut to layer over a tee or henley. Twin patch pockets, button cuffs and a woven interior label, a shacket-weight piece between a shirt and a jacket.',
     details: ['Brushed cotton, mid-weight', 'Twin chest patch pockets', 'Button cuffs', 'Regular fit, straight hem'],
     fit: 'Regular fit, straight hem. True to size; size up to layer.',
     care: ['Machine wash cold, inside out', 'Do not bleach', 'Tumble dry low', 'Warm iron if needed'],

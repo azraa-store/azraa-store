@@ -4,7 +4,7 @@ import Button from '../../components/ui/Button.jsx';
 import { adminSnapshot, setStock, getHistory, resetInventory } from '../../services/inventory.js';
 
 // NOTE: this is an architecture placeholder. Real admin access must be
-// server-authenticated and role-gated — the passphrase here only keeps casual
+// server-authenticated and role-gated, the passphrase here only keeps casual
 // visitors out of the demo. The canonical admin tool is the Python CLI in
 // /inventory; this view reads the same store shape.
 const DEMO_PASS = 'azraa-admin';
@@ -109,8 +109,8 @@ function VariantRow({ productId, v, onSaved }) {
   const dirty = Number(val) !== v.qty;
   return (
     <tr>
-      <td>{v.color || '—'}</td>
-      <td>{v.size || '—'}</td>
+      <td>{v.color || 'N/A'}</td>
+      <td>{v.size || 'N/A'}</td>
       <td>
         <input className="admin__qty" type="number" min="0" value={val} onChange={(e) => setVal(e.target.value)} />
       </td>

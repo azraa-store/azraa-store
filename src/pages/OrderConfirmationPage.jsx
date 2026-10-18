@@ -40,7 +40,7 @@ export default function OrderConfirmationPage() {
 
       {mode === 'mock' && (
         <p className="confirm__demo">
-          Demo checkout — no payment was taken and no live stock moved beyond this browser.
+          Demo checkout, no payment was taken and no live stock moved beyond this browser.
           Connect a payment provider’s live keys to process real transactions.
         </p>
       )}

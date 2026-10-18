@@ -3,13 +3,13 @@ import { mockSession, mockConfirm } from './_mock.js';
 const PUBLIC_KEY = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY || '';
 
 /**
- * Paystack — Nigeria (NGN). Publishable: VITE_PAYSTACK_PUBLIC_KEY.
+ * Paystack, Nigeria (NGN). Publishable: VITE_PAYSTACK_PUBLIC_KEY.
  * Secret (PAYSTACK_SECRET_KEY) + transaction init/verify stay server-side.
  */
 export default {
   id: 'paystack',
   label: 'Paystack',
-  description: 'Cards, bank transfer & USSD — Nigeria',
+  description: 'Cards, bank transfer & USSD, Nigeria',
   currencies: ['NGN', 'GHS', 'ZAR', 'KES'],
   configured: Boolean(PUBLIC_KEY),
 

@@ -77,7 +77,7 @@ export default function WholesaleEnquiryPage() {
           Your reference is <strong>{result.reference}</strong>. Our trade desk
           will review it and reply to <strong>{contact.email}</strong>, usually
           within two working days, with account terms and any custom pricing.
-          You can buy wholesale on the store in the meantime — no account needed.
+          You can buy wholesale on the store in the meantime, no account needed.
         </p>
         <div className="confirm__card">
           <h2 className="confirm__h">Products you flagged</h2>
@@ -103,7 +103,7 @@ export default function WholesaleEnquiryPage() {
       </nav>
       <h1 className="page-title">Open a trade account</h1>
       <p className="enquiry__lede">
-        You can buy wholesale on the store right now — this form is only for
+        You can buy wholesale on the store right now, this form is only for
         <strong> custom pricing, payment terms, standing orders</strong> or
         volumes beyond the standard runs. Tell us about your business and what
         you expect to order.
@@ -119,7 +119,7 @@ export default function WholesaleEnquiryPage() {
                 <Field label="Product">
                   <Select value={line.productId} onChange={(e) => setLine(i, { productId: e.target.value })}>
                     {wholesaleProducts.map((wp) => (
-                      <option key={wp.id} value={wp.id}>{wp.name} — {wp.category}</option>
+                      <option key={wp.id} value={wp.id}>{wp.name}, {wp.category}</option>
                     ))}
                   </Select>
                 </Field>
@@ -166,7 +166,7 @@ export default function WholesaleEnquiryPage() {
               <TextInput value={business.website} onChange={(e) => setBusiness({ ...business, website: e.target.value })} placeholder="https://" />
             </Field>
           </div>
-          <Field label="Tax / business ID (optional)" hint="GSTIN, RC number, VAT — whatever applies in your market.">
+          <Field label="Tax / business ID (optional)" hint="GSTIN, RC number, VAT, whatever applies in your market.">
             <TextInput value={business.taxId} onChange={(e) => setBusiness({ ...business, taxId: e.target.value })} />
           </Field>
         </section>

@@ -17,7 +17,7 @@ export default function FxNote() {
   if (!show) return null;
   return (
     <div className="fxnote" role="status">
-      Live exchange rates are unavailable — {currency} prices use a recent snapshot.
+      Live exchange rates are unavailable, {currency} prices use a recent snapshot.
       Your card is charged the exact local amount at checkout.
       <button onClick={() => setShow(false)} aria-label="Dismiss">×</button>
     </div>

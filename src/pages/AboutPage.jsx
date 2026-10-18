@@ -32,7 +32,7 @@ export default function AboutPage() {
         <h2>Standard</h2>
         <p>
           Everything is specced and checked to a retail standard before it
-          ships — the wholesale price reflects the volume, not a drop in
+          ships, the wholesale price reflects the volume, not a drop in
           quality.
         </p>
         <h2>Company information</h2>

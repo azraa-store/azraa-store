@@ -6,11 +6,11 @@ import { activeCategories, getCategory, isActiveCategory } from '../data/categor
 
 const delay = (ms) => new Promise((r) => setTimeout(r, ms));
 
-// A product only shows up on the storefront once it has real photography —
+// A product only shows up on the storefront once it has real photography:
 // a primary shot plus at least a back view (gallery[0] = front, [1] = back).
 // Everything else stays in the data (pricing, inventory, copy already done)
-// but is hidden everywhere — grid, search, featured, related, and direct
-// product-page access — until its photos are complete.
+// but is hidden everywhere: grid, search, featured, related, and direct
+// product-page access, until its photos are complete.
 const hasFrontAndBack = (p) => Boolean(p.images?.primary) && (p.images?.gallery?.length || 0) >= 2;
 export const isStorefrontReady = (p) => isActiveCategory(p.category) && hasFrontAndBack(p);
 const storefront = () => PRODUCTS.filter(isStorefrontReady);

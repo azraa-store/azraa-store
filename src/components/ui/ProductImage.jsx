@@ -28,7 +28,7 @@ export default function ProductImage({ product, color, className = '', ratio = '
       <div className={`pimg ${className}`} style={{ aspectRatio: ratio }}>
         <img
           src={src}
-          alt={`${product.name}${color ? ` — ${color}` : ''}`}
+          alt={`${product.name}${color ? `, ${color}` : ''}`}
           loading={priority ? 'eager' : 'lazy'}
           decoding="async"
           sizes={sizes}

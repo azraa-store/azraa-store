@@ -7,7 +7,7 @@ import { LANGUAGES, langDir, t } from '../../i18n/assistant.js';
 /* ── marks ─────────────────────────────────────────────────────────── */
 
 function BotMark({ size = 20 }) {
-  // a quiet concentric "listening" mark — reads as an assistant, not a face
+  // a quiet concentric "listening" mark, reads as an assistant, not a face
   return (
     <svg viewBox="0 0 24 24" width={size} height={size} aria-hidden="true" focusable="false">
       <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.4" opacity="0.35" />

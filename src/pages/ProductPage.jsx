@@ -139,7 +139,7 @@ export default function ProductPage() {
 
           <p className="pdp__summary">{product.summary}</p>
 
-          {/* Retail / Wholesale — both are a direct purchase */}
+          {/* Retail / Wholesale, both are a direct purchase */}
           <div className="pdp__opt">
             <span className="pdp__opt-label">Buy as · <strong>{mode === 'wholesale' ? 'Wholesale' : 'Retail'}</strong></span>
             <div className="mode-switch">
@@ -153,7 +153,7 @@ export default function ProductPage() {
             {mode === 'wholesale' && (
               <p className="pdp__moq">
                 {product.wholesale?.unitHint || `Minimum ${moq} ${product.unit}s`}. Enter any
-                quantity from {moq} — you pay the wholesale unit price and wholesale delivery.
+                quantity from {moq}, you pay the wholesale unit price and wholesale delivery.
               </p>
             )}
           </div>
@@ -219,12 +219,12 @@ export default function ProductPage() {
           <div className="pdp__crossmode">
             {mode === 'retail' ? (
               <>Ordering in volume? <button className="link" onClick={() => switchMode('wholesale')}>
-                Switch to wholesale</button> — <Price product={product} mode="wholesale" /> / {product.unit}
+                Switch to wholesale</button>, <Price product={product} mode="wholesale" /> / {product.unit}
                 {' '}from {product.wholesale?.moq} {product.unit}s.
               </>
             ) : (
               <>Just need a few? <button className="link" onClick={() => switchMode('retail')}>
-                Switch to retail</button> — <Price product={product} mode="retail" /> / {product.unit}.
+                Switch to retail</button>, <Price product={product} mode="retail" /> / {product.unit}.
               </>
             )}
           </div>

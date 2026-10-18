@@ -17,28 +17,28 @@ const AUDIENCE = [
 ];
 const STEPS = [
   ['Choose', 'Open any product, switch to Wholesale, and enter the quantity you need.'],
-  ['Checkout', 'Pay the wholesale unit price and wholesale delivery — no quote, no wait.'],
+  ['Checkout', 'Pay the wholesale unit price and wholesale delivery, no quote, no wait.'],
   ['Account', 'For custom pricing, payment terms or standing orders, open a trade account.'],
-  ['Fulfil', 'We pick, document and ship — tracked courier or consolidated export.'],
+  ['Fulfil', 'We pick, document and ship, tracked courier or consolidated export.'],
 ];
 
 export default function WholesalePage() {
   // The example links to the product page, which 404s for anything not yet
-  // storefront-ready — pick a product that's actually live.
+  // storefront-ready, pick a product that's actually live.
   const tee = PRODUCTS.find((p) => p.id === 'azr-tee-round' && isStorefrontReady(p)) || PRODUCTS.find(isStorefrontReady);
 
   return (
     <div className="wpage">
       <Seo
         title="Wholesale"
-        description="Every AZRAA product is available to buy at a wholesale price — pick a quantity and check out. Serving retailers, distributors and bulk buyers across Asia and Africa."
+        description="Every AZRAA product is available to buy at a wholesale price, pick a quantity and check out. Serving retailers, distributors and bulk buyers across Asia and Africa."
       />
 
       <section className="wpage__hero">
         <div className="u-wrap">
           <Reveal>
             <span className="label">Wholesale</span>
-            <h1 className="wpage__title">Buy wholesale directly — no enquiry</h1>
+            <h1 className="wpage__title">Buy wholesale directly, no enquiry</h1>
             <p className="wpage__lede">
               Every product in the store carries a retail and a wholesale price.
               Open a product, switch to Wholesale, enter your quantity, and check
@@ -118,11 +118,11 @@ export default function WholesalePage() {
             <h2 className="hsec__title">Open a trade account</h2>
             <p className="hsec__lede">
               For customer-specific pricing, payment terms, standing orders or
-              volumes beyond the standard runs — tell us about your business.
+              volumes beyond the standard runs, tell us about your business.
             </p>
             <Button to="/wholesale/enquiry" size="lg">Start a trade account</Button>
             <p className="wpage__fine">
-              You can buy wholesale right now without an account — this is only for
+              You can buy wholesale right now without an account, this is only for
               custom terms.
             </p>
           </Reveal>

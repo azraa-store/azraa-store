@@ -1,4 +1,4 @@
-// Inventory — customer-safe read model + order hooks.
+// Inventory, customer-safe read model + order hooks.
 //
 // Customers never see quantities, only In Stock / Low Stock / Out of Stock.
 // The administrator (Python tool in /inventory, or a future admin dashboard)

@@ -52,7 +52,7 @@ export default function CartPage() {
                       <span>{qty}</span>
                       <button onClick={() => updateQty(product.id, mode, variant, qty + 1)} aria-label="Increase">+</button>
                     </div>
-                    <span className="cline__total">{price.status ? '—' : totals.money(line.lineAmount)}</span>
+                    <span className="cline__total">{price.status ? 'Soon' : totals.money(line.lineAmount)}</span>
                   </div>
                 </div>
               );

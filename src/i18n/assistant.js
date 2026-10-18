@@ -1,10 +1,10 @@
-// AZRAA assistant — languages + string table.
+// AZRAA assistant, languages + string table.
 //
 // The assistant offers six languages covering AZRAA's markets. The rule engine
 // still routes on English keywords, so chip `send` values stay English; only the
 // text a customer *reads* is translated here.
 //
-// ⚠ Non-English strings are a first pass — have a native speaker review before
+// ⚠ Non-English strings are a first pass, have a native speaker review before
 // launch, especially the policy answers in data/faqs.js.
 
 export const LANGUAGES = [
@@ -58,20 +58,20 @@ const S = {
     sw: 'AZRAA inaandika', fr: 'AZRAA écrit', ar: 'AZRAA يكتب',
   },
   fineLocal: {
-    en: 'This assistant answers from AZRAA’s own product and policy information — check important details before ordering.',
-    hi: 'यह सहायक AZRAA की अपनी उत्पाद और नीति जानकारी से उत्तर देता है — ऑर्डर करने से पहले ज़रूरी विवरण जाँच लें।',
-    bn: 'এই সহকারী AZRAA-র নিজস্ব পণ্য ও নীতির তথ্য থেকে উত্তর দেয় — অর্ডার করার আগে গুরুত্বপূর্ণ তথ্য যাচাই করুন।',
-    sw: 'Msaidizi huyu hujibu kwa taarifa za bidhaa na sera za AZRAA — hakiki maelezo muhimu kabla ya kuagiza.',
-    fr: "Cet assistant répond à partir des informations produits et politiques d’AZRAA — vérifiez les détails importants avant de commander.",
-    ar: 'يجيب هذا المساعد من معلومات منتجات وسياسات AZRAA — تحقّق من التفاصيل المهمة قبل الطلب.',
+    en: 'This assistant answers from AZRAA’s own product and policy information, check important details before ordering.',
+    hi: 'यह सहायक AZRAA की अपनी उत्पाद और नीति जानकारी से उत्तर देता है, ऑर्डर करने से पहले ज़रूरी विवरण जाँच लें।',
+    bn: 'এই সহকারী AZRAA-র নিজস্ব পণ্য ও নীতির তথ্য থেকে উত্তর দেয়, অর্ডার করার আগে গুরুত্বপূর্ণ তথ্য যাচাই করুন।',
+    sw: 'Msaidizi huyu hujibu kwa taarifa za bidhaa na sera za AZRAA, hakiki maelezo muhimu kabla ya kuagiza.',
+    fr: "Cet assistant répond à partir des informations produits et politiques d’AZRAA, vérifiez les détails importants avant de commander.",
+    ar: 'يجيب هذا المساعد من معلومات منتجات وسياسات AZRAA, تحقّق من التفاصيل المهمة قبل الطلب.',
   },
   fineModel: {
-    en: 'AZRAA is AI-assisted — check important details before ordering.',
-    hi: 'AZRAA AI-सहायता प्राप्त है — ऑर्डर करने से पहले ज़रूरी विवरण जाँच लें।',
-    bn: 'AZRAA AI-সহায়তাপ্রাপ্ত — অর্ডার করার আগে গুরুত্বপূর্ণ তথ্য যাচাই করুন।',
-    sw: 'AZRAA inasaidiwa na AI — hakiki maelezo muhimu kabla ya kuagiza.',
-    fr: "AZRAA est assisté par IA — vérifiez les détails importants avant de commander.",
-    ar: 'AZRAA مدعوم بالذكاء الاصطناعي — تحقّق من التفاصيل المهمة قبل الطلب.',
+    en: 'AZRAA is AI-assisted, check important details before ordering.',
+    hi: 'AZRAA AI-सहायता प्राप्त है, ऑर्डर करने से पहले ज़रूरी विवरण जाँच लें।',
+    bn: 'AZRAA AI-সহায়তাপ্রাপ্ত, অর্ডার করার আগে গুরুত্বপূর্ণ তথ্য যাচাই করুন।',
+    sw: 'AZRAA inasaidiwa na AI, hakiki maelezo muhimu kabla ya kuagiza.',
+    fr: "AZRAA est assisté par IA, vérifiez les détails importants avant de commander.",
+    ar: 'AZRAA مدعوم بالذكاء الاصطناعي, تحقّق من التفاصيل المهمة قبل الطلب.',
   },
 
   /* ---- language gate ---- */
@@ -90,12 +90,12 @@ const S = {
 
   /* ---- smalltalk / meta ---- */
   greeting: {
-    en: "Hi, I'm AZRAA — your shopping assistant.{region} I can help you find products, check pricing and stock, explain wholesale and delivery, or point you to the right page. What are you after?",
-    hi: "नमस्ते, मैं AZRAA हूँ — आपका शॉपिंग सहायक।{region} मैं उत्पाद खोजने, कीमत और स्टॉक देखने, थोक और डिलीवरी समझाने, या सही पेज तक पहुँचाने में मदद कर सकता हूँ। आपको क्या चाहिए?",
-    bn: "নমস্কার, আমি AZRAA — আপনার শপিং সহকারী।{region} আমি পণ্য খুঁজে দিতে, দাম ও স্টক দেখতে, পাইকারি ও ডেলিভারি বোঝাতে, বা সঠিক পেজে নিয়ে যেতে পারি। আপনি কী খুঁজছেন?",
-    sw: "Habari, mimi ni AZRAA — msaidizi wako wa ununuzi.{region} Naweza kukusaidia kupata bidhaa, kuangalia bei na hisa, kueleza jumla na uwasilishaji, au kukuelekeza kwenye ukurasa sahihi. Unatafuta nini?",
-    fr: "Bonjour, je suis AZRAA — votre assistant achats.{region} Je peux vous aider à trouver des produits, vérifier les prix et le stock, expliquer la vente en gros et la livraison, ou vous orienter vers la bonne page. Que cherchez-vous ?",
-    ar: "مرحبًا، أنا AZRAA — مساعد التسوّق الخاص بك.{region} يمكنني مساعدتك في إيجاد المنتجات، والتحقق من الأسعار والمخزون، وشرح البيع بالجملة والتوصيل، أو إرشادك إلى الصفحة المناسبة. عمّ تبحث؟",
+    en: "Hi, I'm AZRAA, your shopping assistant.{region} I can help you find products, check pricing and stock, explain wholesale and delivery, or point you to the right page. What are you after?",
+    hi: "नमस्ते, मैं AZRAA हूँ, आपका शॉपिंग सहायक।{region} मैं उत्पाद खोजने, कीमत और स्टॉक देखने, थोक और डिलीवरी समझाने, या सही पेज तक पहुँचाने में मदद कर सकता हूँ। आपको क्या चाहिए?",
+    bn: "নমস্কার, আমি AZRAA, আপনার শপিং সহকারী।{region} আমি পণ্য খুঁজে দিতে, দাম ও স্টক দেখতে, পাইকারি ও ডেলিভারি বোঝাতে, বা সঠিক পেজে নিয়ে যেতে পারি। আপনি কী খুঁজছেন?",
+    sw: "Habari, mimi ni AZRAA, msaidizi wako wa ununuzi.{region} Naweza kukusaidia kupata bidhaa, kuangalia bei na hisa, kueleza jumla na uwasilishaji, au kukuelekeza kwenye ukurasa sahihi. Unatafuta nini?",
+    fr: "Bonjour, je suis AZRAA, votre assistant achats.{region} Je peux vous aider à trouver des produits, vérifier les prix et le stock, expliquer la vente en gros et la livraison, ou vous orienter vers la bonne page. Que cherchez-vous ?",
+    ar: "مرحبًا، أنا AZRAA, مساعد التسوّق الخاص بك.{region} يمكنني مساعدتك في إيجاد المنتجات، والتحقق من الأسعار والمخزون، وشرح البيع بالجملة والتوصيل، أو إرشادك إلى الصفحة المناسبة. عمّ تبحث؟",
   },
   greetingRegion: {
     en: " You're shopping in {country}.",
@@ -114,12 +114,12 @@ const S = {
     ar: ' للحصول على مساعدة تفصيلية، يمكن لفريقنا متابعة الحديث معك عبر واتساب.',
   },
   hello: {
-    en: 'Hello. What can I help you with — finding a product, pricing, wholesale, or an order?',
-    hi: 'नमस्ते। मैं किसमें मदद करूँ — उत्पाद खोजना, कीमत, थोक, या ऑर्डर?',
-    bn: 'নমস্কার। আমি কীসে সাহায্য করব — পণ্য খোঁজা, দাম, পাইকারি, নাকি অর্ডার?',
-    sw: 'Habari. Nikusaidie na nini — kupata bidhaa, bei, jumla, au agizo?',
-    fr: 'Bonjour. Comment puis-je vous aider — trouver un produit, les prix, la vente en gros, ou une commande ?',
-    ar: 'مرحبًا. بماذا أساعدك — إيجاد منتج، الأسعار، البيع بالجملة، أو طلب؟',
+    en: 'Hello. What can I help you with, finding a product, pricing, wholesale, or an order?',
+    hi: 'नमस्ते। मैं किसमें मदद करूँ, उत्पाद खोजना, कीमत, थोक, या ऑर्डर?',
+    bn: 'নমস্কার। আমি কীসে সাহায্য করব, পণ্য খোঁজা, দাম, পাইকারি, নাকি অর্ডার?',
+    sw: 'Habari. Nikusaidie na nini, kupata bidhaa, bei, jumla, au agizo?',
+    fr: 'Bonjour. Comment puis-je vous aider, trouver un produit, les prix, la vente en gros, ou une commande ?',
+    ar: 'مرحبًا. بماذا أساعدك, إيجاد منتج، الأسعار، البيع بالجملة، أو طلب؟',
   },
   thanks: {
     en: 'Anytime. Anything else I can help with?',
@@ -138,17 +138,17 @@ const S = {
     ar: 'اسألني أي شيء عن منتجات AZRAA وأسعارها وطلباتها أو التوصيل.',
   },
   fallback: {
-    en: "I'm not certain I follow. I can help with products and pricing, wholesale and minimum orders, stock, delivery, returns, payment and getting through checkout. Try one of these — or ask a person.",
-    hi: 'मुझे पूरी तरह समझ नहीं आया। मैं उत्पाद और कीमत, थोक और न्यूनतम ऑर्डर, स्टॉक, डिलीवरी, रिटर्न, भुगतान और चेकआउट में मदद कर सकता हूँ। इनमें से कोई चुनें — या किसी व्यक्ति से बात करें।',
-    bn: 'আমি ঠিক বুঝতে পারিনি। আমি পণ্য ও দাম, পাইকারি ও ন্যূনতম অর্ডার, স্টক, ডেলিভারি, রিটার্ন, পেমেন্ট এবং চেকআউটে সাহায্য করতে পারি। এর একটি বেছে নিন — বা একজন ব্যক্তির সাথে কথা বলুন।',
-    sw: 'Sina uhakika nimeelewa. Naweza kusaidia na bidhaa na bei, jumla na maagizo ya chini, hisa, uwasilishaji, marejesho, malipo na kukamilisha malipo. Jaribu mojawapo — au ongea na mtu.',
-    fr: "Je ne suis pas sûr de comprendre. Je peux aider pour les produits et les prix, la vente en gros et les commandes minimales, le stock, la livraison, les retours, le paiement et le passage en caisse. Essayez l’une de ces options — ou parlez à une personne.",
-    ar: 'لست متأكدًا أنني فهمت. يمكنني المساعدة في المنتجات والأسعار، والبيع بالجملة والحد الأدنى للطلبات، والمخزون، والتوصيل، والإرجاع، والدفع، وإتمام الشراء. جرّب أحد هذه الخيارات — أو تحدّث إلى شخص.',
+    en: "I'm not certain I follow. I can help with products and pricing, wholesale and minimum orders, stock, delivery, returns, payment and getting through checkout. Try one of these, or ask a person.",
+    hi: 'मुझे पूरी तरह समझ नहीं आया। मैं उत्पाद और कीमत, थोक और न्यूनतम ऑर्डर, स्टॉक, डिलीवरी, रिटर्न, भुगतान और चेकआउट में मदद कर सकता हूँ। इनमें से कोई चुनें, या किसी व्यक्ति से बात करें।',
+    bn: 'আমি ঠিক বুঝতে পারিনি। আমি পণ্য ও দাম, পাইকারি ও ন্যূনতম অর্ডার, স্টক, ডেলিভারি, রিটার্ন, পেমেন্ট এবং চেকআউটে সাহায্য করতে পারি। এর একটি বেছে নিন, বা একজন ব্যক্তির সাথে কথা বলুন।',
+    sw: 'Sina uhakika nimeelewa. Naweza kusaidia na bidhaa na bei, jumla na maagizo ya chini, hisa, uwasilishaji, marejesho, malipo na kukamilisha malipo. Jaribu mojawapo, au ongea na mtu.',
+    fr: "Je ne suis pas sûr de comprendre. Je peux aider pour les produits et les prix, la vente en gros et les commandes minimales, le stock, la livraison, les retours, le paiement et le passage en caisse. Essayez l’une de ces options, ou parlez à une personne.",
+    ar: 'لست متأكدًا أنني فهمت. يمكنني المساعدة في المنتجات والأسعار، والبيع بالجملة والحد الأدنى للطلبات، والمخزون، والتوصيل، والإرجاع، والدفع، وإتمام الشراء. جرّب أحد هذه الخيارات, أو تحدّث إلى شخص.',
   },
   notCaught: {
-    en: "Sorry — I didn't catch that.", hi: 'क्षमा करें — मैं समझ नहीं पाया।',
-    bn: 'দুঃখিত — আমি বুঝতে পারিনি।', sw: 'Samahani — sikuelewa.',
-    fr: "Désolé, je n'ai pas compris.", ar: 'عذرًا — لم أفهم ذلك.',
+    en: "Sorry, I didn't catch that.", hi: 'क्षमा करें, मैं समझ नहीं पाया।',
+    bn: 'দুঃখিত, আমি বুঝতে পারিনি।', sw: 'Samahani, sikuelewa.',
+    fr: "Désolé, je n'ai pas compris.", ar: 'عذرًا, لم أفهم ذلك.',
   },
   error: {
     en: 'Something went wrong on my end. Please try again, or reach us on WhatsApp or the contact form.',
@@ -159,24 +159,24 @@ const S = {
     ar: 'حدث خطأ من جهتي. يرجى المحاولة مرة أخرى، أو التواصل معنا عبر واتساب أو نموذج الاتصال.',
   },
   noCleanAnswer: {
-    en: "I don't have a clear answer for that — a person can help.",
-    hi: 'इसका मेरे पास स्पष्ट उत्तर नहीं है — कोई व्यक्ति मदद कर सकता है।',
-    bn: 'এর স্পষ্ট উত্তর আমার কাছে নেই — একজন ব্যক্তি সাহায্য করতে পারেন।',
-    sw: 'Sina jibu wazi kwa hilo — mtu anaweza kusaidia.',
-    fr: "Je n'ai pas de réponse claire à cela — une personne peut vous aider.",
-    ar: 'ليس لديّ إجابة واضحة عن ذلك — يمكن لشخص مساعدتك.',
+    en: "I don't have a clear answer for that, a person can help.",
+    hi: 'इसका मेरे पास स्पष्ट उत्तर नहीं है, कोई व्यक्ति मदद कर सकता है।',
+    bn: 'এর স্পষ্ট উত্তর আমার কাছে নেই, একজন ব্যক্তি সাহায্য করতে পারেন।',
+    sw: 'Sina jibu wazi kwa hilo, mtu anaweza kusaidia.',
+    fr: "Je n'ai pas de réponse claire à cela, une personne peut vous aider.",
+    ar: 'ليس لديّ إجابة واضحة عن ذلك, يمكن لشخص مساعدتك.',
   },
   handoffBtn: {
     en: 'Chat on WhatsApp', hi: 'WhatsApp पर चैट करें', bn: 'WhatsApp-এ চ্যাট করুন',
     sw: 'Piga soga kwenye WhatsApp', fr: 'Discuter sur WhatsApp', ar: 'الدردشة عبر واتساب',
   },
   whatsappPrefill: {
-    en: 'Hello AZRAA — I was chatting with the assistant and would like to speak to someone.',
-    hi: 'नमस्ते AZRAA — मैं सहायक से बात कर रहा था और किसी व्यक्ति से बात करना चाहता हूँ।',
-    bn: 'নমস্কার AZRAA — আমি সহকারীর সাথে কথা বলছিলাম এবং একজন ব্যক্তির সাথে কথা বলতে চাই।',
-    sw: 'Habari AZRAA — nilikuwa naongea na msaidizi na ningependa kuongea na mtu.',
-    fr: "Bonjour AZRAA — je discutais avec l'assistant et j'aimerais parler à quelqu'un.",
-    ar: 'مرحبًا AZRAA — كنت أتحدث مع المساعد وأودّ التحدث إلى شخص.',
+    en: 'Hello AZRAA, I was chatting with the assistant and would like to speak to someone.',
+    hi: 'नमस्ते AZRAA, मैं सहायक से बात कर रहा था और किसी व्यक्ति से बात करना चाहता हूँ।',
+    bn: 'নমস্কার AZRAA, আমি সহকারীর সাথে কথা বলছিলাম এবং একজন ব্যক্তির সাথে কথা বলতে চাই।',
+    sw: 'Habari AZRAA, nilikuwa naongea na msaidizi na ningependa kuongea na mtu.',
+    fr: "Bonjour AZRAA, je discutais avec l'assistant et j'aimerais parler à quelqu'un.",
+    ar: 'مرحبًا AZRAA, كنت أتحدث مع المساعد وأودّ التحدث إلى شخص.',
   },
 
   /* ---- price / stock / moq templates ---- */
@@ -197,12 +197,12 @@ const S = {
     ar: 'الجملة: {price} لكل {unit} (ابتداءً من {moq} {units})',
   },
   priceWholesaleLead: {
-    en: '{name} — wholesale is {price} per {unit}, from {moq} {units}. Retail (single units) is {retail}.',
-    hi: '{name} — थोक कीमत {price} प्रति {unit} है, {moq} {units} से। खुदरा (एकल) {retail} है।',
-    bn: '{name} — পাইকারি দাম {price} প্রতি {unit}, {moq} {units} থেকে। খুচরা (একক) {retail}।',
-    sw: '{name} — bei ya jumla ni {price} kwa {unit}, kuanzia {units} {moq}. Rejareja (kimoja) ni {retail}.',
-    fr: '{name} — le prix de gros est {price} / {unit}, à partir de {moq} {units}. Le détail (à l’unité) est {retail}.',
-    ar: '{name} — سعر الجملة {price} لكل {unit}، ابتداءً من {moq} {units}. سعر التجزئة (للقطعة) {retail}.',
+    en: '{name}, wholesale is {price} per {unit}, from {moq} {units}. Retail (single units) is {retail}.',
+    hi: '{name}, थोक कीमत {price} प्रति {unit} है, {moq} {units} से। खुदरा (एकल) {retail} है।',
+    bn: '{name}, পাইকারি দাম {price} প্রতি {unit}, {moq} {units} থেকে। খুচরা (একক) {retail}।',
+    sw: '{name}, bei ya jumla ni {price} kwa {unit}, kuanzia {units} {moq}. Rejareja (kimoja) ni {retail}.',
+    fr: '{name}, le prix de gros est {price} / {unit}, à partir de {moq} {units}. Le détail (à l’unité) est {retail}.',
+    ar: '{name}, سعر الجملة {price} لكل {unit}، ابتداءً من {moq} {units}. سعر التجزئة (للقطعة) {retail}.',
   },
   unitPiece: { en: 'piece', hi: 'पीस', bn: 'পিস', sw: 'kipande', fr: 'pièce', ar: 'قطعة' },
   unitPair: { en: 'pair', hi: 'जोड़ी', bn: 'জোড়া', sw: 'jozi', fr: 'paire', ar: 'زوج' },
@@ -217,37 +217,37 @@ const S = {
     ar: 'لكل منتج سعر تجزئة وسعر جملة أقل (بحد أدنى من الكمية). تظهر الأسعار بالعملة التي اخترتها. أخبرني بالمنتج وسأعطيك الأرقام الدقيقة.',
   },
   pricingClosest: {
-    en: "Here's pricing for the closest matches — open one for the full breakdown.",
-    hi: 'निकटतम मिलानों की कीमत यहाँ है — पूरा विवरण देखने के लिए किसी एक को खोलें।',
-    bn: 'নিকটতম মিলগুলোর দাম এখানে — সম্পূর্ণ বিবরণের জন্য একটি খুলুন।',
-    sw: 'Hizi ni bei za bidhaa zinazolingana zaidi — fungua moja kwa maelezo kamili.',
-    fr: 'Voici les prix des correspondances les plus proches — ouvrez-en une pour le détail complet.',
-    ar: 'إليك أسعار أقرب النتائج — افتح واحدًا للتفاصيل الكاملة.',
+    en: "Here's pricing for the closest matches, open one for the full breakdown.",
+    hi: 'निकटतम मिलानों की कीमत यहाँ है, पूरा विवरण देखने के लिए किसी एक को खोलें।',
+    bn: 'নিকটতম মিলগুলোর দাম এখানে, সম্পূর্ণ বিবরণের জন্য একটি খুলুন।',
+    sw: 'Hizi ni bei za bidhaa zinazolingana zaidi, fungua moja kwa maelezo kamili.',
+    fr: 'Voici les prix des correspondances les plus proches, ouvrez-en une pour le détail complet.',
+    ar: 'إليك أسعار أقرب النتائج, افتح واحدًا للتفاصيل الكاملة.',
   },
   matchesTap: {
-    en: "Here's what matches — tap one to open it.",
-    hi: 'ये मिलते हैं — खोलने के लिए किसी एक पर टैप करें।',
-    bn: 'এগুলো মিলছে — খুলতে একটিতে ট্যাপ করুন।',
-    sw: 'Hivi ndivyo vinavyolingana — gusa kimoja kukifungua.',
-    fr: 'Voici les correspondances — appuyez pour ouvrir.',
-    ar: 'هذه هي النتائج — انقر على واحد لفتحه.',
+    en: "Here's what matches, tap one to open it.",
+    hi: 'ये मिलते हैं, खोलने के लिए किसी एक पर टैप करें।',
+    bn: 'এগুলো মিলছে, খুলতে একটিতে ট্যাপ করুন।',
+    sw: 'Hivi ndivyo vinavyolingana, gusa kimoja kukifungua.',
+    fr: 'Voici les correspondances, appuyez pour ouvrir.',
+    ar: 'هذه هي النتائج, انقر على واحد لفتحه.',
   },
   fewMatch: {
-    en: 'A few things match — which one?', hi: 'कुछ चीज़ें मिलती हैं — कौन-सी?',
-    bn: 'কয়েকটি জিনিস মিলছে — কোনটি?', sw: 'Vitu kadhaa vinalingana — kipi?',
-    fr: 'Plusieurs correspondances — laquelle ?', ar: 'هناك عدة نتائج — أيّها؟',
+    en: 'A few things match, which one?', hi: 'कुछ चीज़ें मिलती हैं, कौन-सी?',
+    bn: 'কয়েকটি জিনিস মিলছে, কোনটি?', sw: 'Vitu kadhaa vinalingana, kipi?',
+    fr: 'Plusieurs correspondances, laquelle ?', ar: 'هناك عدة نتائج, أيّها؟',
   },
   yesProduct: {
-    en: 'Yes — {name}. {summary}', hi: 'हाँ — {name}। {summary}', bn: 'হ্যাঁ — {name}। {summary}',
-    sw: 'Ndio — {name}. {summary}', fr: 'Oui — {name}. {summary}', ar: 'نعم — {name}. {summary}',
+    en: 'Yes, {name}. {summary}', hi: 'हाँ, {name}। {summary}', bn: 'হ্যাঁ, {name}। {summary}',
+    sw: 'Ndio, {name}. {summary}', fr: 'Oui, {name}. {summary}', ar: 'نعم, {name}. {summary}',
   },
   yesProductShort: {
-    en: 'Yes — we have {name}. Retail {price}.',
-    hi: 'हाँ — हमारे पास {name} है। खुदरा {price}।',
-    bn: 'হ্যাঁ — আমাদের কাছে {name} আছে। খুচরা {price}।',
-    sw: 'Ndio — tuna {name}. Rejareja {price}.',
-    fr: 'Oui — nous avons {name}. Détail {price}.',
-    ar: 'نعم — لدينا {name}. التجزئة {price}.',
+    en: 'Yes, we have {name}. Retail {price}.',
+    hi: 'हाँ, हमारे पास {name} है। खुदरा {price}।',
+    bn: 'হ্যাঁ, আমাদের কাছে {name} আছে। খুচরা {price}।',
+    sw: 'Ndio, tuna {name}. Rejareja {price}.',
+    fr: 'Oui, nous avons {name}. Détail {price}.',
+    ar: 'نعم, لدينا {name}. التجزئة {price}.',
   },
   stockUpdates: {
     en: 'Stock updates live as orders come in.',
@@ -258,12 +258,12 @@ const S = {
     ar: 'يتحدّث المخزون مباشرةً مع ورود الطلبات.',
   },
   stockSingle: {
-    en: '{name} — {status}. Stock is shown live on the product page and updates as orders come in.',
-    hi: '{name} — {status}। स्टॉक उत्पाद पेज पर लाइव दिखता है और ऑर्डर आने पर अपडेट होता है।',
-    bn: '{name} — {status}। স্টক পণ্য পৃষ্ঠায় লাইভ দেখানো হয় এবং অর্ডার এলে আপডেট হয়।',
-    sw: '{name} — {status}. Hisa huonyeshwa moja kwa moja kwenye ukurasa wa bidhaa na husasishwa maagizo yanapoingia.',
-    fr: '{name} — {status}. Le stock est affiché en direct sur la page produit et se met à jour au fil des commandes.',
-    ar: '{name} — {status}. يظهر المخزون مباشرةً في صفحة المنتج ويتحدّث مع ورود الطلبات.',
+    en: '{name}, {status}. Stock is shown live on the product page and updates as orders come in.',
+    hi: '{name}, {status}। स्टॉक उत्पाद पेज पर लाइव दिखता है और ऑर्डर आने पर अपडेट होता है।',
+    bn: '{name}, {status}। স্টক পণ্য পৃষ্ঠায় লাইভ দেখানো হয় এবং অর্ডার এলে আপডেট হয়।',
+    sw: '{name}, {status}. Hisa huonyeshwa moja kwa moja kwenye ukurasa wa bidhaa na husasishwa maagizo yanapoingia.',
+    fr: '{name}, {status}. Le stock est affiché en direct sur la page produit et se met à jour au fil des commandes.',
+    ar: '{name}, {status}. يظهر المخزون مباشرةً في صفحة المنتج ويتحدّث مع ورود الطلبات.',
   },
   availOnRequest: {
     en: 'availability on request', hi: 'उपलब्धता अनुरोध पर', bn: 'প্রাপ্যতা অনুরোধসাপেক্ষে',
@@ -281,8 +281,8 @@ const S = {
     ar: 'الحد الأدنى للجملة يكون لكل منتج:',
   },
   moqLine: {
-    en: '• {names} — from {qty}', hi: '• {names} — {qty} से', bn: '• {names} — {qty} থেকে',
-    sw: '• {names} — kuanzia {qty}', fr: '• {names} — à partir de {qty}', ar: '• {names} — ابتداءً من {qty}',
+    en: '• {names}, from {qty}', hi: '• {names}, {qty} से', bn: '• {names}, {qty} থেকে',
+    sw: '• {names}, kuanzia {qty}', fr: '• {names}, à partir de {qty}', ar: '• {names}, ابتداءً من {qty}',
   },
   moqMix: {
     en: 'You can mix colours and sizes within the minimum. Open a product and switch to “Wholesale” to see its exact figure.',
@@ -427,7 +427,7 @@ const S = {
   'route_/cart': { en: 'Your bag', hi: 'आपका बैग', bn: 'আপনার ব্যাগ', sw: 'Kikapu chako', fr: 'Votre panier', ar: 'سلّتك' },
 };
 
-/** t('hi', 'greeting', { region: '...' }) — falls back to English, then the key. */
+/** t('hi', 'greeting', { region: '...' }), falls back to English, then the key. */
 export function t(lang, key, vars) {
   const row = S[key] || {};
   let str = row[lang] ?? row.en ?? key;

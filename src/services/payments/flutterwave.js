@@ -3,13 +3,13 @@ import { mockSession, mockConfirm } from './_mock.js';
 const PUBLIC_KEY = import.meta.env.VITE_FLUTTERWAVE_PUBLIC_KEY || '';
 
 /**
- * Flutterwave — Nigeria + pan-African (NGN, GHS, KES, ZAR, USD).
+ * Flutterwave, Nigeria + pan-African (NGN, GHS, KES, ZAR, USD).
  * Publishable: VITE_FLUTTERWAVE_PUBLIC_KEY. Secret key + verify stay server-side.
  */
 export default {
   id: 'flutterwave',
   label: 'Flutterwave',
-  description: 'Cards, mobile money & bank transfer — Africa',
+  description: 'Cards, mobile money & bank transfer, Africa',
   currencies: ['NGN', 'GHS', 'KES', 'ZAR', 'USD'],
   configured: Boolean(PUBLIC_KEY),
 

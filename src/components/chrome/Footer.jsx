@@ -86,7 +86,7 @@ export default function Footer() {
           <div className="ftr__col ftr__news">
             <h3 className="ftr__col-title">Newsletter</h3>
             {done ? (
-              <p className="ftr__news-done">Thank you — you’re on the list.</p>
+              <p className="ftr__news-done">Thank you, you’re on the list.</p>
             ) : (
               <form
                 onSubmit={(e) => { e.preventDefault(); if (email.trim()) setDone(true); }}

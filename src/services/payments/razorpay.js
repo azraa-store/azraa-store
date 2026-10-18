@@ -3,13 +3,13 @@ import { mockSession, mockConfirm } from './_mock.js';
 const KEY_ID = import.meta.env.VITE_RAZORPAY_KEY_ID || '';
 
 /**
- * Razorpay — India (INR). Publishable: VITE_RAZORPAY_KEY_ID.
+ * Razorpay, India (INR). Publishable: VITE_RAZORPAY_KEY_ID.
  * Secret (RAZORPAY_KEY_SECRET) and order creation stay server-side.
  */
 export default {
   id: 'razorpay',
   label: 'Razorpay',
-  description: 'UPI, cards, netbanking & wallets — India',
+  description: 'UPI, cards, netbanking & wallets, India',
   currencies: ['INR'],
   configured: Boolean(KEY_ID),
 

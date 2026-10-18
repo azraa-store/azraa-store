@@ -3,13 +3,13 @@ import { mockSession, mockConfirm } from './_mock.js';
 const CLIENT_ID = import.meta.env.VITE_PAYPAL_CLIENT_ID || '';
 
 /**
- * PayPal — international fallback. Publishable: VITE_PAYPAL_CLIENT_ID.
+ * PayPal, international fallback. Publishable: VITE_PAYPAL_CLIENT_ID.
  * Secret + order capture stay server-side.
  */
 export default {
   id: 'paypal',
   label: 'PayPal',
-  description: 'PayPal balance or card — international',
+  description: 'PayPal balance or card, international',
   currencies: ['USD', 'INR', 'NGN', 'GHS', 'KES', 'AED', 'ZAR', 'BDT'],
   configured: Boolean(CLIENT_ID),
 

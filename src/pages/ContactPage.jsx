@@ -12,7 +12,7 @@ export default function ContactPage() {
 
   return (
     <div className="u-wrap page contact-page">
-      <Seo title="Contact" description="Contact AZRAA — wholesale, orders and general enquiries." />
+      <Seo title="Contact" description="Contact AZRAA, wholesale, orders and general enquiries." />
       <span className="label">Contact</span>
       <h1 className="page-title">Get in touch</h1>
 
@@ -54,7 +54,7 @@ export default function ContactPage() {
           onSubmit={(e) => { e.preventDefault(); setSent(true); }}
         >
           {sent ? (
-            <p className="auth__ok">Thank you — we’ve received your message and will reply to {form.email}.</p>
+            <p className="auth__ok">Thank you, we’ve received your message and will reply to {form.email}.</p>
           ) : (
             <>
               <div className="field-row">

@@ -4,7 +4,7 @@
 //   3. browser locale region
 //   4. default country
 //
-// The user can always override in the header / checkout — detection never locks.
+// The user can always override in the header / checkout, detection never locks.
 
 import { COUNTRIES, DEFAULT_COUNTRY } from '../data/countries.js';
 
@@ -44,7 +44,7 @@ function localeCountry() {
 }
 
 // Keyless, CORS-open IP->country endpoints, tried in order. In production,
-// prefer resolving country at the edge/CDN and passing it in — this avoids
+// prefer resolving country at the edge/CDN and passing it in, this avoids
 // CORS, ad-blockers and latency entirely.
 const IP_ENDPOINTS = [
   { url: 'https://api.country.is/', pick: (d) => d.country },

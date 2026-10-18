@@ -48,7 +48,7 @@ export const COUNTRIES = {
     currency: 'GBP', locale: 'en-GB', taxLabel: 'VAT', taxRate: 0.2,
     paymentMethods: ['paypal'],
   },
-  // Fallback for anywhere not individually configured — priced in USD.
+  // Fallback for anywhere not individually configured, priced in USD.
   ROW: {
     code: 'ROW', name: 'Other / International', flag: '🌍', region: 'International',
     currency: 'USD', locale: 'en-US', taxLabel: 'Tax', taxRate: 0,

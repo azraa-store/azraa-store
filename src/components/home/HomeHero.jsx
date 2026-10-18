@@ -2,8 +2,8 @@ import Button from '../ui/Button.jsx';
 
 /**
  * The hero is the full editorial product photograph (assets/hero.png, prepped to
- * a clean 4K by scripts/process-hero.py). It is shown complete and uncropped —
- * every garment, bag and shoe in frame — with the AZRAA copy set over the open
+ * a clean 4K by scripts/process-hero.py). It is shown complete and uncropped,
+ * every garment, bag and shoe in frame, with the AZRAA copy set over the open
  * marble counter on the left.
  */
 function Arrow() {
@@ -17,7 +17,7 @@ function Arrow() {
 function HeroCopy() {
   return (
     <div className="home-hero__copy">
-      <p className="home-hero__eyebrow">Est. supply — Asia &amp; Africa</p>
+      <p className="home-hero__eyebrow">Est. supply, Asia &amp; Africa</p>
       <h1 className="home-hero__word">AZRAA</h1>
       <p className="home-hero__tag">Wholesale. Retail.<br />Across Asia &amp; Africa.</p>
       <div className="home-hero__cta">
@@ -34,7 +34,7 @@ export default function HomeHero() {
       <div className="home-hero__still">
         <img
           src="/textures/hero-range.jpg"
-          alt="The AZRAA range — crew tees, shirts, bags and footwear displayed on a sunlit boutique rail"
+          alt="The AZRAA range, crew tees, shirts, bags and footwear displayed on a sunlit boutique rail"
           sizes="100vw"
           fetchpriority="high"
         />

@@ -12,7 +12,7 @@ import { convertFromUSD, roundForCurrency } from './fx.js';
 import { logisticsForMode, EXPRESS_MULTIPLIER } from '../data/logistics.js';
 
 export function formatMoney(amount, currency, locale) {
-  if (amount == null) return '—';
+  if (amount == null) return 'N/A';
   const zeroDecimal = ['INR', 'NGN', 'KES', 'BDT'];
   try {
     return new Intl.NumberFormat(locale || 'en-US', {
@@ -51,7 +51,7 @@ export function resolvePrice(product, mode, currency, rates, locale) {
   };
 }
 
-/** Price to advertise on cards / listings — the retail price. */
+/** Price to advertise on cards / listings, the retail price. */
 export function displayPrice(product, currency, rates, locale) {
   return { ...resolvePrice(product, 'retail', currency, rates, locale), mode: 'retail' };
 }

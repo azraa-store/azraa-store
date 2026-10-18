@@ -1,19 +1,19 @@
-// AZRAA assistant — the engine.
+// AZRAA assistant, the engine.
 //
 // Two modes, chosen at runtime:
 //
-//   1. REAL MODEL (production) — if `VITE_ASSISTANT_ENDPOINT` is set, every turn
+//   1. REAL MODEL (production), if `VITE_ASSISTANT_ENDPOINT` is set, every turn
 //      is POSTed to that backend, which runs the conversation against a model
 //      (e.g. `claude-opus-5`) with a system prompt + the live catalogue as
 //      context/tools, and returns the shaped reply below. The model key and the
-//      prompt live server-side — never in the browser. Backend contract:
+//      prompt live server-side, never in the browser. Backend contract:
 //
 //        POST <VITE_ASSISTANT_ENDPOINT>
 //        body:  { messages: [{role,content}], context: {..., lang} }
 //        200:   { content: string, chips?: [{label,send}],
 //                 products?: [slug], links?: [{label,to}], handoff?: boolean }
 //
-//   2. LOCAL KNOWLEDGE ENGINE (default / offline) — answers from the site's own
+//   2. LOCAL KNOWLEDGE ENGINE (default / offline), answers from the site's own
 //      data: catalogue, categories, region-aware pricing, live inventory,
 //      logistics and a curated FAQ set. No network, no key.
 //
@@ -90,7 +90,7 @@ function localAnswer(raw, context) {
   const text = raw.toLowerCase();
   if (!text) return { content: t(lang, 'askMore') };
 
-  // 1 — greetings / thanks / identity
+  // 1, greetings / thanks / identity
   if (/^(hi|hey|hello|yo|good (morning|afternoon|evening)|howdy)\b/.test(text)) {
     return { content: t(lang, 'hello'), chips: quickStart(lang) };
   }
@@ -101,13 +101,13 @@ function localAnswer(raw, context) {
     return faqReply(byId('company'), lang);
   }
 
-  // 2 — human handoff
+  // 2, human handoff
   if (/\b(human|real person|agent|talk to (a )?(person|someone|human)|speak to|customer (service|care|support)|complain)\b/.test(text)
       || /\bwhatsapp\b/.test(text)) {
     return { ...faqReply(byId('contact-human'), lang), handoff: true };
   }
 
-  // 3 — pricing / cost
+  // 3, pricing / cost
   if (/\b(price|cost|how much|pricing|rate|expensive|cheap|\$|₹|rupee|dollar)\b/.test(text)) {
     const hits = findProducts(text);
     if (hits.length === 1) return priceReply(hits[0], context);
@@ -120,7 +120,7 @@ function localAnswer(raw, context) {
     return { content: t(lang, 'priceIntro'), chips: productChips(lang) };
   }
 
-  // 4 — wholesale / MOQ
+  // 4, wholesale / MOQ
   if (/\b(wholesale|bulk|moq|minimum order|minimum quantity|reseller|distribut|trade account|buy in bulk|per unit|unit price)\b/.test(text)) {
     const hits = findProducts(text);
     if (hits.length === 1) return priceReply(hits[0], context, { lead: 'wholesale' });
@@ -130,7 +130,7 @@ function localAnswer(raw, context) {
     return faqReply(byId(/trade account|net terms|credit/.test(text) ? 'trade-account' : 'wholesale-how'), lang);
   }
 
-  // 5 — stock / availability
+  // 5, stock / availability
   if (/\b(in stock|out of stock|stock|available|availability|sold out|restock)\b/.test(text)) {
     const hits = findProducts(text);
     if (hits.length === 1) {
@@ -144,30 +144,30 @@ function localAnswer(raw, context) {
     return faqReply(byId('stock'), lang);
   }
 
-  // 6 — sizing / fit
+  // 6, sizing / fit
   if (/\b(size|sizing|fit|fits|true to size|measurement|size (chart|guide)|run (small|large|big))\b/.test(text)) {
     const hits = findProducts(text);
     if (hits.length === 1 && hits[0].fit && lang === DEFAULT_LANG) {
       return {
-        content: `${hits[0].name} — ${hits[0].fit}`,
+        content: `${hits[0].name}, ${hits[0].fit}`,
         links: [{ label: t(lang, 'openProduct', { name: hits[0].name }), to: `/product/${hits[0].slug}` }],
       };
     }
     return faqReply(byId('sizing'), lang);
   }
 
-  // 7 — shipping / delivery / tracking
+  // 7, shipping / delivery / tracking
   if (/\b(ship|shipping|deliver|delivery|dispatch|courier|freight|how long|lead time|arrive|track|tracking|customs|dut(y|ies))\b/.test(text)) {
     if (/\b(cost|charge|fee|price|how much|free)\b/.test(text)) return faqReply(byId('delivery-cost'), lang);
     return faqReply(byId('shipping'), lang);
   }
 
-  // 8 — returns / refunds
+  // 8, returns / refunds
   if (/\b(return|refund|exchange|send back|money back|faulty|damaged|defective|wrong (item|size))\b/.test(text)) {
     return faqReply(byId('returns'), lang);
   }
 
-  // 9 — payment / currency
+  // 9, payment / currency
   if (/\b(pay|payment|card|paypal|razorpay|paystack|flutterwave|checkout method)\b/.test(text)) {
     return faqReply(byId('payment'), lang);
   }
@@ -175,7 +175,7 @@ function localAnswer(raw, context) {
     return faqReply(byId('currency'), lang);
   }
 
-  // 10 — order help / account
+  // 10, order help / account
   if (/\b(my order|order status|where('s| is) my order|order number|track my order|change my order|cancel my order)\b/.test(text)) {
     return faqReply(byId('order-help'), lang);
   }
@@ -183,13 +183,13 @@ function localAnswer(raw, context) {
     return faqReply(byId('account'), lang);
   }
 
-  // 11 — navigation / how-to
+  // 11, navigation / how-to
   if (/\b(where (can i|do i)|how do i|find|navigate|go to|link to|show me the)\b/.test(text)) {
     const nav = navGuess(text, lang);
     if (nav) return nav;
   }
 
-  // 12 — about / what we sell
+  // 12, about / what we sell
   if (/\b(about|company|based|who (is|are)|what is azraa|story)\b/.test(text)) return faqReply(byId('company'), lang);
   if (/\b(what do you (sell|have|stock|carry|offer)|categor|range|catalog|collection|products?)\b/.test(text)) {
     const hits = findProducts(text);
@@ -199,13 +199,13 @@ function localAnswer(raw, context) {
     return faqReply(byId('categories'), lang);
   }
 
-  // 13 — direct product mention
+  // 13, direct product mention
   const hits = findProducts(text);
   if (hits.length === 1) {
     const p = hits[0];
     const content = lang === DEFAULT_LANG
       ? t(lang, 'yesProduct', { name: p.name, summary: p.summary })
-      : t(lang, 'yesProductShort', { name: p.name, price: priceIn(p, 'retail', context) || '—' });
+      : t(lang, 'yesProductShort', { name: p.name, price: priceIn(p, 'retail', context) || 'N/A' });
     return {
       content,
       products: [productCard(p, context)],
@@ -219,11 +219,11 @@ function localAnswer(raw, context) {
     return { content: t(lang, 'fewMatch'), products: hits.slice(0, 4).map((p) => productCard(p, context)) };
   }
 
-  // 14 — FAQ keyword sweep
+  // 14, FAQ keyword sweep
   const faq = matchFaq(text);
   if (faq) return faqReply(faq, lang);
 
-  // 15 — fallback
+  // 15, fallback
   return { content: t(lang, 'fallback'), chips: quickStart(lang), handoff: true };
 }
 
@@ -245,13 +245,13 @@ function priceReply(p, context, { lead } = {}) {
   let content;
   if (lead === 'wholesale' && wholesale) {
     content = t(lang, 'priceWholesaleLead', {
-      name: p.name, price: wholesale, unit, moq, units, retail: retail || '—',
+      name: p.name, price: wholesale, unit, moq, units, retail: retail || 'N/A',
     });
   } else {
     const wLine = moq
-      ? t(lang, 'priceWholesaleFrom', { price: wholesale || '—', unit, moq, units })
-      : t(lang, 'priceWholesale', { price: wholesale || '—', unit });
-    content = `${p.name}\n${t(lang, 'priceRetail', { price: retail || '—', unit })}\n${wLine}`;
+      ? t(lang, 'priceWholesaleFrom', { price: wholesale || 'N/A', unit, moq, units })
+      : t(lang, 'priceWholesale', { price: wholesale || 'N/A', unit });
+    content = `${p.name}\n${t(lang, 'priceRetail', { price: retail || 'N/A', unit })}\n${wLine}`;
   }
   return {
     content,
@@ -284,7 +284,7 @@ function moqReply(lang) {
 }
 
 function stockReply(list, lang) {
-  const rows = list.map((p) => `• ${p.name} — ${availLabel(lang, availability(p))}`);
+  const rows = list.map((p) => `• ${p.name}, ${availLabel(lang, availability(p))}`);
   return {
     content: `${rows.join('\n')}\n\n${t(lang, 'stockUpdates')}`,
     links: list.slice(0, 3).map((p) => ({ label: p.name, to: `/product/${p.slug}` })),
