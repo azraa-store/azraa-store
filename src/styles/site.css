@@ -679,18 +679,6 @@
   width: 100%; height: auto;      /* whole image, its own aspect ratio, no crop */
   filter: var(--hero-img-filter);
 }
-.home-hero__intro {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: var(--hero-img-filter);
-  opacity: 1;
-  transition: opacity 0.8s var(--ease);
-  pointer-events: none;
-}
-.home-hero__intro.is-ended { opacity: 0; }
 .home-hero__wash {
   position: absolute; inset: 0;
   background: var(--hero-wash);
