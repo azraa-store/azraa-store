@@ -393,6 +393,9 @@
   box-shadow: var(--shadow-lg);
 }
 .cpick--left .cpick__panel { right: auto; left: 0; }
+.phonecc__panel { left: 0; right: auto; width: 18rem; }
+.phonecc__search { width: 100%; margin-bottom: 0.6rem; font-size: 0.8rem; padding: 0.5rem 0.6rem; }
+.phonecc__empty { padding: 0.6rem; font-size: 0.78rem; color: var(--ink-faint); }
 .cpick__hint { font-size: 0.72rem; color: var(--ink-faint); line-height: 1.5; margin-bottom: 0.7rem; }
 .cpick__panel ul { list-style: none; }
 .cpick__sep { height: 1px; background: var(--line); margin: 0.5rem 0; }

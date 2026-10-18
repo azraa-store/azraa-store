@@ -2,11 +2,12 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import AuthLayout from './AuthLayout.jsx';
 import Button from '../../components/ui/Button.jsx';
-import { Field, TextInput, Select } from '../../components/ui/Field.jsx';
+import { Field, TextInput } from '../../components/ui/Field.jsx';
 import PasswordChecklist from '../../components/ui/PasswordChecklist.jsx';
+import PhoneCountrySelect from '../../components/ui/PhoneCountrySelect.jsx';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { useRegion } from '../../context/RegionContext.jsx';
-import { PHONE_COUNTRIES, findPhoneCountry } from '../../data/phoneCountries.js';
+import { findPhoneCountry } from '../../data/phoneCountries.js';
 import { isPasswordValid } from '../../utils/passwordPolicy.js';
 
 export default function SignUpPage() {
@@ -71,11 +72,10 @@ export default function SignUpPage() {
           <PasswordChecklist value={form.password} />
           <div className="field-row field-row--phone">
             <Field label="Country" required>
-              <Select value={form.phoneCountry} onChange={(e) => setForm({ ...form, phoneCountry: e.target.value })}>
-                {PHONE_COUNTRIES.map((c) => (
-                  <option key={c.code} value={c.code}>{c.flag} {c.dialCode}</option>
-                ))}
-              </Select>
+              <PhoneCountrySelect
+                value={form.phoneCountry}
+                onChange={(code) => setForm({ ...form, phoneCountry: code })}
+              />
             </Field>
             <Field label="Phone number" required>
               <TextInput type="tel" autoComplete="tel-national" value={form.phoneNumber}
