@@ -6,11 +6,13 @@ export default function AuthLayout({ title, intro, children, alt }) {
     <div className="auth">
       <Seo title={title} />
       <div className="auth__panel">
-        <Link to="/" className="auth__mark">AZRAA</Link>
-        <h1 className="auth__title">{title}</h1>
-        {intro && <p className="auth__intro">{intro}</p>}
-        {children}
-        {alt && <p className="auth__alt">{alt}</p>}
+        <div className="auth__panel-inner">
+          <Link to="/" className="auth__mark">AZRAA</Link>
+          <h1 className="auth__title">{title}</h1>
+          {intro && <p className="auth__intro">{intro}</p>}
+          {children}
+          {alt && <p className="auth__alt">{alt}</p>}
+        </div>
       </div>
       <aside className="auth__aside" aria-hidden="true">
         <img src="/textures/auth-aside.jpg" alt="" />
