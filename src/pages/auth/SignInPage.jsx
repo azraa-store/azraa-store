@@ -3,7 +3,9 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import AuthLayout from './AuthLayout.jsx';
 import Button from '../../components/ui/Button.jsx';
 import { Field, TextInput } from '../../components/ui/Field.jsx';
+import Turnstile, { isTurnstileConfigured } from '../../components/ui/Turnstile.jsx';
 import { useAuth } from '../../context/AuthContext.jsx';
+import { verifyTurnstile } from '../../services/turnstile.js';
 
 export default function SignInPage() {
   const { signIn, signInWithMagicLink } = useAuth();
@@ -14,13 +16,21 @@ export default function SignInPage() {
   const [error, setError] = useState(null);
   const [busy, setBusy] = useState(false);
   const [magicSent, setMagicSent] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState('');
 
+  // Turnstile only guards the magic-link branch here: it triggers an email
+  // send (same abuse vector as sign-up), while plain password sign-in is a
+  // routine, frequent action already rate-limited by Supabase itself.
   const submit = async (e) => {
     e.preventDefault();
     setBusy(true);
     setError(null);
     try {
       if (mode === 'magic') {
+        if (isTurnstileConfigured) {
+          const verified = await verifyTurnstile(turnstileToken);
+          if (!verified) throw new Error('Verification failed. Please try the checkbox again.');
+        }
         await signInWithMagicLink(form.email);
         setMagicSent(true);
         setBusy(false);
@@ -62,8 +72,9 @@ export default function SignInPage() {
                 onChange={(e) => setForm({ ...form, password: e.target.value })} required />
             </Field>
           )}
+          {mode === 'magic' && <Turnstile onVerify={setTurnstileToken} />}
           {error && <p className="auth__error">{error}</p>}
-          <Button type="submit" block disabled={busy}>
+          <Button type="submit" block disabled={busy || (mode === 'magic' && isTurnstileConfigured && !turnstileToken)}>
             {busy ? (mode === 'magic' ? 'Sending…' : 'Signing in…') : (mode === 'magic' ? 'Email me a sign-in link' : 'Sign in')}
           </Button>
           {mode === 'password' ? (

@@ -3,20 +3,34 @@ import { Link } from 'react-router-dom';
 import AuthLayout from './AuthLayout.jsx';
 import Button from '../../components/ui/Button.jsx';
 import { Field, TextInput } from '../../components/ui/Field.jsx';
+import Turnstile, { isTurnstileConfigured } from '../../components/ui/Turnstile.jsx';
 import { useAuth } from '../../context/AuthContext.jsx';
+import { verifyTurnstile } from '../../services/turnstile.js';
 
 export default function ResetPage() {
   const { resetPassword } = useAuth();
   const [email, setEmail] = useState('');
   const [sent, setSent] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [error, setError] = useState(null);
+  const [turnstileToken, setTurnstileToken] = useState('');
 
   const submit = async (e) => {
     e.preventDefault();
     setBusy(true);
-    await resetPassword(email);
-    setBusy(false);
-    setSent(true);
+    setError(null);
+    try {
+      if (isTurnstileConfigured) {
+        const verified = await verifyTurnstile(turnstileToken);
+        if (!verified) throw new Error('Verification failed. Please try the checkbox again.');
+      }
+      await resetPassword(email);
+      setSent(true);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setBusy(false);
+    }
   };
 
   return (
@@ -34,7 +48,11 @@ export default function ResetPage() {
           <Field label="Email" required>
             <TextInput type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
           </Field>
-          <Button type="submit" block disabled={busy}>{busy ? 'Sending…' : 'Send reset link'}</Button>
+          <Turnstile onVerify={setTurnstileToken} />
+          {error && <p className="auth__error">{error}</p>}
+          <Button type="submit" block disabled={busy || (isTurnstileConfigured && !turnstileToken)}>
+            {busy ? 'Sending…' : 'Send reset link'}
+          </Button>
         </form>
       )}
     </AuthLayout>

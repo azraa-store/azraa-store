@@ -3,11 +3,13 @@ import { useSearchParams, Link } from 'react-router-dom';
 import Seo from '../components/ui/Seo.jsx';
 import Button from '../components/ui/Button.jsx';
 import { Field, TextInput, TextArea, Select } from '../components/ui/Field.jsx';
+import Turnstile, { isTurnstileConfigured } from '../components/ui/Turnstile.jsx';
 import { PRODUCTS } from '../data/products.js';
 import { countryList } from '../data/countries.js';
 import { useRegion } from '../context/RegionContext.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
 import { submitWholesaleEnquiry } from '../services/wholesale.js';
+import { verifyTurnstile } from '../services/turnstile.js';
 
 const BUSINESS_TYPES = ['Retailer', 'Distributor', 'Reseller', 'Wholesaler', 'Institution / caterer', 'NGO / government', 'Other'];
 
@@ -32,6 +34,7 @@ export default function WholesaleEnquiryPage() {
   const [submitting, setSubmitting] = useState(false);
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
+  const [turnstileToken, setTurnstileToken] = useState('');
 
   const wholesaleProducts = useMemo(
     () => PRODUCTS.filter((p) => p.wholesale && p.modes?.includes('wholesale')),
@@ -49,6 +52,10 @@ export default function WholesaleEnquiryPage() {
     setSubmitting(true);
     setError(null);
     try {
+      if (isTurnstileConfigured) {
+        const verified = await verifyTurnstile(turnstileToken);
+        if (!verified) throw new Error('Verification failed. Please try the checkbox again.');
+      }
       const res = await submitWholesaleEnquiry({
         business,
         contact,
@@ -194,8 +201,9 @@ export default function WholesaleEnquiryPage() {
           </Field>
         </section>
 
+        <Turnstile onVerify={setTurnstileToken} />
         {error && <p className="checkout__error">{error}</p>}
-        <Button type="submit" size="lg" disabled={submitting}>
+        <Button type="submit" size="lg" disabled={submitting || (isTurnstileConfigured && !turnstileToken)}>
           {submitting ? 'Sending…' : 'Submit enquiry'}
         </Button>
         <p className="checkout__fine">

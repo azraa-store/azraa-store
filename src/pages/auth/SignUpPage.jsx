@@ -5,10 +5,12 @@ import Button from '../../components/ui/Button.jsx';
 import { Field, TextInput } from '../../components/ui/Field.jsx';
 import PasswordChecklist from '../../components/ui/PasswordChecklist.jsx';
 import PhoneCountrySelect from '../../components/ui/PhoneCountrySelect.jsx';
+import Turnstile, { isTurnstileConfigured } from '../../components/ui/Turnstile.jsx';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { useRegion } from '../../context/RegionContext.jsx';
 import { findPhoneCountry } from '../../data/phoneCountries.js';
 import { isPasswordValid } from '../../utils/passwordPolicy.js';
+import { verifyTurnstile } from '../../services/turnstile.js';
 
 export default function SignUpPage() {
   const { signUp } = useAuth();
@@ -21,6 +23,7 @@ export default function SignUpPage() {
   const [error, setError] = useState(null);
   const [busy, setBusy] = useState(false);
   const [confirmSent, setConfirmSent] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState('');
 
   const submit = async (e) => {
     e.preventDefault();
@@ -30,6 +33,10 @@ export default function SignUpPage() {
       if (!isPasswordValid(form.password)) throw new Error("Password doesn't meet the requirements below.");
       const digits = form.phoneNumber.replace(/\D/g, '');
       if (digits.length < 4) throw new Error('Enter a valid phone number.');
+      if (isTurnstileConfigured) {
+        const verified = await verifyTurnstile(turnstileToken);
+        if (!verified) throw new Error('Verification failed. Please try the checkbox again.');
+      }
       const dialCode = findPhoneCountry(form.phoneCountry)?.dialCode || '';
       const phone = `${dialCode}${digits}`;
       const { needsConfirmation } = await signUp({ ...form, phone });
@@ -82,8 +89,11 @@ export default function SignUpPage() {
                 onChange={(e) => setForm({ ...form, phoneNumber: e.target.value })} required />
             </Field>
           </div>
+          <Turnstile onVerify={setTurnstileToken} />
           {error && <p className="auth__error">{error}</p>}
-          <Button type="submit" block disabled={busy}>{busy ? 'Creating…' : 'Create account'}</Button>
+          <Button type="submit" block disabled={busy || (isTurnstileConfigured && !turnstileToken)}>
+            {busy ? 'Creating…' : 'Create account'}
+          </Button>
           <p className="auth__minor">
             By creating an account you agree to our <Link to="/legal/terms" className="link">terms</Link>{' '}
             and <Link to="/legal/privacy" className="link">privacy policy</Link>.
