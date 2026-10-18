@@ -1,5 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import * as auth from '../services/auth.js';
+import { supabase, isSupabaseConfigured } from '../lib/supabaseClient.js';
 
 const AuthContext = createContext(null);
 
@@ -15,6 +16,13 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     refresh().finally(() => setLoading(false));
+    // Keep session state in sync with Supabase's own token refresh / the
+    // recovery session a password-reset email link establishes, not just
+    // the one-time check above.
+    if (isSupabaseConfigured) {
+      const { data: sub } = supabase.auth.onAuthStateChange(() => { refresh(); });
+      return () => sub.subscription.unsubscribe();
+    }
   }, [refresh]);
 
   const value = useMemo(
@@ -28,9 +36,9 @@ export function AuthProvider({ children }) {
         return u;
       },
       async signUp(data) {
-        const u = await auth.signUp(data);
-        setUser(u);
-        return u;
+        const { user: u, needsConfirmation } = await auth.signUp(data);
+        if (u) setUser(u);
+        return { user: u, needsConfirmation };
       },
       async signOut() {
         await auth.signOut();

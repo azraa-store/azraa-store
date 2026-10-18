@@ -27,6 +27,7 @@ const LegalPage = lazy(() => import('./pages/LegalPage.jsx'));
 const SignInPage = lazy(() => import('./pages/auth/SignInPage.jsx'));
 const SignUpPage = lazy(() => import('./pages/auth/SignUpPage.jsx'));
 const ResetPage = lazy(() => import('./pages/auth/ResetPage.jsx'));
+const ResetConfirmPage = lazy(() => import('./pages/auth/ResetConfirmPage.jsx'));
 const AccountPage = lazy(() => import('./pages/account/AccountPage.jsx'));
 const AdminPage = lazy(() => import('./pages/admin/AdminPage.jsx'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage.jsx'));
@@ -65,6 +66,7 @@ export default function App() {
                     <Route path="sign-in" element={wrap(<SignInPage />)} />
                     <Route path="sign-up" element={wrap(<SignUpPage />)} />
                     <Route path="reset-password" element={wrap(<ResetPage />)} />
+                    <Route path="reset-password/confirm" element={wrap(<ResetConfirmPage />)} />
                     <Route path="*" element={wrap(<NotFoundPage />)} />
                   </Route>
                 </Routes>
