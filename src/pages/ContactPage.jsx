@@ -12,7 +12,7 @@ export default function ContactPage() {
 
   return (
     <div className="u-wrap page contact-page">
-      <Seo title="Contact" description="Contact AZRAA, wholesale, orders and general enquiries." />
+      <Seo title="Contact" description="Contact AZRAA: wholesale, orders and general enquiries." />
       <span className="label">Contact</span>
       <h1 className="page-title">Get in touch</h1>
 

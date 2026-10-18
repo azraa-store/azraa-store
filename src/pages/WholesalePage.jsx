@@ -31,7 +31,7 @@ export default function WholesalePage() {
     <div className="wpage">
       <Seo
         title="Wholesale"
-        description="Every AZRAA product is available to buy at a wholesale price, pick a quantity and check out. Serving retailers, distributors and bulk buyers across Asia and Africa."
+        description="Every AZRAA product is available to buy at a wholesale price. Pick a quantity and check out. Serving retailers, distributors and bulk buyers across Asia and Africa."
       />
 
       <section className="wpage__hero">
