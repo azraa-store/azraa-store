@@ -9,6 +9,8 @@ import AnnouncementBar from '../chrome/AnnouncementBar.jsx';
 import BackToTop from '../chrome/BackToTop.jsx';
 import WelcomeOfferPopup from '../chrome/WelcomeOfferPopup.jsx';
 import QuickView from '../commerce/QuickView.jsx';
+import WishlistNudge from '../chrome/WishlistNudge.jsx';
+import BackInStockWatcher from '../chrome/BackInStockWatcher.jsx';
 
 const BARE = ['/sign-in', '/sign-up', '/reset-password'];
 
@@ -43,6 +45,8 @@ export default function RootLayout() {
       <BackToTop />
       <WelcomeOfferPopup />
       <QuickView />
+      <WishlistNudge />
+      <BackInStockWatcher />
     </div>
   );
 }

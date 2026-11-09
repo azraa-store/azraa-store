@@ -12,6 +12,7 @@ import { useRegion } from '../context/RegionContext.jsx';
 import { resolvePrice } from '../services/pricing.js';
 import { LOGISTICS } from '../data/logistics.js';
 import { availability, availabilityLabel } from '../services/inventory.js';
+import NotifyMeForm from '../components/commerce/NotifyMeForm.jsx';
 
 export default function ProductPage() {
   const { slug } = useParams();
@@ -209,7 +210,11 @@ export default function ProductPage() {
               {soldOut ? 'Out of stock' : needsSize ? 'Select a size' : added ? 'Added ✓' : 'Add to bag'}
             </Button>
           </div>
-          <Button onClick={buyNow} variant="outline" block disabled={soldOut || needsSize}>Buy now</Button>
+          {soldOut ? (
+            <NotifyMeForm productId={product.id} color={color} size={size} className="pdp__notify" />
+          ) : (
+            <Button onClick={buyNow} variant="outline" block disabled={needsSize}>Buy now</Button>
+          )}
 
           <div className="pdp__linesum">
             <span>{effectiveQty} × <Price product={product} mode={mode} /></span>

@@ -5,6 +5,7 @@ import { useCart } from '../../context/CartContext.jsx';
 import { useWishlist } from '../../context/WishlistContext.jsx';
 import { useQuickView } from '../../context/QuickViewContext.jsx';
 import { availability, availabilityLabel } from '../../services/inventory.js';
+import NotifyMeForm from './NotifyMeForm.jsx';
 
 export default function ProductCard({ product, priority = false }) {
   const { add } = useCart();
@@ -65,6 +66,7 @@ export default function ProductCard({ product, priority = false }) {
         <p className="pcard__meta">
           {product.subcategory} · wholesale from <Price product={product} mode="wholesale" />
         </p>
+        {soldOut && <NotifyMeForm productId={product.id} className="pcard__notify" />}
       </div>
     </article>
   );
