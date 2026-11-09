@@ -758,6 +758,57 @@
 .home-hero.no-canvas .home-hero__stage { position: relative; }
 .home-hero.no-canvas { height: 100svh !important; }
 
+/* lookbook: a small cycling card of real product photography, fading in
+   once the main photograph has settled, a lighter second point of motion */
+.home-hero__lookbook {
+  position: absolute;
+  right: clamp(1.25rem, 4vw, 3rem);
+  bottom: clamp(1.5rem, 5vw, 3.5rem);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.6rem;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  pointer-events: none;
+}
+.home-hero__lookbook.is-in { opacity: 1; transform: none; pointer-events: auto; }
+.home-hero__lookbook-label {
+  font-size: 0.6rem; letter-spacing: var(--label); text-transform: uppercase;
+  color: var(--hero-eyebrow); background: var(--hero-scrim);
+  padding: 0.25rem 0.65rem; border-radius: 999px;
+}
+.home-hero__lookbook-card {
+  display: block;
+  width: clamp(8rem, 12vw, 11rem);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  text-decoration: none;
+}
+.home-hero__lookbook-img { animation: lookbookIn 0.6s var(--ease); }
+.home-hero__lookbook-name {
+  display: block;
+  padding: 0.5rem 0.65rem;
+  font-size: 0.7rem;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.home-hero__lookbook-dots { display: flex; gap: 0.3rem; }
+.home-hero__lookbook-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--ink-faint); opacity: 0.4; }
+.home-hero__lookbook-dot.is-active { opacity: 1; background: var(--ink); }
+@keyframes lookbookIn { from { opacity: 0; transform: scale(1.04); } to { opacity: 1; transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) {
+  .home-hero__lookbook { transition: none; }
+  .home-hero__lookbook-img { animation: none; }
+}
+@media (max-width: 860px) { .home-hero__lookbook { display: none; } }
+
 /* home sections */
 .hsec { padding-block: clamp(4rem, 9vw, 8rem); border-top: 1px solid var(--line); }
 .hsec:first-child { border-top: none; }
