@@ -90,40 +90,9 @@ turns to going live/launching.
   files live only in a local, gitignored `trademark/` folder, never
   commit anything there.
 
-## Commands
-
-```bash
-npm install
-npm run dev        # Vite dev server, http://localhost:5173
-npm run build      # production build to dist/
-npm run preview    # serve the production build, http://localhost:4173
-```
-
-No test suite, linter, or type checker is configured. There is no single-test command.
-
-Python inventory CLI (standalone, stdlib only, separate from the frontend):
-
-```bash
-cd inventory
-python manage.py seed
-python manage.py view "Round Neck"
-python manage.py set "Round Neck T-Shirt" White M 120
-python manage.py order   round-neck-t-shirt White M 5 --ref AZ10001
-python manage.py restore round-neck-t-shirt White M 5 --ref AZ10001
-python manage.py unavailable leather-bags
-python manage.py history
-```
-
-Asset pipeline scripts (OpenCV, run manually when source assets change):
-
-```bash
-python scripts/process-logo.py   # assets/company-logo.png -> public brand/* + favicons
-python scripts/process-hero.py   # assets/hero.png -> public/textures/hero-range.jpg (4K upscale)
-```
-
 ## Architecture
 
-React 18 + React Router 6 + GSAP/Lenis on Vite. **All backend is mock services + `localStorage`**, each file shaped so a real API can be swapped in later, when working on `services/`, preserve that seam rather than hardcoding client-side-only assumptions.
+**All backend is mock services + `localStorage`**, each file shaped so a real API can be swapped in later, when working on `services/`, preserve that seam rather than hardcoding client-side-only assumptions.
 
 - `src/config/site.js`, single source of truth for public contact channels (WhatsApp number/link).
 - `src/i18n/assistant.js`, assistant UI languages + string table (en/hi/bn/sw/fr/ar). Routing/intent matching is English-keyword-only regardless of UI language; only labels/content are translated.
