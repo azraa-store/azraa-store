@@ -11,6 +11,8 @@ import WelcomeOfferPopup from '../chrome/WelcomeOfferPopup.jsx';
 import QuickView from '../commerce/QuickView.jsx';
 import WishlistNudge from '../chrome/WishlistNudge.jsx';
 import BackInStockWatcher from '../chrome/BackInStockWatcher.jsx';
+import CookieConsent from '../chrome/CookieConsent.jsx';
+import ExitIntentPopup from '../chrome/ExitIntentPopup.jsx';
 
 const BARE = ['/sign-in', '/sign-up', '/reset-password'];
 
@@ -47,6 +49,8 @@ export default function RootLayout() {
       <QuickView />
       <WishlistNudge />
       <BackInStockWatcher />
+      <ExitIntentPopup />
+      <CookieConsent />
     </div>
   );
 }
