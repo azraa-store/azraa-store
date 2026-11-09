@@ -135,13 +135,7 @@ export function WhySection() {
 
 /* ─────────── Regional shopping ─────────── */
 export function RegionalSection() {
-  const { country, setCountry } = useRegion();
-  const regions = [
-    { code: 'US', name: 'United States', note: 'Priced in $ USD · PayPal' },
-    { code: 'IN', name: 'India', note: 'Priced in ₹ INR · Razorpay & PayPal' },
-    { code: 'NG', name: 'Nigeria', note: 'Priced in ₦ NGN · Paystack & PayPal' },
-    { code: 'GH', name: 'Ghana', note: 'Priced in GH₵ · Paystack & PayPal' },
-  ];
+  const { country } = useRegion();
   return (
     <section className="hsec hsec--regional">
       <div className="u-wrap">
@@ -155,23 +149,14 @@ export function RegionalSection() {
             in USD. You’re currently shopping as <strong>{country.name}</strong>.
           </p>
         </Reveal>
-        <div className="regions">
-          {regions.map((r, i) => (
-            <Reveal key={r.code} className="region" delay={i * 55}>
-              <button className={`region__btn ${country.code === r.code ? 'is-active' : ''}`} onClick={() => setCountry(r.code)}>
-                <span className="region__name">{r.name}</span>
-                <span className="region__note">{r.note}</span>
-              </button>
-            </Reveal>
-          ))}
-          <Reveal className="region" delay={regions.length * 55}>
-            <div className="region__btn region__btn--pick">
-              <span className="region__name">Anywhere else</span>
-              <span className="region__note">Choose your country for local pricing where we support it.</span>
-              <CountryPicker align="left" />
-            </div>
-          </Reveal>
-        </div>
+        <Reveal className="regional-pick" delay={80}>
+          <span className="regional-pick__label">Choose your country</span>
+          <p className="regional-pick__note">
+            Local currency, prices, payment options and delivery switch
+            automatically for every country we support.
+          </p>
+          <CountryPicker align="left" />
+        </Reveal>
       </div>
     </section>
   );
