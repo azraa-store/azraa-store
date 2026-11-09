@@ -9,6 +9,12 @@ import ProductImage from '../ui/ProductImage.jsx';
 // now are in "men", the others are still pending real photography.
 const EDITORIAL_CATEGORY = 'men';
 
+// Display-only relabel so "Shoes" nested under the "Shoes" category heading
+// doesn't read as a duplicate — the underlying subcategory value (used in
+// the ?sub= link and matched by ShopPage) is untouched.
+const SUB_LABELS = { shoes: { Shoes: 'Leather Shoes' } };
+const subLabel = (categorySlug, sub) => SUB_LABELS[categorySlug]?.[sub] || sub;
+
 function CollectionsMenu({ onNavigate }) {
   const cats = activeCategories();
   const [featured, setFeatured] = useState([]);
@@ -29,9 +35,11 @@ function CollectionsMenu({ onNavigate }) {
             <li key={c.slug}>
               <Link to={`/shop/${c.slug}`} onClick={onNavigate} className="mega__cat">{c.name}</Link>
               <ul className="mega__sublist">
-                {c.subcategories.slice(0, 4).map((s) => (
+                {c.subcategories.map((s) => (
                   <li key={s}>
-                    <Link to={`/shop/${c.slug}?sub=${encodeURIComponent(s)}`} onClick={onNavigate}>{s}</Link>
+                    <Link to={`/shop/${c.slug}?sub=${encodeURIComponent(s)}`} onClick={onNavigate}>
+                      {subLabel(c.slug, s)}
+                    </Link>
                   </li>
                 ))}
               </ul>

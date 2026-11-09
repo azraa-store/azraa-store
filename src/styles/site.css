@@ -149,18 +149,27 @@
 
 .input {
   width: 100%;
-  padding: 0.85rem 0.95rem;
-  background: var(--bg-3);
-  border: 1px solid var(--line);
+  padding: 0.95rem 1.05rem;
+  background: var(--bg);
+  border: 1.5px solid var(--line-strong);
   color: var(--ink);
   font-family: var(--sans);
   font-size: 0.92rem;
   border-radius: var(--radius-sm);
-  transition: border-color 0.25s var(--ease), background 0.25s var(--ease);
+  box-shadow: inset 0 1px 2px rgba(20, 16, 8, 0.04);
+  transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease), background 0.2s var(--ease);
 }
 .input::placeholder { color: var(--ink-disabled); }
-.input:focus { outline: none; border-color: var(--line-strong); background: var(--bg-2); }
-.input:disabled { opacity: 0.55; }
+.input:hover:not(:disabled):not(:focus) { border-color: var(--ink-faint); }
+.input:focus {
+  outline: none;
+  border-color: var(--ink);
+  background: var(--bg-2);
+  box-shadow: inset 0 1px 2px rgba(20, 16, 8, 0.04), 0 0 0 3px var(--hover-wash);
+}
+.input:disabled { opacity: 0.55; cursor: not-allowed; }
+:root[data-theme='dark'] .input { box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25); }
+:root[data-theme='dark'] .input:focus { box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 0 0 3px var(--hover-wash); }
 .input--select { appearance: none; background-image: linear-gradient(45deg, transparent 49%, var(--ink-faint) 50%), linear-gradient(-45deg, transparent 49%, var(--ink-faint) 50%); background-position: calc(100% - 18px) 55%, calc(100% - 12px) 55%; background-size: 6px 6px; background-repeat: no-repeat; padding-right: 2.4rem; }
 .input--area { resize: vertical; min-height: 6rem; line-height: 1.6; }
 
@@ -350,23 +359,36 @@
   color: var(--ink-faint);
   margin-bottom: 0.3rem;
 }
-.mega__list { display: flex; flex-direction: column; gap: 0.75rem; }
-.mega__list--plain { gap: 0.5rem; }
+.mega__list { display: flex; flex-direction: column; gap: 1.1rem; list-style: none; }
+.mega__list--plain { gap: 0.65rem; }
 .mega__cat {
+  display: block;
   font-family: var(--serif);
-  font-size: 1rem;
+  font-size: 1.02rem;
   color: var(--ink);
   white-space: normal;
 }
-.mega__sublist { display: flex; flex-direction: column; margin-top: 0.3rem; gap: 0.25rem; }
+/* indented like a real sub-list: pushed in from the parent category, with a
+   quiet rule on the left to read as nested rather than a flat second list */
+.mega__sublist {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin-top: 0.5rem;
+  padding-left: 1rem;
+  border-left: 1px solid var(--line);
+  gap: 0.45rem;
+}
 .mega__sublist a {
-  font-size: 0.74rem;
+  display: block;
+  font-size: 0.76rem;
   color: var(--ink-faint);
-  padding: 0.15rem 0;
+  padding: 0.1rem 0;
+  line-height: 1.4;
   white-space: normal;
 }
 .mega__sublist a:hover, .mega__list--plain a:hover { color: var(--ink); }
-.mega__list--plain a { font-size: 0.82rem; color: var(--ink-dim); white-space: normal; }
+.mega__list--plain a { display: block; font-size: 0.82rem; color: var(--ink-dim); white-space: normal; }
 .mega__best { color: var(--hero-gold) !important; font-weight: 500; }
 .mega__col--editorial { position: relative; }
 .mega__editorial-img {
@@ -994,9 +1016,10 @@
 }
 .home-hero__lookbook-card {
   display: block;
-  width: clamp(8rem, 12vw, 11rem);
+  width: clamp(11rem, 17vw, 16rem);
   background: var(--bg);
   border: 1px solid var(--line);
+  border-radius: var(--radius-md);
   box-shadow: var(--shadow-lg);
   overflow: hidden;
   text-decoration: none;
@@ -1004,8 +1027,8 @@
 .home-hero__lookbook-img { animation: lookbookIn 0.6s var(--ease); }
 .home-hero__lookbook-name {
   display: block;
-  padding: 0.5rem 0.65rem;
-  font-size: 0.7rem;
+  padding: 0.65rem 0.8rem;
+  font-size: 0.78rem;
   color: var(--ink);
   white-space: nowrap;
   overflow: hidden;
@@ -1441,7 +1464,7 @@
 .ftr__col a { color: var(--ink-dim); font-size: 0.85rem; }
 .ftr__col a:hover { color: var(--ink); }
 .ftr__news-form { display: flex; gap: 0.5rem; margin-bottom: 0.7rem; }
-.ftr__news-form input { flex: 1; padding: 0.6rem 0.7rem; background: var(--bg-3); border: 1px solid var(--line); color: var(--ink); font-size: 0.82rem; border-radius: var(--radius-sm); }
+.ftr__news-form input { flex: 1; font-size: 0.82rem; }
 .ftr__news-form button { width: 2.6rem; border: 1px solid var(--line-strong); color: var(--ink); border-radius: var(--radius-sm); }
 .ftr__news-form button:hover { background: var(--ink); color: var(--btn-text); }
 .ftr__news-fine, .ftr__news-done { font-size: 0.74rem; color: var(--ink-faint); line-height: 1.5; }

@@ -107,7 +107,7 @@ export default function ExitIntentPopup() {
                 aria-label="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="promo-modal__input"
+                className="input promo-modal__input"
               />
               <button type="submit" className="promo-modal__cta">Get my code</button>
               <p className="promo-modal__fine">Retail orders only, no minimum spend, one use per email.</p>

@@ -178,7 +178,7 @@ export function NewsletterSection() {
             <p className="news-band__done">Thank you, check your inbox to confirm.</p>
           ) : (
             <form className="news-band__form" onSubmit={(e) => { e.preventDefault(); if (email.trim()) setDone(true); }}>
-              <input type="email" required placeholder="Email address" aria-label="Email address" value={email} onChange={(e) => setEmail(e.target.value)} />
+              <input type="email" required placeholder="Email address" aria-label="Email address" value={email} onChange={(e) => setEmail(e.target.value)} className="input" />
               <Button type="submit">Subscribe</Button>
             </form>
           )}

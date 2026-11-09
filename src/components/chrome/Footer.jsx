@@ -98,6 +98,7 @@ export default function Footer() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   aria-label="Email address"
+                  className="input"
                 />
                 <button type="submit" aria-label="Subscribe">→</button>
               </form>

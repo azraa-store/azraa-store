@@ -69,9 +69,9 @@
      from current e-commerce convention: cards cluster 8-20px, pills stay
      fully rounded; see the design-research note in the commit this landed
      in for the search this was based on. */
-  --radius-sm: 10px;   /* buttons, inputs, thumbnails, chips, small controls */
-  --radius-md: 14px;   /* cards, form panels, summary boxes */
-  --radius-lg: 20px;   /* modals, drawers, mega menu, large floating panels */
+  --radius-sm: 12px;   /* buttons, inputs, thumbnails, chips, small controls */
+  --radius-md: 18px;   /* cards, form panels, summary boxes */
+  --radius-lg: 26px;   /* modals, drawers, mega menu, large floating panels */
 
   --pad: clamp(1.25rem, 4vw, 3.5rem);
   /* --header-box-h is the header's own rendered height; --header-h is the
