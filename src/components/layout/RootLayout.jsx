@@ -7,6 +7,7 @@ import WhatsAppFab from '../chrome/WhatsAppFab.jsx';
 import AzraaBot from '../chrome/AzraaBot.jsx';
 import AnnouncementBar from '../chrome/AnnouncementBar.jsx';
 import BackToTop from '../chrome/BackToTop.jsx';
+import WelcomeOfferPopup from '../chrome/WelcomeOfferPopup.jsx';
 
 const BARE = ['/sign-in', '/sign-up', '/reset-password'];
 
@@ -39,6 +40,7 @@ export default function RootLayout() {
       <WhatsAppFab />
       <AzraaBot />
       <BackToTop />
+      <WelcomeOfferPopup />
     </div>
   );
 }
