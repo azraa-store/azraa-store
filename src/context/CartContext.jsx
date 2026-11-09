@@ -3,6 +3,7 @@ import { getProductById } from '../data/products.js';
 
 const CartContext = createContext(null);
 const KEY = 'azraa.cart';
+const PROMO_KEY = 'azraa.cart.promo';
 
 function load() {
   try {
@@ -13,16 +14,38 @@ function load() {
   }
 }
 
+function loadPromo() {
+  try {
+    const raw = JSON.parse(localStorage.getItem(PROMO_KEY) || 'null');
+    return raw && typeof raw.code === 'string' && typeof raw.percent === 'number' ? raw : null;
+  } catch {
+    return null;
+  }
+}
+
 const keyOf = (productId, mode, variant) =>
   `${productId}|${mode}|${variant?.color || ''}|${variant?.size || ''}`;
 
 export function CartProvider({ children }) {
   const [lines, setLines] = useState(load); // [{ productId, mode, qty, variant:{color,size} }]
   const [open, setOpen] = useState(false);
+  const [promo, setPromo] = useState(loadPromo); // { code, percent } | null
 
   useEffect(() => {
     try { localStorage.setItem(KEY, JSON.stringify(lines)); } catch { /* ignore */ }
   }, [lines]);
+
+  useEffect(() => {
+    try {
+      if (promo) localStorage.setItem(PROMO_KEY, JSON.stringify(promo));
+      else localStorage.removeItem(PROMO_KEY);
+    } catch {
+      /* ignore */
+    }
+  }, [promo]);
+
+  const applyPromo = useCallback((code, percent) => setPromo({ code, percent }), []);
+  const clearPromo = useCallback(() => setPromo(null), []);
 
   const add = useCallback((productId, { qty = 1, variant = null, mode = 'retail' } = {}) => {
     setLines((prev) => {
@@ -47,7 +70,7 @@ export function CartProvider({ children }) {
     setLines((prev) => prev.filter((l) => keyOf(l.productId, l.mode, l.variant) !== k));
   }, []);
 
-  const clear = useCallback(() => setLines([]), []);
+  const clear = useCallback(() => { setLines([]); setPromo(null); }, []);
 
   const items = useMemo(
     () =>
@@ -63,8 +86,8 @@ export function CartProvider({ children }) {
   const count = useMemo(() => items.reduce((n, i) => n + i.qty, 0), [items]);
 
   const value = useMemo(
-    () => ({ items, lines, count, add, updateQty, remove, clear, open, setOpen }),
-    [items, lines, count, add, updateQty, remove, clear, open]
+    () => ({ items, lines, count, add, updateQty, remove, clear, open, setOpen, promo, applyPromo, clearPromo }),
+    [items, lines, count, add, updateQty, remove, clear, open, promo, applyPromo, clearPromo]
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

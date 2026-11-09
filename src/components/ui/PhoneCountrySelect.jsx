@@ -53,7 +53,7 @@ export default function PhoneCountrySelect({ value, onChange, id }) {
       >
         <span className="cpick__flag" aria-hidden="true">{current.flag}</span>
         <span className="cpick__cur">{current.dialCode}</span>
-        <svg className="cpick__chevron" viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+        <svg className={`cpick__chevron ${open ? 'is-open' : ''}`} viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
           <path d="m6 9 6 6 6-6" />
         </svg>
       </button>

@@ -60,11 +60,13 @@ export function displayPrice(product, currency, rates, locale) {
  * Cart / order totals, computed directly in the customer's display currency.
  * Each line carries its own `mode`. Logistics is charged once per order, at the
  * wholesale rate if any wholesale line is present, else retail. `express` adds a
- * surcharge on top.
+ * surcharge on top. `promo` (`{ code, percent }`) discounts the subtotal before
+ * tax, retail orders only — a wholesale-typed cart (any wholesale line present)
+ * ignores it, since wholesale already runs on negotiated pricing.
  *
  * @param {Array<{product, qty, mode, variant}>} items
  */
-export function computeCartTotals(items, countryCode, rates, { express = false } = {}) {
+export function computeCartTotals(items, countryCode, rates, { express = false, promo = null } = {}) {
   const country = getCountry(countryCode);
   const currency = country.currency;
   const locale = country.locale;
@@ -84,8 +86,12 @@ export function computeCartTotals(items, countryCode, rates, { express = false }
   const baseShip = items.length === 0 ? 0 : amountIn(logi, currency, rates);
   const shipping = roundForCurrency(express ? baseShip * EXPRESS_MULTIPLIER : baseShip, currency);
 
-  const tax = roundForCurrency((subtotal + shipping) * country.taxRate, currency);
-  const total = roundForCurrency(subtotal + shipping + tax, currency);
+  const promoApplies = Boolean(promo) && orderMode === 'retail';
+  const discount = promoApplies ? roundForCurrency(subtotal * (promo.percent / 100), currency) : 0;
+  const discountedSubtotal = subtotal - discount;
+
+  const tax = roundForCurrency((discountedSubtotal + shipping) * country.taxRate, currency);
+  const total = roundForCurrency(discountedSubtotal + shipping + tax, currency);
 
   return {
     currency, locale, money,
@@ -94,6 +100,8 @@ export function computeCartTotals(items, countryCode, rates, { express = false }
     logisticsLabel: logi.label,
     logisticsBase: money(roundForCurrency(baseShip, currency)),
     subtotal, subtotalText: money(subtotal),
+    promo: promoApplies ? promo : null,
+    discount, discountText: money(discount),
     shipping, shippingText: shipping === 0 ? 'Free' : money(shipping),
     express,
     taxLabel: country.taxLabel,

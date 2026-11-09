@@ -5,12 +5,13 @@ import ProductImage from '../components/ui/ProductImage.jsx';
 import { useCart } from '../context/CartContext.jsx';
 import { useRegion } from '../context/RegionContext.jsx';
 import { computeCartTotals } from '../services/pricing.js';
+import PromoCodeField from '../components/commerce/PromoCodeField.jsx';
 
 export default function CartPage() {
-  const { items, updateQty, remove } = useCart();
+  const { items, updateQty, remove, promo } = useCart();
   const { countryCode, country, rates } = useRegion();
   const navigate = useNavigate();
-  const totals = computeCartTotals(items, countryCode, rates);
+  const totals = computeCartTotals(items, countryCode, rates, { promo });
 
   return (
     <div className="u-wrap page">
@@ -61,8 +62,12 @@ export default function CartPage() {
 
           <aside className="cartpage__summary">
             <h2 className="summary__title">Summary</h2>
+            <PromoCodeField orderMode={totals.orderMode} />
             <dl className="summary__rows">
               <div><dt>Subtotal</dt><dd>{totals.subtotalText}</dd></div>
+              {totals.promo && (
+                <div><dt>Discount ({totals.promo.code})</dt><dd>−{totals.discountText}</dd></div>
+              )}
               <div>
                 <dt>{totals.logisticsLabel} to {country.name}</dt>
                 <dd>{totals.shippingText}</dd>

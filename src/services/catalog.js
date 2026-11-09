@@ -69,4 +69,21 @@ export async function getFeatured(limit = 4) {
   return storefront().filter((p) => p.featured).slice(0, limit);
 }
 
+/**
+ * Products to suggest alongside what's already in the bag: same category or
+ * subcategory as something in the cart, storefront-ready, not already in it.
+ * Same shape as getProductBySlug's `.related`, just driven by the whole cart
+ * rather than one product.
+ */
+export function getComplementary(cartItems, limit = 3) {
+  if (!cartItems?.length) return [];
+  const inCart = new Set(cartItems.map((i) => i.product.id));
+  const categories = new Set(cartItems.map((i) => i.product.category));
+  const subcategories = new Set(cartItems.map((i) => i.product.subcategory));
+  return storefront()
+    .filter((p) => !inCart.has(p.id) && (categories.has(p.category) || subcategories.has(p.subcategory)))
+    .sort((a, b) => Number(b.featured) - Number(a.featured))
+    .slice(0, limit);
+}
+
 export { getCategory, getHeroProduct };

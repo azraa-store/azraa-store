@@ -129,9 +129,11 @@ export default function Header() {
                     <NavLink
                       to={item.base}
                       className={() => `hdr__link hdr__link--group ${isGroupActive ? 'is-active' : ''}`}
+                      aria-expanded={isOpen}
                       onFocus={() => openGroupNow(item.label)}
                     >
                       {item.label}
+                      <DropdownChevron open={isOpen} />
                     </NavLink>
                   ) : (
                     <button
@@ -142,6 +144,7 @@ export default function Header() {
                       onFocus={() => openGroupNow(item.label)}
                     >
                       {item.label}
+                      <DropdownChevron open={isOpen} />
                     </button>
                   )}
                   <div className={`hdr__dropdown ${item.megaType ? 'hdr__dropdown--mega' : ''} ${isOpen ? 'is-open' : ''}`}>
@@ -197,6 +200,16 @@ export default function Header() {
     </>
   );
 }
+
+const DropdownChevron = ({ open }) => (
+  <svg
+    className={`hdr__chevron ${open ? 'is-open' : ''}`}
+    viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" strokeWidth="2.2"
+    aria-hidden="true"
+  >
+    <path d="m6 9 6 6 6-6" />
+  </svg>
+);
 
 const SearchIcon = () => (
   <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.4">

@@ -10,12 +10,13 @@ import { computeCartTotals } from '../services/pricing.js';
 import { providersForCountry } from '../services/payments/index.js';
 import { createOrder } from '../services/orders.js';
 import { countriesByContinent } from '../data/countries.js';
+import { markPromoRedeemed } from '../services/promotions.js';
 
 const STEPS = ['Contact', 'Delivery', 'Shipping', 'Payment', 'Review'];
 
 export default function CheckoutPage() {
   const navigate = useNavigate();
-  const { items, clear } = useCart();
+  const { items, clear, promo } = useCart();
   const { countryCode, country, setCountry, rates } = useRegion();
   const { user } = useAuth();
 
@@ -31,7 +32,7 @@ export default function CheckoutPage() {
   const providers = useMemo(() => providersForCountry(countryCode), [countryCode]);
   const [payMethod, setPayMethod] = useState(providers[0]?.id || 'paypal');
 
-  const totals = computeCartTotals(items, countryCode, rates, { express });
+  const totals = computeCartTotals(items, countryCode, rates, { express, promo });
 
   if (items.length === 0 && !placing) {
     return (
@@ -65,7 +66,8 @@ export default function CheckoutPage() {
           productId: l.product.id, name: l.product.name, slug: l.product.slug,
           mode: l.mode, variant: l.variant, qty: l.qty, unit: l.unit,
         })),
-        amounts: { subtotal: totals.subtotal, shipping: totals.shipping, tax: totals.tax, total: totals.total, currency: totals.currency },
+        amounts: { subtotal: totals.subtotal, discount: totals.discount, shipping: totals.shipping, tax: totals.tax, total: totals.total, currency: totals.currency },
+        promo: totals.promo ? { code: totals.promo.code, percent: totals.promo.percent } : null,
         display: {
           currency: totals.currency, locale: totals.locale,
           subtotal: totals.subtotalText, shipping: totals.shippingText, tax: totals.taxText, total: totals.totalText,
@@ -81,6 +83,7 @@ export default function CheckoutPage() {
       });
       const result = await provider.confirm(session, { orderId: order.id });
 
+      if (totals.promo) markPromoRedeemed(totals.promo.code, contact.email);
       clear();
       navigate(`/order/${order.id}`, { state: { payment: { provider: provider.id, ...result }, sessionMode: session.mode } });
     } catch (e) {
@@ -248,6 +251,9 @@ export default function CheckoutPage() {
           </ul>
           <dl className="summary__rows">
             <div><dt>Subtotal</dt><dd>{totals.subtotalText}</dd></div>
+            {totals.promo && (
+              <div><dt>Discount ({totals.promo.code})</dt><dd>−{totals.discountText}</dd></div>
+            )}
             <div><dt>{totals.logisticsLabel}{express ? ' (express)' : ''}</dt><dd>{totals.shippingText}</dd></div>
             <div><dt>{totals.taxLabel}</dt><dd>{totals.taxText}</dd></div>
             <div className="summary__total"><dt>Total</dt><dd>{totals.totalText}</dd></div>

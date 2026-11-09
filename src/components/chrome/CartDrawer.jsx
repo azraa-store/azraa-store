@@ -1,13 +1,16 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/CartContext.jsx';
 import { useRegion } from '../../context/RegionContext.jsx';
 import { computeCartTotals } from '../../services/pricing.js';
+import { getComplementary } from '../../services/catalog.js';
 import ProductImage from '../ui/ProductImage.jsx';
+import Price from '../ui/Price.jsx';
 import Button from '../ui/Button.jsx';
+import PromoCodeField from '../commerce/PromoCodeField.jsx';
 
 export default function CartDrawer() {
-  const { items, open, setOpen, updateQty, remove } = useCart();
+  const { items, open, setOpen, updateQty, remove, promo } = useCart();
   const { countryCode, rates } = useRegion();
   const navigate = useNavigate();
 
@@ -23,7 +26,8 @@ export default function CartDrawer() {
     };
   }, [open, setOpen]);
 
-  const totals = computeCartTotals(items, countryCode, rates);
+  const totals = computeCartTotals(items, countryCode, rates, { promo });
+  const complementary = useMemo(() => getComplementary(items, 3), [items]);
 
   return (
     <>
@@ -67,13 +71,34 @@ export default function CartDrawer() {
               );
             })
           )}
+
+          {complementary.length > 0 && (
+            <div className="drawer__complementary">
+              <span className="drawer__complementary-label">You might also like</span>
+              <div className="drawer__complementary-grid">
+                {complementary.map((p) => (
+                  <Link key={p.id} to={`/product/${p.slug}`} className="drawer__comp-card" onClick={() => setOpen(false)}>
+                    <ProductImage product={p} ratio="4 / 5" />
+                    <span className="drawer__comp-name">{p.name}</span>
+                    <Price product={p} className="drawer__comp-price" />
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         {items.length > 0 && (
           <div className="drawer__foot">
+            <PromoCodeField orderMode={totals.orderMode} />
             <div className="drawer__row">
               <span>Subtotal</span><span>{totals.subtotalText}</span>
             </div>
+            {totals.promo && (
+              <div className="drawer__row drawer__row--discount">
+                <span>Discount ({totals.promo.code})</span><span>−{totals.discountText}</span>
+              </div>
+            )}
             <div className="drawer__row drawer__row--muted">
               <span>{totals.logisticsLabel} (est.)</span>
               <span>{totals.shippingText}</span>
