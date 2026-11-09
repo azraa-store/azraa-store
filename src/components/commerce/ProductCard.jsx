@@ -3,21 +3,29 @@ import ProductImage from '../ui/ProductImage.jsx';
 import Price from '../ui/Price.jsx';
 import { useCart } from '../../context/CartContext.jsx';
 import { useWishlist } from '../../context/WishlistContext.jsx';
+import { useQuickView } from '../../context/QuickViewContext.jsx';
 import { availability, availabilityLabel } from '../../services/inventory.js';
 
 export default function ProductCard({ product, priority = false }) {
   const { add } = useCart();
   const { has, toggle } = useWishlist();
+  const { show: showQuickView } = useQuickView();
   const avail = availability(product);
   const soldOut = avail === 'out';
   const saved = has(product.id);
+  const hasVariants = (product.sizes?.length > 0) || (product.colors?.length > 0);
 
   const quickAdd = (e) => {
     e.preventDefault();
     if (soldOut) return;
-    const size = product.sizes?.[0]?.label || null;
-    const color = product.colors?.[0]?.name || null;
-    add(product.id, { qty: 1, mode: 'retail', variant: (size || color) ? { size, color } : null });
+    // A product with sizes/colors needs a real choice, not whatever the
+    // data happens to list first — open Quick View so the shopper can
+    // actually pick, rather than silently grabbing sizes[0]/colors[0].
+    if (hasVariants) {
+      showQuickView(product);
+      return;
+    }
+    add(product.id, { qty: 1, mode: 'retail', variant: null });
   };
 
   return (
@@ -40,8 +48,12 @@ export default function ProductCard({ product, priority = false }) {
           </svg>
         </button>
         {!soldOut && (
-          <button className="pcard__quick" onClick={quickAdd} aria-label={`Quick add ${product.name}`}>
-            Quick add
+          <button
+            className="pcard__quick"
+            onClick={quickAdd}
+            aria-label={hasVariants ? `Quick view ${product.name}` : `Quick add ${product.name}`}
+          >
+            {hasVariants ? 'Quick view' : 'Quick add'}
           </button>
         )}
       </Link>

@@ -7,6 +7,7 @@ import { AuthProvider } from './context/AuthContext.jsx';
 import { CartProvider } from './context/CartContext.jsx';
 import { WishlistProvider } from './context/WishlistContext.jsx';
 import { AssistantProvider } from './context/AssistantContext.jsx';
+import { QuickViewProvider } from './context/QuickViewContext.jsx';
 import RootLayout from './components/layout/RootLayout.jsx';
 import ScrollManager from './components/layout/ScrollManager.jsx';
 import RouteFallback from './components/layout/RouteFallback.jsx';
@@ -44,33 +45,35 @@ export default function App() {
           <AuthProvider>
             <CartProvider>
               <WishlistProvider>
-                <AssistantProvider>
-                  <ScrollManager />
-                  <RegionModal />
-                  <Routes>
-                    <Route element={<RootLayout reducedMotion={reducedMotion} />}>
-                      <Route index element={wrap(<HomePage reducedMotion={reducedMotion} />)} />
-                      <Route path="shop" element={wrap(<ShopPage />)} />
-                      <Route path="shop/:category" element={wrap(<ShopPage />)} />
-                      <Route path="product/:slug" element={wrap(<ProductPage reducedMotion={reducedMotion} />)} />
-                      <Route path="wholesale" element={wrap(<WholesalePage />)} />
-                      <Route path="wholesale/enquiry" element={wrap(<WholesaleEnquiryPage />)} />
-                      <Route path="cart" element={wrap(<CartPage />)} />
-                      <Route path="wishlist" element={wrap(<WishlistPage />)} />
-                      <Route path="checkout" element={wrap(<CheckoutPage />)} />
-                      <Route path="order/:id" element={wrap(<OrderConfirmationPage />)} />
-                      <Route path="contact" element={wrap(<ContactPage />)} />
-                      <Route path="legal/:doc" element={wrap(<LegalPage />)} />
-                      <Route path="account/*" element={wrap(<AccountPage />)} />
-                      <Route path="admin/*" element={wrap(<AdminPage />)} />
-                      <Route path="sign-in" element={wrap(<SignInPage />)} />
-                      <Route path="sign-up" element={wrap(<SignUpPage />)} />
-                      <Route path="reset-password" element={wrap(<ResetPage />)} />
-                      <Route path="reset-password/confirm" element={wrap(<ResetConfirmPage />)} />
-                      <Route path="*" element={wrap(<NotFoundPage />)} />
-                    </Route>
-                  </Routes>
-                </AssistantProvider>
+                <QuickViewProvider>
+                  <AssistantProvider>
+                    <ScrollManager />
+                    <RegionModal />
+                    <Routes>
+                      <Route element={<RootLayout reducedMotion={reducedMotion} />}>
+                        <Route index element={wrap(<HomePage reducedMotion={reducedMotion} />)} />
+                        <Route path="shop" element={wrap(<ShopPage />)} />
+                        <Route path="shop/:category" element={wrap(<ShopPage />)} />
+                        <Route path="product/:slug" element={wrap(<ProductPage reducedMotion={reducedMotion} />)} />
+                        <Route path="wholesale" element={wrap(<WholesalePage />)} />
+                        <Route path="wholesale/enquiry" element={wrap(<WholesaleEnquiryPage />)} />
+                        <Route path="cart" element={wrap(<CartPage />)} />
+                        <Route path="wishlist" element={wrap(<WishlistPage />)} />
+                        <Route path="checkout" element={wrap(<CheckoutPage />)} />
+                        <Route path="order/:id" element={wrap(<OrderConfirmationPage />)} />
+                        <Route path="contact" element={wrap(<ContactPage />)} />
+                        <Route path="legal/:doc" element={wrap(<LegalPage />)} />
+                        <Route path="account/*" element={wrap(<AccountPage />)} />
+                        <Route path="admin/*" element={wrap(<AdminPage />)} />
+                        <Route path="sign-in" element={wrap(<SignInPage />)} />
+                        <Route path="sign-up" element={wrap(<SignUpPage />)} />
+                        <Route path="reset-password" element={wrap(<ResetPage />)} />
+                        <Route path="reset-password/confirm" element={wrap(<ResetConfirmPage />)} />
+                        <Route path="*" element={wrap(<NotFoundPage />)} />
+                      </Route>
+                    </Routes>
+                  </AssistantProvider>
+                </QuickViewProvider>
               </WishlistProvider>
             </CartProvider>
           </AuthProvider>

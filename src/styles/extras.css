@@ -112,6 +112,18 @@
   .promo-modal__media { aspect-ratio: 16 / 9; }
 }
 
+/* ---------- quick view (reuses the promo-modal shell) ---------- */
+.quickview__panel { width: min(48rem, 100%); }
+.quickview__body { gap: 0.6rem; }
+.quickview__name { font-family: var(--serif); font-weight: 300; font-size: clamp(1.3rem, 2.6vw, 1.6rem); margin-top: 0.2rem; }
+.quickview__price { font-size: 1.05rem; margin-top: 0.2rem; }
+.quickview__summary { font-size: 0.84rem; color: var(--ink-dim); line-height: 1.6; margin: 0.4rem 0 0.8rem; }
+.quickview__body .pdp__opt { margin-bottom: 1rem; }
+.quickview__body .btn { margin-top: 0.4rem; }
+.quickview__full { align-self: center; margin-top: 0.8rem; font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); }
+.quickview__full:hover { color: var(--ink); }
+@media (max-width: 700px) { .quickview__panel { max-height: 90vh; } }
+
 /* ---------- fx note ---------- */
 .fxnote {
   position: fixed; left: 50%; bottom: 1.2rem; transform: translateX(-50%);

@@ -8,6 +8,7 @@ import AzraaBot from '../chrome/AzraaBot.jsx';
 import AnnouncementBar from '../chrome/AnnouncementBar.jsx';
 import BackToTop from '../chrome/BackToTop.jsx';
 import WelcomeOfferPopup from '../chrome/WelcomeOfferPopup.jsx';
+import QuickView from '../commerce/QuickView.jsx';
 
 const BARE = ['/sign-in', '/sign-up', '/reset-password'];
 
@@ -41,6 +42,7 @@ export default function RootLayout() {
       <AzraaBot />
       <BackToTop />
       <WelcomeOfferPopup />
+      <QuickView />
     </div>
   );
 }
