@@ -5,7 +5,7 @@ import Button from '../components/ui/Button.jsx';
 import { Field, TextInput, TextArea, Select } from '../components/ui/Field.jsx';
 import Turnstile, { isTurnstileConfigured } from '../components/ui/Turnstile.jsx';
 import { PRODUCTS } from '../data/products.js';
-import { countryList } from '../data/countries.js';
+import { countriesByContinent } from '../data/countries.js';
 import { useRegion } from '../context/RegionContext.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
 import { submitWholesaleEnquiry } from '../services/wholesale.js';
@@ -166,7 +166,11 @@ export default function WholesaleEnquiryPage() {
           <div className="field-row">
             <Field label="Country" required>
               <Select value={business.country} onChange={(e) => setBusiness({ ...business, country: e.target.value })}>
-                {countryList().map((c) => <option key={c.code} value={c.code}>{c.name}</option>)}
+                {countriesByContinent().map(({ continent, countries }) => (
+                  <optgroup key={continent} label={continent}>
+                    {countries.map((c) => <option key={c.code} value={c.code}>{c.name}</option>)}
+                  </optgroup>
+                ))}
               </Select>
             </Field>
             <Field label="Website (optional)">

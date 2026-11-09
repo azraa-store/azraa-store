@@ -9,7 +9,7 @@ import { useAuth } from '../context/AuthContext.jsx';
 import { computeCartTotals } from '../services/pricing.js';
 import { providersForCountry } from '../services/payments/index.js';
 import { createOrder } from '../services/orders.js';
-import { countryList } from '../data/countries.js';
+import { countriesByContinent } from '../data/countries.js';
 
 const STEPS = ['Contact', 'Delivery', 'Shipping', 'Payment', 'Review'];
 
@@ -130,7 +130,11 @@ export default function CheckoutPage() {
               <h2 className="checkout__h">Delivery address</h2>
               <Field label="Country / region" required>
                 <Select value={countryCode} onChange={(e) => setCountry(e.target.value)}>
-                  {countryList().map((c) => <option key={c.code} value={c.code}>{c.name}, {c.currency}</option>)}
+                  {countriesByContinent().map(({ continent, countries }) => (
+                    <optgroup key={continent} label={continent}>
+                      {countries.map((c) => <option key={c.code} value={c.code}>{c.name}, {c.currency}</option>)}
+                    </optgroup>
+                  ))}
                 </Select>
               </Field>
               <Field label="Full name" required><TextInput value={address.name} onChange={(e) => setAddress({ ...address, name: e.target.value })} /></Field>

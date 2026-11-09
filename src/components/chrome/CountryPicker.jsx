@@ -1,11 +1,13 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useRegion } from '../../context/RegionContext.jsx';
-import { PRIMARY_COUNTRIES, countryList } from '../../data/countries.js';
+import { PRIMARY_COUNTRIES, countriesByContinent, countryList } from '../../data/countries.js';
 
 export default function CountryPicker({ align = 'right' }) {
   const { country, countryCode, setCountry } = useRegion();
   const [open, setOpen] = useState(false);
+  const [query, setQuery] = useState('');
   const ref = useRef(null);
+  const searchRef = useRef(null);
 
   useEffect(() => {
     if (!open) return;
@@ -15,17 +17,29 @@ export default function CountryPicker({ align = 'right' }) {
     const onKey = (e) => e.key === 'Escape' && setOpen(false);
     document.addEventListener('mousedown', onDoc);
     document.addEventListener('keydown', onKey);
+    searchRef.current?.focus();
     return () => {
       document.removeEventListener('mousedown', onDoc);
       document.removeEventListener('keydown', onKey);
     };
   }, [open]);
 
-  const all = countryList();
-  const primary = PRIMARY_COUNTRIES.map((c) => all.find((x) => x.code === c)).filter(Boolean);
-  const rest = all
-    .filter((c) => !PRIMARY_COUNTRIES.includes(c.code))
-    .sort((a, b) => a.name.localeCompare(b.name));
+  useEffect(() => { if (!open) setQuery(''); }, [open]);
+
+  const groups = countriesByContinent();
+  const primary = PRIMARY_COUNTRIES
+    .map((code) => groups.flatMap((g) => g.countries).find((c) => c.code === code))
+    .filter(Boolean);
+
+  const q = query.trim().toLowerCase();
+  const matches = useMemo(() => {
+    if (!q) return null;
+    return countryList()
+      .filter((c) => c.name.toLowerCase().includes(q) || c.code.toLowerCase() === q || c.currency.toLowerCase() === q)
+      .sort((a, b) => a.name.localeCompare(b.name));
+  }, [q]);
+
+  const pick = (code) => { setCountry(code); setOpen(false); };
 
   return (
     <div className={`cpick cpick--${align}`} ref={ref}>
@@ -48,14 +62,45 @@ export default function CountryPicker({ align = 'right' }) {
           <p className="cpick__hint">
             Currency, prices, payment options and delivery update with your country.
           </p>
-          <ul>
-            {primary.map((c) => (
-              <Row key={c.code} c={c} active={c.code === countryCode} onPick={() => { setCountry(c.code); setOpen(false); }} />
-            ))}
-            <li className="cpick__sep" aria-hidden="true" />
-            {rest.map((c) => (
-              <Row key={c.code} c={c} active={c.code === countryCode} onPick={() => { setCountry(c.code); setOpen(false); }} />
-            ))}
+          <input
+            ref={searchRef}
+            type="text"
+            className="input cpick__search"
+            placeholder="Search country or currency"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          <ul className="cpick__list">
+            {matches ? (
+              matches.length === 0 ? (
+                <li className="cpick__empty">No matches.</li>
+              ) : (
+                matches.map((c) => (
+                  <Row key={c.code} c={c} active={c.code === countryCode} onPick={() => pick(c.code)} />
+                ))
+              )
+            ) : (
+              <>
+                {primary.map((c) => (
+                  <Row key={c.code} c={c} active={c.code === countryCode} onPick={() => pick(c.code)} />
+                ))}
+                <li className="cpick__sep" aria-hidden="true" />
+                {groups.map(({ continent, countries }) => {
+                  const rest = countries.filter((c) => !PRIMARY_COUNTRIES.includes(c.code));
+                  if (rest.length === 0) return null;
+                  return (
+                    <li key={continent} className="cpick__group">
+                      <span className="cpick__group-label">{continent}</span>
+                      <ul>
+                        {rest.map((c) => (
+                          <Row key={c.code} c={c} active={c.code === countryCode} onPick={() => pick(c.code)} />
+                        ))}
+                      </ul>
+                    </li>
+                  );
+                })}
+              </>
+            )}
           </ul>
         </div>
       )}

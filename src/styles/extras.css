@@ -110,6 +110,34 @@
 .fxnote ~ .wa-fab { bottom: calc(var(--fab-edge) + 7.5rem); }
 .fxnote ~ .bot-launcher { bottom: calc(var(--fab-edge) + 3.25rem); }
 
+/* ---------- back to top ----------
+   The right corner is already full (WhatsApp + bot launcher), so this one
+   lives bottom-left instead of stacking a third element on the right. */
+.back-to-top {
+  position: fixed;
+  left: var(--fab-edge);
+  bottom: var(--fab-edge);
+  z-index: 95;
+  width: 2.8rem;
+  height: 2.8rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--bg-1);
+  border: 1px solid var(--line-strong);
+  color: var(--ink);
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  transform: translateY(8px) scale(0.9);
+  pointer-events: none;
+  transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
+}
+.back-to-top.is-in { opacity: 1; transform: none; pointer-events: auto; }
+.back-to-top:hover { background: var(--ink); color: var(--btn-text); border-color: var(--ink); }
+@media (prefers-reduced-motion: reduce) {
+  .back-to-top { transition: opacity 0.2s linear; transform: none; }
+}
+
 /* ============================================================================
    AZRAA BOT
    ========================================================================= */

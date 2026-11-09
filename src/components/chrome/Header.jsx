@@ -5,6 +5,7 @@ import CountryPicker from './CountryPicker.jsx';
 import ThemeToggle from './ThemeToggle.jsx';
 import MobileMenu from './MobileMenu.jsx';
 import SearchOverlay from './SearchOverlay.jsx';
+import MegaMenu from './MegaMenu.jsx';
 import { useCart } from '../../context/CartContext.jsx';
 import { useWishlist } from '../../context/WishlistContext.jsx';
 import { useAuth } from '../../context/AuthContext.jsx';
@@ -17,6 +18,7 @@ export const NAV = [
   {
     label: 'Collections',
     base: '/shop',
+    megaType: 'collections',
     items: [
       { to: '/shop', label: 'Shop All', end: true },
       { to: '/shop/men', label: 'Men' },
@@ -28,6 +30,7 @@ export const NAV = [
   {
     label: 'Wholesale',
     base: '/wholesale',
+    megaType: 'wholesale',
     items: [
       { to: '/wholesale', label: 'Buy Wholesale', end: true },
       { to: '/wholesale/enquiry', label: 'Trade Account' },
@@ -49,6 +52,7 @@ export default function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [openGroup, setOpenGroup] = useState(null);
   const closeTimer = useRef(null);
+  const navRef = useRef(null);
 
   useEffect(() => {
     if (!isHome) { setScrolled(true); return; }
@@ -59,6 +63,22 @@ export default function Header() {
   }, [isHome]);
 
   useEffect(() => { setMenuOpen(false); setSearchOpen(false); setOpenGroup(null); }, [pathname]);
+
+  // Escape + click-outside close an open mega/dropdown group, same pattern
+  // as CountryPicker — hover/focus-open is handled separately above.
+  useEffect(() => {
+    if (!openGroup) return;
+    const onKey = (e) => e.key === 'Escape' && setOpenGroup(null);
+    const onDocClick = (e) => {
+      if (navRef.current && !navRef.current.contains(e.target)) setOpenGroup(null);
+    };
+    document.addEventListener('keydown', onKey);
+    document.addEventListener('mousedown', onDocClick);
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.removeEventListener('mousedown', onDocClick);
+    };
+  }, [openGroup]);
 
   const openGroupNow = (label) => {
     clearTimeout(closeTimer.current);
@@ -80,7 +100,7 @@ export default function Header() {
             <Logo />
           </div>
 
-          <nav className="hdr__nav" aria-label="Primary">
+          <nav className="hdr__nav" ref={navRef} aria-label="Primary">
             {NAV.map((item) => {
               if (!item.items) {
                 return (
@@ -124,17 +144,21 @@ export default function Header() {
                       {item.label}
                     </button>
                   )}
-                  <div className={`hdr__dropdown ${isOpen ? 'is-open' : ''}`}>
-                    {item.items.map((sub) => (
-                      <NavLink
-                        key={sub.to}
-                        to={sub.to}
-                        end={sub.end}
-                        className={({ isActive }) => `hdr__dropdown-link ${isActive ? 'is-active' : ''}`}
-                      >
-                        {sub.label}
-                      </NavLink>
-                    ))}
+                  <div className={`hdr__dropdown ${item.megaType ? 'hdr__dropdown--mega' : ''} ${isOpen ? 'is-open' : ''}`}>
+                    {item.megaType ? (
+                      isOpen && <MegaMenu type={item.megaType} onNavigate={() => setOpenGroup(null)} />
+                    ) : (
+                      item.items.map((sub) => (
+                        <NavLink
+                          key={sub.to}
+                          to={sub.to}
+                          end={sub.end}
+                          className={({ isActive }) => `hdr__dropdown-link ${isActive ? 'is-active' : ''}`}
+                        >
+                          {sub.label}
+                        </NavLink>
+                      ))
+                    )}
                   </div>
                 </div>
               );

@@ -24,6 +24,13 @@
         var t = localStorage.getItem('azraa.theme');
         document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : 'light');
       } catch (e) {}
+      // Same for the announcement bar's dismissed state, since it affects
+      // --header-h (and therefore every page's top padding) sitewide.
+      try {
+        if (localStorage.getItem('azraa.announce.dismissed') === '1') {
+          document.documentElement.setAttribute('data-announce-hidden', '');
+        }
+      } catch (e) {}
     </script>
   </head>
   <body>

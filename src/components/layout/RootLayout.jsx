@@ -5,6 +5,8 @@ import CartDrawer from '../chrome/CartDrawer.jsx';
 import FxNote from '../chrome/FxNote.jsx';
 import WhatsAppFab from '../chrome/WhatsAppFab.jsx';
 import AzraaBot from '../chrome/AzraaBot.jsx';
+import AnnouncementBar from '../chrome/AnnouncementBar.jsx';
+import BackToTop from '../chrome/BackToTop.jsx';
 
 const BARE = ['/sign-in', '/sign-up', '/reset-password'];
 
@@ -26,6 +28,7 @@ export default function RootLayout() {
   return (
     <div className={`app ${isHome ? 'app--home' : 'app--inner'}`}>
       <a className="skip-link" href="#main">Skip to content</a>
+      <AnnouncementBar />
       <Header />
       <main id="main" className="app__main">
         <Outlet />
@@ -35,6 +38,7 @@ export default function RootLayout() {
       <FxNote />
       <WhatsAppFab />
       <AzraaBot />
+      <BackToTop />
     </div>
   );
 }

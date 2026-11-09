@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useRegion } from '../../context/RegionContext.jsx';
-import { COUNTRIES, countryList } from '../../data/countries.js';
+import { COUNTRIES, countriesByContinent } from '../../data/countries.js';
 
 /** First-visit welcome. Never blocks, visitors can skip and use USD. */
 export default function RegionModal() {
@@ -47,7 +47,11 @@ export default function RegionModal() {
             <span>Or pick a country</span>
             <select className="input input--select" defaultValue="" onChange={(e) => e.target.value && setCountry(e.target.value)}>
               <option value="" disabled>Select…</option>
-              {countryList().map((c) => <option key={c.code} value={c.code}>{c.name}, {c.currency}</option>)}
+              {countriesByContinent().map(({ continent, countries }) => (
+                <optgroup key={continent} label={continent}>
+                  {countries.map((c) => <option key={c.code} value={c.code}>{c.name}, {c.currency}</option>)}
+                </optgroup>
+              ))}
             </select>
           </label>
         )}

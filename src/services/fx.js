@@ -12,11 +12,24 @@ const ENDPOINT = 'https://open.er-api.com/v6/latest/USD';
 
 // Dated fallback snapshot (approximate, USD base). Used until live rates load,
 // and if the API fails. Exported so the app never renders a null rate table.
+// Covers the currencies of the countries most likely to actually be picked;
+// this is a fallback-only approximation (used only if the live API is also
+// unreachable), not a pricing source — see the module note above. A currency
+// missing here still displays correctly whenever the live rates load, which
+// is the normal path; it only shows as a raw USD figure in the rare case
+// both the live fetch and this snapshot miss it.
 export const SNAPSHOT = {
   date: '2026-01-01',
   rates: {
     USD: 1, INR: 90, NGN: 1600, GHS: 15.4, KES: 129, ZAR: 18.6,
     BDT: 118, AED: 3.67, GBP: 0.785, EUR: 0.92,
+    CNY: 7.3, JPY: 152, CAD: 1.38, AUD: 1.52, SGD: 1.34, CHF: 0.88,
+    SEK: 10.6, NOK: 10.9, DKK: 6.9, PLN: 4.0, TRY: 35, BRL: 5.9,
+    MXN: 20.3, ARS: 1050, THB: 34.5, VND: 25400, PHP: 58, IDR: 16200,
+    MYR: 4.5, PKR: 279, EGP: 49, MAD: 10, TZS: 2500, UGX: 3750,
+    ZMW: 27, RUB: 95, UAH: 41.5, ILS: 3.7, SAR: 3.75, QAR: 3.64,
+    KWD: 0.31, BHD: 0.377, OMR: 0.385, JOD: 0.709, LKR: 300, NPR: 134,
+    KRW: 1390, NZD: 1.67, XOF: 605, XAF: 605, XCD: 2.7, CZK: 23.3, HUF: 390,
   },
 };
 export const SNAPSHOT_RATES = SNAPSHOT.rates;
