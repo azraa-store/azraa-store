@@ -45,7 +45,7 @@ export default function ContactPage() {
           <div>
             <h3>Head office</h3>
             <p className="muted">Registered address to follow.</p>
-            <p>Operating across India and Nigeria, shipping across Asia and Africa.</p>
+            <p>Shipping worldwide, local currency and payment where we support it.</p>
           </div>
         </div>
 

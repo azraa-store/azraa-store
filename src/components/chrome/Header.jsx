@@ -33,13 +33,7 @@ export const NAV = [
       { to: '/wholesale/enquiry', label: 'Trade Account' },
     ],
   },
-  {
-    label: 'Company',
-    items: [
-      { to: '/about', label: 'About' },
-      { to: '/contact', label: 'Contact' },
-    ],
-  },
+  { to: '/contact', label: 'Contact', end: true },
 ];
 
 export default function Header() {

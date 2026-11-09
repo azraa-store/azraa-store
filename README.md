@@ -1,8 +1,7 @@
 # AZRAA
 
 A polished editorial brand site **and** a professional international wholesale +
-retail store — clothing, footwear and accessories, supplied across Asia and
-Africa.
+retail store — clothing, footwear and accessories, supplied worldwide.
 
 - **Light is the default art direction.** A warm-white editorial storefront.
 - **The hero is the full product photograph** — shown complete and uncropped,
@@ -126,12 +125,13 @@ The cart can mix modes; the order is typed wholesale if any line is.
 
 ## Country detection
 
-`RegionModal` greets a first-time visitor with India / Nigeria / Other and an
+`RegionModal` greets a first-time visitor with "Shop AZRAA from anywhere" and an
 optional **“Detect my region”** (IP, keyless) — it never forces the browser
 location prompt, and `services/region.js` also exposes a permission-gated
-`geolocateCountry()` for an explicit “allow precise location”. Detection only
-suggests; the `CountryPicker` in the header, footer and checkout always wins and
-persists.
+`geolocateCountry()` for an explicit “allow precise location”. Visitors can also
+pick any supported country directly from a full list, or skip and shop in USD.
+Detection only suggests; the `CountryPicker` in the header, footer and checkout
+always wins and persists.
 
 ---
 
@@ -217,7 +217,7 @@ src/
     commerce/   ProductCard
     ui/         Button · Price · ProductImage · Field · Reveal · Seo
   pages/        Home · Shop · Product · Cart · Checkout · OrderConfirmation
-                Wholesale · WholesaleEnquiry · About · Contact · Legal · NotFound
+                Wholesale · WholesaleEnquiry · Contact · Legal · NotFound
                 auth/{SignIn,SignUp,Reset} · account/AccountPage · admin/AdminPage
   styles/       global.css (tokens) · site.css · extras.css
 inventory/      Python CLI + JSON store

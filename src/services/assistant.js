@@ -306,7 +306,6 @@ function navGuess(text, lang) {
     [/checkout|cart|bag|basket/, '/cart'],
     [/account|order|profile/, '/account'],
     [/contact|support|help desk/, '/contact'],
-    [/about|company/, '/about'],
     [/shoe|footwear|sneaker|sandal/, '/shop/shoes'],
     [/\bbag(s)?\b|sling/, '/shop/bags'],
     [/ladies|women/, '/shop/ladies'],

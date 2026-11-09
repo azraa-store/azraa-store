@@ -413,10 +413,6 @@ const S = {
     en: 'Create an account', hi: 'खाता बनाएँ', bn: 'অ্যাকাউন্ট তৈরি করুন',
     sw: 'Fungua akaunti', fr: 'Créer un compte', ar: 'إنشاء حساب',
   },
-  'route_/about': {
-    en: 'About AZRAA', hi: 'AZRAA के बारे में', bn: 'AZRAA সম্পর্কে',
-    sw: 'Kuhusu AZRAA', fr: 'À propos d’AZRAA', ar: 'عن AZRAA',
-  },
   'route_/shop': {
     en: 'Shop all', hi: 'सभी देखें', bn: 'সব দেখুন', sw: 'Nunua zote', fr: 'Tout voir', ar: 'تسوّق الكل',
   },

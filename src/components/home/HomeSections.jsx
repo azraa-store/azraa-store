@@ -80,8 +80,8 @@ export function WholesaleSection() {
           <span className="label">The core of the business</span>
           <h2 className="hsec__title">Wholesale is how AZRAA works</h2>
           <p className="hsec__lede">
-            We supply retailers, distributors, resellers and bulk buyers across
-            Asia and Africa. Every product is available to order in volume,
+            We supply retailers, distributors, resellers and bulk buyers
+            worldwide. Every product is available to order in volume,
             lower unit price, wholesale logistics, and terms set to your account.
           </p>
           <ul className="wholesale-band__points">
@@ -108,7 +108,7 @@ export function WholesaleSection() {
 const WHY = [
   ['Quality', 'Every line is selected, specced and checked to a retail standard, whatever the order size.'],
   ['Wholesale', 'Built for businesses and bulk buyers: retail and wholesale pricing on the same catalogue.'],
-  ['Reach', 'Serving customers and trade partners across Asia and Africa, with regional currency and payment.'],
+  ['Reach', 'Serving customers and trade partners worldwide, with regional currency and payment.'],
   ['Reliability', 'Honest stock, clear lead times, and a professional purchasing experience end to end.'],
 ];
 export function WhySection() {
@@ -172,40 +172,6 @@ export function RegionalSection() {
             </div>
           </Reveal>
         </div>
-      </div>
-    </section>
-  );
-}
-
-/* ─────────── About ─────────── */
-export function AboutSection() {
-  return (
-    <section className="hsec hsec--about">
-      <div className="u-wrap about-band">
-        <Reveal>
-          <span className="label">About</span>
-          <h2 className="hsec__title">AZRAA</h2>
-          <p className="hsec__lede">
-            AZRAA is a wholesale-focused commerce company supplying clothing,
-            footwear and accessories to businesses and consumers across Asia and
-            Africa. We buy well, hold real stock, and make purchasing
-            (one piece or one container) straightforward.
-          </p>
-          <Button to="/about" variant="link">More about the company →</Button>
-        </Reveal>
-        <Reveal className="about-band__stats" delay={100}>
-          {[
-            ['4', 'live product lines'],
-            ['2', 'core markets, India & Nigeria'],
-            ['1', 'standard, retail-grade, any volume'],
-          ].map(([n, l]) => (
-            <div key={l} className="about-stat">
-              <span className="about-stat__n">{n}</span>
-              <span className="about-stat__l">{l}</span>
-            </div>
-          ))}
-          <p className="about-band__note">Company registration, facilities and partner details will be published here.</p>
-        </Reveal>
       </div>
     </section>
   );

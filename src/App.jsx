@@ -21,7 +21,6 @@ const CartPage = lazy(() => import('./pages/CartPage.jsx'));
 const WishlistPage = lazy(() => import('./pages/WishlistPage.jsx'));
 const CheckoutPage = lazy(() => import('./pages/CheckoutPage.jsx'));
 const OrderConfirmationPage = lazy(() => import('./pages/OrderConfirmationPage.jsx'));
-const AboutPage = lazy(() => import('./pages/AboutPage.jsx'));
 const ContactPage = lazy(() => import('./pages/ContactPage.jsx'));
 const LegalPage = lazy(() => import('./pages/LegalPage.jsx'));
 const SignInPage = lazy(() => import('./pages/auth/SignInPage.jsx'));
@@ -58,7 +57,6 @@ export default function App() {
                     <Route path="wishlist" element={wrap(<WishlistPage />)} />
                     <Route path="checkout" element={wrap(<CheckoutPage />)} />
                     <Route path="order/:id" element={wrap(<OrderConfirmationPage />)} />
-                    <Route path="about" element={wrap(<AboutPage />)} />
                     <Route path="contact" element={wrap(<ContactPage />)} />
                     <Route path="legal/:doc" element={wrap(<LegalPage />)} />
                     <Route path="account/*" element={wrap(<AccountPage />)} />

@@ -27,7 +27,6 @@ export default function Footer() {
       links: [
         ['Wholesale', '/wholesale'],
         ['Open a trade account', '/wholesale/enquiry'],
-        ['About AZRAA', '/about'],
         ['Contact', '/contact'],
       ],
     },
@@ -48,8 +47,8 @@ export default function Footer() {
         <div className="ftr__brand">
           <img src={isDark ? '/brand/logo-mono.png' : '/brand/logo-color.png'} alt="AZRAA" width="104" height="101" className="ftr__mark" />
           <p className="ftr__line">
-            Wholesale and retail supply of clothing, footwear and accessories
-            across Asia and Africa.
+            Wholesale and retail supply of clothing, footwear and accessories,
+            shipping worldwide.
           </p>
           <a
             className="ftr__wa"
