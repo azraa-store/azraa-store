@@ -3,13 +3,30 @@ import { useState } from 'react';
 import CountryPicker from './CountryPicker.jsx';
 import { useRegion } from '../../context/RegionContext.jsx';
 import { useTheme } from '../../context/ThemeContext.jsx';
+import { useAuth } from '../../context/AuthContext.jsx';
 import { WHATSAPP, whatsappLink } from '../../config/site.js';
+import { cooldownRemaining, markSubmitted } from '../../lib/submitThrottle.js';
 
 export default function Footer() {
   const { country } = useRegion();
   const { isDark } = useTheme();
+  const { isAuthed } = useAuth();
   const [email, setEmail] = useState('');
   const [done, setDone] = useState(false);
+  const [throttleError, setThrottleError] = useState(null);
+
+  const submitNewsletter = (e) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+    const remaining = cooldownRemaining('newsletter');
+    if (remaining > 0) {
+      setThrottleError(`Please wait ${remaining}s before trying again.`);
+      return;
+    }
+    markSubmitted('newsletter');
+    setThrottleError(null);
+    setDone(true);
+  };
 
   const columns = [
     {
@@ -82,15 +99,13 @@ export default function Footer() {
             </nav>
           ))}
 
+          {!isAuthed && (
           <div className="ftr__col ftr__news">
             <h3 className="ftr__col-title">Newsletter</h3>
             {done ? (
               <p className="ftr__news-done">Thank you, you’re on the list.</p>
             ) : (
-              <form
-                onSubmit={(e) => { e.preventDefault(); if (email.trim()) setDone(true); }}
-                className="ftr__news-form"
-              >
+              <form onSubmit={submitNewsletter} className="ftr__news-form">
                 <input
                   type="email"
                   required
@@ -103,10 +118,12 @@ export default function Footer() {
                 <button type="submit" aria-label="Subscribe">→</button>
               </form>
             )}
+            {throttleError && <p className="ftr__news-fine" style={{ color: 'var(--err)' }}>{throttleError}</p>}
             <p className="ftr__news-fine">
               Occasional notes on new stock and trade terms. Unsubscribe anytime.
             </p>
           </div>
+          )}
         </div>
       </div>
 

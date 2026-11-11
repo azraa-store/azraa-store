@@ -33,24 +33,26 @@ export default function SizeGuideModal({ chart, onClose }) {
           </div>
         )}
 
-        <table className="sizeguide__table">
-          <thead>
-            <tr>
-              <th>Size</th>
-              {chart.columns.map((c) => <th key={c}>{c}</th>)}
-            </tr>
-          </thead>
-          <tbody>
-            {chart.rows.map((row) => (
-              <tr key={row.size}>
-                <td>{row.size}</td>
-                {chart.kind === 'measurements'
-                  ? row[unit].map((v, i) => <td key={i}>{v}</td>)
-                  : row.values.map((v, i) => <td key={i}>{v}</td>)}
+        <div className="sizeguide__table-wrap">
+          <table className="sizeguide__table">
+            <thead>
+              <tr>
+                <th>Size</th>
+                {chart.columns.map((c) => <th key={c}>{c}</th>)}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {chart.rows.map((row) => (
+                <tr key={row.size}>
+                  <td>{row.size}</td>
+                  {chart.kind === 'measurements'
+                    ? row[unit].map((v, i) => <td key={i}>{v}</td>)
+                    : row.values.map((v, i) => <td key={i}>{v}</td>)}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
         <p className="sizeguide__fine">
           A general guide — individual fit may vary slightly by style. See each product's

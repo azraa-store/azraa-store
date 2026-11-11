@@ -20,6 +20,7 @@ import ProductReviews from '../components/commerce/ProductReviews.jsx';
 import RecentlyViewed from '../components/commerce/RecentlyViewed.jsx';
 import { getSummary } from '../services/reviews.js';
 import { recordView } from '../services/recentlyViewed.js';
+import AssistantNudge from '../components/commerce/AssistantNudge.jsx';
 
 export default function ProductPage() {
   const { slug } = useParams();
@@ -315,6 +316,7 @@ export default function ProductPage() {
       )}
 
       {sizeGuideOpen && <SizeGuideModal chart={sizeChart} onClose={() => setSizeGuideOpen(false)} />}
+      <AssistantNudge prompt={hasSizes ? 'Need help choosing a size?' : 'Have a question about this piece?'} />
     </article>
   );
 }

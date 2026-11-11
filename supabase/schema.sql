@@ -77,3 +77,48 @@ create policy "Users can manage own addresses"
   on public.addresses for all
   using (auth.uid() = user_id)
   with check (auth.uid() = user_id);
+
+-- Orders, backing src/services/orders/supabase.js. Previously orders only
+-- ever lived in localStorage (services/orders.js had no backend at all,
+-- even with Supabase auth configured) — this is what makes order history
+-- real and cross-device. Column shapes mirror the JSON the app already
+-- builds in CheckoutPage.jsx, so the frontend needed no reshaping, just a
+-- real place to put it.
+create table if not exists public.orders (
+  id uuid primary key default gen_random_uuid(),
+  number text not null default ('AZ' || upper(substr(replace(gen_random_uuid()::text, '-', ''), 1, 8))),
+  user_id uuid not null references auth.users(id) on delete cascade,
+  status text not null default 'confirmed' check (status in ('confirmed', 'cancelled')),
+  order_type text not null default 'retail' check (order_type in ('retail', 'wholesale')),
+  currency text not null,
+  customer jsonb not null,
+  shipping_address jsonb not null,
+  shipping_method jsonb,
+  items jsonb not null,
+  amounts jsonb not null,
+  promo jsonb,
+  display jsonb not null,
+  inventory_applied boolean not null default true,
+  created_at timestamptz not null default now(),
+  cancelled_at timestamptz
+);
+
+alter table public.orders enable row level security;
+
+drop policy if exists "Users can view own orders" on public.orders;
+create policy "Users can view own orders"
+  on public.orders for select
+  using (auth.uid() = user_id);
+
+drop policy if exists "Users can create own orders" on public.orders;
+create policy "Users can create own orders"
+  on public.orders for insert
+  with check (auth.uid() = user_id);
+
+-- Cancellation only: a real backend would also re-validate here before
+-- restoring inventory, same caveat already on the client-side mock.
+drop policy if exists "Users can cancel own orders" on public.orders;
+create policy "Users can cancel own orders"
+  on public.orders for update
+  using (auth.uid() = user_id)
+  with check (auth.uid() = user_id);

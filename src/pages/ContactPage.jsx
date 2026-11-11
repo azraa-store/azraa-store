@@ -3,12 +3,26 @@ import Seo from '../components/ui/Seo.jsx';
 import Button from '../components/ui/Button.jsx';
 import { Field, TextInput, TextArea, Select } from '../components/ui/Field.jsx';
 import { WHATSAPP, whatsappLink } from '../config/site.js';
+import { cooldownRemaining, markSubmitted } from '../lib/submitThrottle.js';
 
 const TOPICS = ['Wholesale enquiry', 'An existing order', 'Product question', 'Partnership', 'Something else'];
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: '', email: '', topic: TOPICS[0], message: '' });
   const [sent, setSent] = useState(false);
+  const [throttleError, setThrottleError] = useState(null);
+
+  const submit = (e) => {
+    e.preventDefault();
+    const remaining = cooldownRemaining('contact');
+    if (remaining > 0) {
+      setThrottleError(`Please wait ${remaining}s before sending another message.`);
+      return;
+    }
+    markSubmitted('contact');
+    setThrottleError(null);
+    setSent(true);
+  };
 
   return (
     <div className="u-wrap page contact-page">
@@ -49,10 +63,7 @@ export default function ContactPage() {
           </div>
         </div>
 
-        <form
-          className="contact-form"
-          onSubmit={(e) => { e.preventDefault(); setSent(true); }}
-        >
+        <form className="contact-form" onSubmit={submit}>
           {sent ? (
             <p className="auth__ok">Thank you, we’ve received your message and will reply to {form.email}.</p>
           ) : (
@@ -69,6 +80,7 @@ export default function ContactPage() {
               <Field label="Message" required>
                 <TextArea value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} required />
               </Field>
+              {throttleError && <p className="auth__error">{throttleError}</p>}
               <Button type="submit">Send message</Button>
             </>
           )}

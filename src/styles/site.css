@@ -61,6 +61,8 @@
 .btn {
   --btn-pad-y: 0.9rem;
   --btn-pad-x: 1.6rem;
+  position: relative;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -74,16 +76,38 @@
   border: 1px solid transparent;
   border-radius: var(--radius-md);
   cursor: pointer;
-  transition: background 0.35s var(--ease), color 0.35s var(--ease), border-color 0.35s var(--ease), opacity 0.2s;
+  transition: background 0.35s var(--ease), color 0.35s var(--ease), border-color 0.35s var(--ease),
+    opacity 0.2s, transform 0.2s var(--ease), box-shadow 0.3s var(--ease);
   white-space: nowrap;
 }
 .btn--sm { --btn-pad-y: 0.65rem; --btn-pad-x: 1.15rem; font-size: 0.66rem; }
 .btn--lg { --btn-pad-y: 1.08rem; --btn-pad-x: 2.1rem; }
 .btn--block, .btn--block.btn { display: flex; width: 100%; }
 .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+/* A tactile press, not just a hover state — functional feedback that the
+   click registered, per 2026 ecommerce research favouring purposeful
+   micro-interactions over decorative motion. */
+.btn:active:not(:disabled) { transform: scale(0.97); }
 
 .btn--primary { background: var(--ink); color: var(--btn-text); border-color: var(--ink); }
-.btn--primary:hover:not(:disabled) { opacity: 0.85; }
+.btn--primary:hover:not(:disabled) { opacity: 0.85; transform: translateY(-1px); box-shadow: 0 10px 24px rgba(20, 16, 8, 0.2); }
+/* A quiet gold sheen sweep on hover, echoing --hero-gold rather than
+   introducing a new colour — the one deliberately "premium" flourish on
+   the single most-clicked element sitewide. */
+.btn--primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 30%, rgba(201, 166, 107, 0.35) 50%, transparent 70%);
+  transform: translateX(-130%);
+  transition: transform 0.65s var(--ease);
+  pointer-events: none;
+}
+.btn--primary:hover:not(:disabled)::after { transform: translateX(130%); }
+@media (prefers-reduced-motion: reduce) {
+  .btn--primary::after { display: none; }
+  .btn:active:not(:disabled) { transform: none; }
+}
 
 .btn--outline { border-color: var(--line-strong); color: var(--ink); }
 .btn--outline:hover:not(:disabled) { border-color: var(--ink); background: var(--hover-wash); }
@@ -907,6 +931,40 @@
 .wish-nudge button { color: var(--ink-faint); font-size: 1rem; line-height: 1; flex: none; }
 .wish-nudge button:hover { color: var(--ink); }
 
+/* ---------- assistant teaser nudge ---------- */
+.assistant-nudge {
+  position: fixed;
+  right: calc(var(--fab-edge) + 4.2rem);
+  bottom: var(--fab-edge);
+  z-index: 94;
+  max-width: 17rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.85rem 1rem;
+  background: var(--bg-2);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--ink-dim);
+  box-shadow: var(--shadow-lg);
+  animation: nudgeIn 0.4s var(--ease);
+}
+.assistant-nudge .link { font-weight: 500; }
+.assistant-nudge__close { color: var(--ink-faint); flex: none; padding: 0.1rem; }
+.assistant-nudge__close:hover { color: var(--ink); }
+@media (max-width: 640px) {
+  .assistant-nudge { right: var(--fab-edge); bottom: calc(var(--fab-edge) + 4rem); max-width: calc(100vw - 2 * var(--fab-edge)); }
+}
+@keyframes nudgeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .assistant-nudge { animation: none; }
+}
+
 .back-in-stock-note a { color: var(--ink); text-decoration: underline; }
 @media (max-width: 560px) {
   .pcard__body { padding-top: 0.7rem; }
@@ -1521,15 +1579,19 @@
 .ftr__wa:hover { color: var(--ink); border-bottom-color: var(--line-strong); }
 .ftr__region { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.6rem; align-items: flex-start; }
 .ftr__region-note { font-size: 0.74rem; color: var(--ink-faint); }
-.ftr__cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(1.2rem, 3vw, 2rem); }
+/* auto-fit rather than a fixed 4-track grid: the Newsletter column is
+   dropped entirely for signed-in customers (see Footer.jsx), so the
+   remaining columns need to redistribute the space, not leave a gap. */
+.ftr__cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: clamp(1.2rem, 3vw, 2rem); }
 .ftr__col-title { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 1rem; }
 .ftr__col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
 .ftr__col a { color: var(--ink-dim); font-size: 0.85rem; }
 .ftr__col a:hover { color: var(--ink); }
-.ftr__news-form { display: flex; gap: 0.5rem; margin-bottom: 0.7rem; }
-.ftr__news-form input { flex: 1; font-size: 0.82rem; }
-.ftr__news-form button { width: 2.6rem; border: 1px solid var(--line-strong); color: var(--ink); border-radius: var(--radius-sm); }
+.ftr__news-form { display: flex; gap: 0.6rem; margin-bottom: 0.7rem; }
+.ftr__news-form input { flex: 1; min-width: 0; }
+.ftr__news-form button { width: 3rem; flex-shrink: 0; border: 1px solid var(--line-strong); color: var(--ink); border-radius: var(--radius-sm); }
 .ftr__news-form button:hover { background: var(--ink); color: var(--btn-text); }
+@media (max-width: 520px) { .ftr__news-form { max-width: 26rem; } }
 .ftr__news-fine, .ftr__news-done { font-size: 0.74rem; color: var(--ink-faint); line-height: 1.5; }
 .ftr__bottom { display: flex; justify-content: space-between; gap: 1rem; padding-block: 1.5rem; border-top: 1px solid var(--line); font-size: 0.74rem; color: var(--ink-faint); flex-wrap: wrap; }
 .ftr__bottom-meta { display: flex; gap: 1rem; flex-wrap: wrap; }

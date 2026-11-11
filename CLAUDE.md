@@ -82,8 +82,16 @@ turns to going live/launching.
 - The two newsletter sign-up forms (homepage section + footer) are still
   non-functional client-side mocks, no real email-collection backend
   exists for them yet.
-- No `orders` table exists in Supabase yet; `azraa-backend`'s
-  `markOrderPaid()` is a no-op stub until that schema is added.
+- An `orders` table now exists in `supabase/schema.sql` (added
+  2026-11-11) with `services/orders/supabase.js` wired in via the same
+  dispatcher pattern as auth/payments — **re-run the updated
+  `schema.sql` in the Supabase SQL editor** for this to take effect (safe
+  to re-run, uses `IF NOT EXISTS`). Until then, or when Supabase isn't
+  configured, orders still fall back to the localStorage mock
+  (`services/orders/mock.js`). Inventory itself (`services/inventory.js`)
+  is still localStorage-only either way, not migrated — only the order
+  *record* is real/cross-device now, stock levels are not. `azraa-backend`'s
+  `markOrderPaid()` is still a no-op stub until that's wired to this table too.
 - A full IP/trademark audit excluded 10 photographed products from the
   catalogue for carrying real trademarks (graphic prints/characters), see
   `### Categories` / `src/services/catalog.js` and the memory IP-safety

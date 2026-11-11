@@ -9,6 +9,7 @@ import { activeCategories } from '../../data/categories.js';
 import { getFeatured, isStorefrontReady } from '../../services/catalog.js';
 import { useRegion } from '../../context/RegionContext.jsx';
 import { PRODUCTS } from '../../data/products.js';
+import { cooldownRemaining, markSubmitted } from '../../lib/submitThrottle.js';
 
 // Prefer a product with real front/back photography within the category;
 // fall back to the category's placeholder plate rather than borrowing a
@@ -166,6 +167,21 @@ export function RegionalSection() {
 export function NewsletterSection() {
   const [email, setEmail] = useState('');
   const [done, setDone] = useState(false);
+  const [throttleError, setThrottleError] = useState(null);
+
+  const submit = (e) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+    const remaining = cooldownRemaining('newsletter');
+    if (remaining > 0) {
+      setThrottleError(`Please wait ${remaining}s before trying again.`);
+      return;
+    }
+    markSubmitted('newsletter');
+    setThrottleError(null);
+    setDone(true);
+  };
+
   return (
     <section className="hsec hsec--news">
       <div className="u-wrap news-band">
@@ -177,11 +193,12 @@ export function NewsletterSection() {
           {done ? (
             <p className="news-band__done">Thank you, check your inbox to confirm.</p>
           ) : (
-            <form className="news-band__form" onSubmit={(e) => { e.preventDefault(); if (email.trim()) setDone(true); }}>
+            <form className="news-band__form" onSubmit={submit}>
               <input type="email" required placeholder="Email address" aria-label="Email address" value={email} onChange={(e) => setEmail(e.target.value)} className="input" />
               <Button type="submit">Subscribe</Button>
             </form>
           )}
+          {throttleError && <p className="auth__error">{throttleError}</p>}
         </Reveal>
       </div>
     </section>
