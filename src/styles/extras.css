@@ -236,12 +236,13 @@
 .fxnote ~ .bot-launcher { bottom: calc(var(--fab-edge) + 3.25rem); }
 
 /* ---------- back to top ----------
-   The right corner is already full (WhatsApp + bot launcher), so this one
-   lives bottom-left instead of stacking a third element on the right. */
+   Third tier of the right-hand corner stack, above the WhatsApp button
+   (which itself sits above the bot launcher) — gapped a bit more generously
+   than the bot-to-WhatsApp gap so it doesn't read as part of that pair. */
 .back-to-top {
   position: fixed;
-  left: var(--fab-edge);
-  bottom: var(--fab-edge);
+  right: var(--fab-edge);
+  bottom: calc(var(--fab-edge) + 7.6rem);
   z-index: 95;
   width: 2.8rem;
   height: 2.8rem;
@@ -262,6 +263,16 @@
 @media (prefers-reduced-motion: reduce) {
   .back-to-top { transition: opacity 0.2s linear; transform: none; }
 }
+/* the bot panel covers this corner anyway (z-index above it); hide it too
+   so it isn't a stray focusable control sitting behind the open panel */
+:root[data-bot-open] .back-to-top {
+  opacity: 0;
+  pointer-events: none;
+}
+@media (max-width: 640px) {
+  .back-to-top { bottom: calc(var(--fab-edge) + 8rem); }
+}
+.fxnote ~ .back-to-top { bottom: calc(var(--fab-edge) + 10.9rem); }
 
 /* ============================================================================
    AZRAA BOT

@@ -7,12 +7,16 @@ import { LANGUAGES, langDir, t } from '../../i18n/assistant.js';
 /* ── marks ─────────────────────────────────────────────────────────── */
 
 function BotMark({ size = 20 }) {
-  // a quiet concentric "listening" mark, reads as an assistant, not a face
+  // a simple robot head, reads clearly as a bot rather than an abstract mark
   return (
     <svg viewBox="0 0 24 24" width={size} height={size} aria-hidden="true" focusable="false">
-      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.4" opacity="0.35" />
-      <circle cx="12" cy="12" r="4.4" fill="none" stroke="currentColor" strokeWidth="1.6" />
-      <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+      <path d="M12 2.6v2.6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <circle cx="12" cy="2.1" r="1.1" fill="currentColor" />
+      <path d="M2 12.5h1.8M20.2 12.5H22" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <rect x="4.7" y="5.9" width="14.6" height="13" rx="4" fill="none" stroke="currentColor" strokeWidth="1.5" />
+      <circle cx="9.1" cy="12.1" r="1.4" fill="currentColor" />
+      <circle cx="14.9" cy="12.1" r="1.4" fill="currentColor" />
+      <path d="M9.3 16.1c1.7 1 3.7 1 5.4 0" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" fill="none" />
     </svg>
   );
 }
