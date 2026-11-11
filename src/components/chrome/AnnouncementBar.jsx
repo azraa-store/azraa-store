@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion.js';
 
 const KEY = 'azraa.announce.dismissed';
-const ROTATE_MS = 4200;
 
 // Three provable messages only — no shipping-threshold claim, since no such
 // policy exists yet (see the "still needs real data" note in CLAUDE.md).
@@ -22,7 +21,6 @@ function dismissedAlready() {
 
 export default function AnnouncementBar() {
   const [dismissed, setDismissed] = useState(dismissedAlready);
-  const [index, setIndex] = useState(0);
   const reduced = usePrefersReducedMotion();
 
   useEffect(() => {
@@ -34,20 +32,30 @@ export default function AnnouncementBar() {
     }
   }, [dismissed]);
 
-  useEffect(() => {
-    if (dismissed || reduced) return;
-    const id = setInterval(() => setIndex((i) => (i + 1) % MESSAGES.length), ROTATE_MS);
-    return () => clearInterval(id);
-  }, [dismissed, reduced]);
-
   if (dismissed) return null;
+
+  // A ticker strip, like a filling-station LED sign: the message list is
+  // rendered twice back to back and scrolled left exactly one strip-width,
+  // which loops seamlessly (CSS only, no measuring needed).
+  const strip = (
+    <span className="announce__strip">
+      {MESSAGES.map((m, i) => (
+        <span className="announce__item" key={i}>{m}</span>
+      ))}
+    </span>
+  );
 
   return (
     <div className="announce" role="region" aria-label="Site announcements">
       <div className="announce__inner">
-        <span className="announce__msg" key={index} aria-live="polite">
-          {MESSAGES[index]}
-        </span>
+        {reduced ? (
+          <span className="announce__msg">{MESSAGES.join(' · ')}</span>
+        ) : (
+          <div className="announce__track" aria-hidden="true">
+            {strip}
+            {strip}
+          </div>
+        )}
         <button
           type="button"
           className="announce__close"
