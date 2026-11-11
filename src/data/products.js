@@ -280,8 +280,16 @@ export const PRODUCTS = [
   /* ─────────────────────────────  MEN, STREET  ─────────────────────────────
      Photographed range delivered 2026-10-16 (front + back where available,
      see assets/products/ + scripts/process-products.py). Eight of the
-     delivered designs reproduced real third-party IP and are intentionally
-     left out of this catalogue, ask before adding any of them back. */
+     delivered designs reproduced real third-party IP (graphic prints/characters)
+     and are intentionally left out of this catalogue, ask before adding any of
+     them back. A further four were caught 2026-11-11 for a different reason,
+     a legible third-party brand tag or wordmark visible in the product photo
+     itself (not a print design, but still someone else's mark on camera):
+     floating-charcoal-hoodie ("DANIELLE KHAN" collar tag), geometric-black-
+     and-white-polo ("NOVAMEN" collar tag), vintage-olive-polo ("VINTAGEWEAR"
+     collar tag + "Woiden Lifestyle" chest print), and tropical-skull-print-
+     polo-shirt ("B.K." collar tag) — also excluded, raw files moved to the
+     gitignored trademark/ folder alongside the original eight. */
   {
     id: 'azr-tee-minimalist-black',
     slug: 'minimalist-black-t-shirt',
@@ -304,30 +312,6 @@ export const PRODUCTS = [
     wholesale: { moq: 12, unitHint: 'sold from 12 pieces', packSize: 12 },
     inventory: { lowStockThreshold: 12 },
     tags: ['tee', 'basic', 'black'],
-  },
-  {
-    id: 'azr-hoodie-charcoal-zip',
-    slug: 'floating-charcoal-hoodie',
-    name: 'Charcoal Zip Hoodie',
-    category: 'men',
-    subcategory: 'Hoodies & Sweatshirts',
-    featured: true,
-    unit: 'piece',
-    plate: { motif: 'CZ' },
-    images: { primary: '/products/floating-charcoal-hoodie-front.jpg', gallery: ['/products/floating-charcoal-hoodie-front.jpg'], byColor: {} },
-    summary: 'A plain full-zip hoodie in brushed charcoal fleece.',
-    description:
-      'A full-zip hoodie in brushed cotton fleece, cut with a dropped shoulder and a roomy hood. Metal zip pull, a kangaroo pocket, and ribbed cuffs and hem. Unbranded, reads as a clean layering piece rather than a graphic tee.',
-    details: ['Full-length zip, metal pull', 'Kangaroo pocket', 'Ribbed cuffs and hem', 'Dropped shoulder, relaxed body'],
-    fit: 'Relaxed fit. True to size; size down for a closer fit.',
-    care: ['Machine wash cold, inside out', 'Do not bleach', 'Tumble dry low', 'Warm iron if needed'],
-    colors: colorList(['Charcoal']),
-    sizes: sizes(['S', 'M', 'L', 'XL', 'XXL']),
-    modes: ['retail', 'wholesale'],
-    pricing: { retail: price(1350), wholesale: price(950) },
-    wholesale: { moq: 12, unitHint: 'sold from 12 pieces', packSize: 12 },
-    inventory: { lowStockThreshold: 12 },
-    tags: ['hoodie', 'zip', 'charcoal'],
   },
   {
     id: 'azr-hoodie-olive',
@@ -608,30 +592,6 @@ export const PRODUCTS = [
     tags: ['shorts', 'fleece', 'grey'],
   },
   {
-    id: 'azr-polo-geometric',
-    slug: 'geometric-black-and-white-polo',
-    name: 'Geometric Knit Polo',
-    category: 'men',
-    subcategory: 'Polos',
-    featured: true,
-    unit: 'piece',
-    plate: { motif: 'GP' },
-    images: { primary: '/products/geometric-black-and-white-polo-front.jpg', gallery: ['/products/geometric-black-and-white-polo-front.jpg', '/products/geometric-black-and-white-polo-back.jpg'], byColor: {} },
-    summary: 'A quarter-zip knit polo in a black and white geometric weave.',
-    description:
-      'A quarter-zip polo in a fine black and white geometric jacquard knit, with solid black collar, placket and sleeves for contrast. Smarter than a piqué polo, still easy enough for everyday wear.',
-    details: ['Quarter-zip placket', 'Geometric jacquard knit body', 'Solid collar and sleeves', 'Regular fit, straight hem'],
-    fit: 'Regular fit. True to size.',
-    care: ['Hand wash or gentle machine cycle, cold', 'Do not bleach', 'Dry flat', 'Cool iron if needed'],
-    colors: colorList(['Black']),
-    sizes: sizes(['S', 'M', 'L', 'XL', 'XXL']),
-    modes: ['retail', 'wholesale'],
-    pricing: { retail: price(650), wholesale: price(460) },
-    wholesale: { moq: 12, unitHint: 'sold from 12 pieces', packSize: 12 },
-    inventory: { lowStockThreshold: 12 },
-    tags: ['polo', 'knit', 'geometric'],
-  },
-  {
     id: 'azr-polo-pastel-blue',
     slug: 'pastel-blue-polo',
     name: 'Pastel Blue Polo',
@@ -653,53 +613,6 @@ export const PRODUCTS = [
     wholesale: { moq: 12, unitHint: 'sold from 12 pieces', packSize: 12 },
     inventory: { lowStockThreshold: 12 },
     tags: ['polo', 'pique', 'blue'],
-  },
-  {
-    id: 'azr-polo-vintage-olive',
-    slug: 'vintage-olive-polo',
-    name: 'Vintage Olive Polo',
-    category: 'men',
-    subcategory: 'Polos',
-    unit: 'piece',
-    plate: { motif: 'VO' },
-    images: { primary: '/products/vintage-olive-polo-front.jpg', gallery: ['/products/vintage-olive-polo-front.jpg', '/products/vintage-olive-polo-back.jpg'], byColor: {} },
-    summary: 'A washed olive polo with a vintage stag graphic.',
-    description:
-      'A garment-washed olive polo with a vintage-style stag and script graphic at the chest and a back placement print. Textured piqué body, three-button placket, regular fit.',
-    details: ['Garment-washed piqué', 'Chest and back placement graphics', 'Three-button placket', 'Regular fit, straight hem'],
-    fit: 'Regular fit. True to size.',
-    care: ['Machine wash cold, inside out', 'Do not bleach', 'Tumble dry low or dry flat', 'Warm iron if needed'],
-    colors: colorList(['Olive']),
-    sizes: sizes(['S', 'M', 'L', 'XL', 'XXL']),
-    modes: ['retail', 'wholesale'],
-    pricing: { retail: price(520), wholesale: price(370) },
-    wholesale: { moq: 12, unitHint: 'sold from 12 pieces', packSize: 12 },
-    inventory: { lowStockThreshold: 12 },
-    tags: ['polo', 'graphic', 'olive'],
-  },
-  {
-    id: 'azr-polo-tropical-skull',
-    slug: 'tropical-skull-print-polo-shirt',
-    name: 'Tropical Skull Print Polo',
-    category: 'men',
-    subcategory: 'Polos',
-    featured: true,
-    unit: 'piece',
-    plate: { motif: 'TP' },
-    images: { primary: '/products/tropical-skull-print-polo-shirt-front.jpg', gallery: ['/products/tropical-skull-print-polo-shirt-front.jpg', '/products/tropical-skull-print-polo-shirt-back.jpg'], byColor: {} },
-    summary: 'An all-over tropical skull and pineapple print polo.',
-    description:
-      'A white polo covered edge to edge in an illustrated skull, pineapple and palm print. Soft stretch piqué, two-button placket, regular fit, a statement piece against the rest of the plainer range.',
-    details: ['All-over illustrated print', 'Soft stretch piqué', 'Two-button placket', 'Regular fit, straight hem'],
-    fit: 'Regular fit. True to size.',
-    care: ['Machine wash cold, inside out', 'Do not bleach', 'Tumble dry low or dry flat', 'Warm iron if needed'],
-    colors: colorList(['White']),
-    sizes: sizes(['S', 'M', 'L', 'XL', 'XXL']),
-    modes: ['retail', 'wholesale'],
-    pricing: { retail: price(560), wholesale: price(400) },
-    wholesale: { moq: 12, unitHint: 'sold from 12 pieces', packSize: 12 },
-    inventory: { lowStockThreshold: 12 },
-    tags: ['polo', 'print', 'white'],
   },
   {
     id: 'azr-shirt-denim-paint',

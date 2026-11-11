@@ -85,10 +85,17 @@ turns to going live/launching.
 - No `orders` table exists in Supabase yet; `azraa-backend`'s
   `markOrderPaid()` is a no-op stub until that schema is added.
 - A full IP/trademark audit excluded 10 photographed products from the
-  catalogue for carrying real trademarks, see `### Categories` /
-  `src/services/catalog.js` and the memory IP-safety notes; their raw
-  files live only in a local, gitignored `trademark/` folder, never
-  commit anything there.
+  catalogue for carrying real trademarks (graphic prints/characters), see
+  `### Categories` / `src/services/catalog.js` and the memory IP-safety
+  notes; their raw files live only in a local, gitignored `trademark/`
+  folder, never commit anything there. A further 4 were excluded
+  2026-11-11 for a different reason: a legible third-party brand tag or
+  wordmark visible in the product photo itself (collar tags reading
+  "DANIELLE KHAN", "NOVAMEN", "VINTAGEWEAR" + a "Woiden Lifestyle" chest
+  print, and "B.K."), see the comment above the MEN, STREET block in
+  `src/data/products.js`. Worth re-auditing any future photo batch for
+  visible tags/labels, not just graphic prints — this is how the first
+  audit missed these.
 
 ## Architecture
 
