@@ -32,6 +32,11 @@ export function initSmoothScroll({ enabled = true } = {}) {
     smoothWheel: true,
     wheelMultiplier: 0.9,
     touchMultiplier: 1.1,
+    // Every internally-scrollable panel in the app (country/phone-country
+    // dropdowns, cart drawer, chat panel, promo/quick-view modals) — without
+    // this, Lenis hijacks their wheel events for page-level smoothing and
+    // they only respond to dragging the scrollbar thumb, not the wheel.
+    prevent: (node) => node.matches?.('.cpick__panel, .drawer__body, .promo-modal__panel, .bot-panel__body') ?? false,
   });
 
   lenis.on('scroll', (e) => {
