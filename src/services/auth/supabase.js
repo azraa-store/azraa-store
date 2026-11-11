@@ -97,6 +97,18 @@ export async function signInWithMagicLink(email) {
   return { ok: true, email: trimmed };
 }
 
+// Redirects the whole page to Google, then back to /account once Supabase
+// has exchanged the code for a session (detectSessionInUrl in
+// supabaseClient.js picks that up automatically, no /auth/callback route
+// needed). Nothing to return here, the browser navigates away.
+export async function signInWithGoogle() {
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: { redirectTo: `${window.location.origin}/account` },
+  });
+  if (error) throw new Error(mapAuthError(error));
+}
+
 // Reauthenticates by re-verifying the current password (rather than
 // Supabase's nonce-based reauthenticate() flow) before changing the login
 // email. updateUser({ email }) doesn't take effect until the confirmation

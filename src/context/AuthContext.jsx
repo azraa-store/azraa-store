@@ -46,6 +46,7 @@ export function AuthProvider({ children }) {
       },
       resetPassword: auth.requestPasswordReset,
       signInWithMagicLink: auth.signInWithMagicLink,
+      signInWithGoogle: auth.signInWithGoogle,
       async changeEmail(data) {
         const result = await auth.changeEmail(data);
         if (result.user) setUser(result.user);

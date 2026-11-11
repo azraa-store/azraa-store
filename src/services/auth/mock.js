@@ -95,6 +95,12 @@ export async function signInWithMagicLink(email) {
   return { ok: true, email };
 }
 
+export async function signInWithGoogle() {
+  await delay(0);
+  // There's no real OAuth round trip to fake in offline/demo mode.
+  throw new Error('Google sign-in needs a live Supabase connection — set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.');
+}
+
 export async function changeEmail({ newEmail, currentPassword }) {
   await delay(450);
   const email = localStorage.getItem(SESSION_KEY);

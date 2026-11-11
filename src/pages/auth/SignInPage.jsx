@@ -4,6 +4,7 @@ import AuthLayout from './AuthLayout.jsx';
 import Button from '../../components/ui/Button.jsx';
 import { Field, TextInput } from '../../components/ui/Field.jsx';
 import Turnstile, { isTurnstileConfigured } from '../../components/ui/Turnstile.jsx';
+import GoogleButton from '../../components/ui/GoogleButton.jsx';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { verifyTurnstile } from '../../services/turnstile.js';
 
@@ -61,6 +62,9 @@ export default function SignInPage() {
           Check <strong>{form.email}</strong> for a link to sign in, no password needed.
         </p>
       ) : (
+        <>
+        <GoogleButton onError={setError} />
+        <div className="auth__divider"><span>or</span></div>
         <form onSubmit={submit} className="auth__form">
           <Field label="Email" required>
             <TextInput type="email" autoComplete="email" value={form.email}
@@ -90,6 +94,7 @@ export default function SignInPage() {
             </button>
           )}
         </form>
+        </>
       )}
     </AuthLayout>
   );

@@ -6,6 +6,7 @@ import { Field, TextInput } from '../../components/ui/Field.jsx';
 import PasswordChecklist from '../../components/ui/PasswordChecklist.jsx';
 import PhoneCountrySelect from '../../components/ui/PhoneCountrySelect.jsx';
 import Turnstile, { isTurnstileConfigured } from '../../components/ui/Turnstile.jsx';
+import GoogleButton from '../../components/ui/GoogleButton.jsx';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { useRegion } from '../../context/RegionContext.jsx';
 import { findPhoneCountry } from '../../data/phoneCountries.js';
@@ -63,6 +64,9 @@ export default function SignUpPage() {
           Check <strong>{form.email}</strong> for a confirmation link to finish creating your account.
         </p>
       ) : (
+        <>
+        <GoogleButton label="Sign up with Google" onError={setError} />
+        <div className="auth__divider"><span>or</span></div>
         <form onSubmit={submit} className="auth__form">
           <Field label="Full name" required>
             <TextInput autoComplete="name" value={form.name}
@@ -99,6 +103,7 @@ export default function SignUpPage() {
             and <Link to="/legal/privacy" className="link">privacy policy</Link>.
           </p>
         </form>
+        </>
       )}
     </AuthLayout>
   );

@@ -1359,6 +1359,9 @@
 .auth__title { font-family: var(--serif); font-weight: 300; font-size: clamp(1.9rem, 4vw, 2.8rem); }
 .auth__intro { color: var(--ink-dim); margin: 0.8rem 0 2rem; line-height: 1.6; }
 .auth__form { display: flex; flex-direction: column; gap: 0.2rem; }
+.auth__divider { display: flex; align-items: center; gap: 0.8rem; margin: 1.4rem 0; color: var(--ink-faint); font-size: 0.78rem; letter-spacing: var(--label); text-transform: uppercase; }
+.auth__divider::before, .auth__divider::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+.btn--google { display: inline-flex; align-items: center; justify-content: center; gap: 0.7rem; }
 .auth__form .btn { margin-top: 0.8rem; }
 .auth__error { color: var(--err); font-size: 0.85rem; margin: 0.4rem 0; }
 .auth__ok { color: var(--ink-dim); line-height: 1.7; }
