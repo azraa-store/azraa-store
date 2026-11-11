@@ -61,7 +61,7 @@ export default function QuickView() {
         </button>
 
         <div className="promo-modal__media">
-          <ProductImage product={product} color={color} ratio="4 / 5" priority />
+          <ProductImage product={product} color={color} ratio="4 / 5" priority flip />
         </div>
 
         <div className="promo-modal__body quickview__body">

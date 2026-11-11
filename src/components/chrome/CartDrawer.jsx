@@ -8,9 +8,10 @@ import ProductImage from '../ui/ProductImage.jsx';
 import Price from '../ui/Price.jsx';
 import Button from '../ui/Button.jsx';
 import PromoCodeField from '../commerce/PromoCodeField.jsx';
+import LoyaltyRedeemField from '../commerce/LoyaltyRedeemField.jsx';
 
 export default function CartDrawer() {
-  const { items, open, setOpen, updateQty, remove, promo } = useCart();
+  const { items, open, setOpen, updateQty, remove, promo, loyaltyRedeemed } = useCart();
   const { countryCode, rates } = useRegion();
   const navigate = useNavigate();
 
@@ -26,7 +27,7 @@ export default function CartDrawer() {
     };
   }, [open, setOpen]);
 
-  const totals = computeCartTotals(items, countryCode, rates, { promo });
+  const totals = computeCartTotals(items, countryCode, rates, { promo, loyaltyRedeemed });
   const complementary = useMemo(() => getComplementary(items, 3), [items]);
 
   return (
@@ -91,12 +92,18 @@ export default function CartDrawer() {
         {items.length > 0 && (
           <div className="drawer__foot">
             <PromoCodeField orderMode={totals.orderMode} />
+            <LoyaltyRedeemField orderMode={totals.orderMode} />
             <div className="drawer__row">
               <span>Subtotal</span><span>{totals.subtotalText}</span>
             </div>
             {totals.promo && (
               <div className="drawer__row drawer__row--discount">
-                <span>Discount ({totals.promo.code})</span><span>−{totals.discountText}</span>
+                <span>Discount ({totals.promo.code})</span><span>−{totals.promoDiscountText}</span>
+              </div>
+            )}
+            {totals.loyaltyApplied && (
+              <div className="drawer__row drawer__row--discount">
+                <span>Rewards redeemed</span><span>−{totals.loyaltyDiscountText}</span>
               </div>
             )}
             <div className="drawer__row drawer__row--muted">

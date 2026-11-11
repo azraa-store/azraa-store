@@ -86,4 +86,23 @@ export function getComplementary(cartItems, limit = 3) {
     .slice(0, limit);
 }
 
+const BOTTOM_TAGS = new Set(['joggers', 'sweatpants', 'shorts', 'lounge']);
+const isBottom = (p) => p.tags?.some((t) => BOTTOM_TAGS.has(t));
+
+/**
+ * Outfit-pairing for a single product's page: the opposite garment type
+ * (top <-> bottom) within the same category, rather than `related`'s
+ * same-category/subcategory browse list, so the two sections read as
+ * genuinely different content rather than a duplicate. Only Men has real
+ * top/bottom photography right now, so this is a no-op elsewhere.
+ */
+export function getOutfitPairing(product, limit = 4) {
+  if (!product || product.category !== 'men') return [];
+  const wantBottom = !isBottom(product);
+  return storefront()
+    .filter((p) => p.id !== product.id && p.category === 'men' && isBottom(p) === wantBottom)
+    .sort((a, b) => Number(b.featured) - Number(a.featured))
+    .slice(0, limit);
+}
+
 export { getCategory, getHeroProduct };

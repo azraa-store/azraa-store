@@ -5,13 +5,16 @@ import { useCart } from '../../context/CartContext.jsx';
 import { useWishlist } from '../../context/WishlistContext.jsx';
 import { useQuickView } from '../../context/QuickViewContext.jsx';
 import { availability, availabilityLabel } from '../../services/inventory.js';
+import { getSummary } from '../../services/reviews.js';
 import NotifyMeForm from './NotifyMeForm.jsx';
+import StarRating from './StarRating.jsx';
 
 export default function ProductCard({ product, priority = false }) {
   const { add } = useCart();
   const { has, toggle } = useWishlist();
   const { show: showQuickView } = useQuickView();
   const avail = availability(product);
+  const reviewSummary = getSummary(product.id);
   const soldOut = avail === 'out';
   const saved = has(product.id);
   const hasVariants = (product.sizes?.length > 0) || (product.colors?.length > 0);
@@ -32,7 +35,7 @@ export default function ProductCard({ product, priority = false }) {
   return (
     <article className="pcard">
       <Link to={`/product/${product.slug}`} className="pcard__media">
-        <ProductImage product={product} priority={priority} />
+        <ProductImage product={product} priority={priority} flip />
         {(avail === 'low' || avail === 'out') && (
           <span className={`pcard__flag pcard__flag--${avail}`}>{availabilityLabel(avail)}</span>
         )}
@@ -63,6 +66,9 @@ export default function ProductCard({ product, priority = false }) {
           <Link to={`/product/${product.slug}`} className="pcard__name">{product.name}</Link>
           <Price product={product} className="pcard__price" />
         </div>
+        {reviewSummary.count > 0 && (
+          <StarRating value={reviewSummary.average} count={reviewSummary.count} size={11} />
+        )}
         <p className="pcard__meta">
           {product.subcategory} · wholesale from <Price product={product} mode="wholesale" />
         </p>

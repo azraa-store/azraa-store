@@ -6,6 +6,7 @@ import { Field, TextInput } from '../../components/ui/Field.jsx';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { useRegion } from '../../context/RegionContext.jsx';
 import { listOrders, cancelOrder } from '../../services/orders.js';
+import { getBalance, REDEEM_COST, REDEEM_VALUE, POINTS_PER_USD } from '../../services/loyalty.js';
 
 export default function AccountPage() {
   const { user, loading, signOut } = useAuth();
@@ -17,6 +18,7 @@ export default function AccountPage() {
   const links = [
     ['', 'Overview'],
     ['orders', 'Orders'],
+    ['rewards', 'Rewards'],
     ['addresses', 'Addresses'],
     ['profile', 'Profile'],
   ];
@@ -48,6 +50,7 @@ export default function AccountPage() {
           <Routes>
             <Route index element={<Overview user={user} />} />
             <Route path="orders" element={<Orders user={user} />} />
+            <Route path="rewards" element={<Rewards user={user} />} />
             <Route path="addresses" element={<Addresses />} />
             <Route path="profile" element={<Profile />} />
             <Route path="*" element={<Navigate to="/account" replace />} />
@@ -74,6 +77,11 @@ function Overview({ user }) {
           <span className="acct-card__n">{user.addresses?.length || 0}</span>
           <span className="acct-card__l">Saved addresses</span>
           <Link to="/account/addresses" className="link">Manage</Link>
+        </div>
+        <div className="acct-card">
+          <span className="acct-card__n">{getBalance(user.id)}</span>
+          <span className="acct-card__l">Reward points</span>
+          <Link to="/account/rewards" className="link">View rewards</Link>
         </div>
         <div className="acct-card">
           <span className="acct-card__n">N/A</span>
@@ -135,6 +143,30 @@ function Orders({ user }) {
       </div>
       <p className="muted" style={{ marginTop: '1rem', fontSize: '0.8rem' }}>
         Cancelling a confirmed order returns its items to stock.
+      </p>
+    </div>
+  );
+}
+
+function Rewards({ user }) {
+  const balance = getBalance(user.id);
+  return (
+    <div className="acct-view">
+      <h2 className="checkout__h">Rewards</h2>
+      <div className="acct-cards">
+        <div className="acct-card">
+          <span className="acct-card__n">{balance}</span>
+          <span className="acct-card__l">Points balance</span>
+        </div>
+        <div className="acct-card">
+          <span className="acct-card__n">{Math.floor(balance / REDEEM_COST)}</span>
+          <span className="acct-card__l">Rewards available (${REDEEM_VALUE.usd} each)</span>
+        </div>
+      </div>
+      <p className="muted">
+        Earn {POINTS_PER_USD} point per $1 spent on retail orders (wholesale runs on
+        negotiated pricing, so it doesn't earn points). Redeem {REDEEM_COST} points for
+        ${REDEEM_VALUE.usd} off any retail order, from your bag at checkout.
       </p>
     </div>
   );

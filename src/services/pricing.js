@@ -10,6 +10,7 @@
 import { getCountry } from '../data/countries.js';
 import { convertFromUSD, roundForCurrency } from './fx.js';
 import { logisticsForMode, EXPRESS_MULTIPLIER } from '../data/logistics.js';
+import { REDEEM_VALUE } from './loyalty.js';
 
 export function formatMoney(amount, currency, locale) {
   if (amount == null) return 'N/A';
@@ -66,7 +67,7 @@ export function displayPrice(product, currency, rates, locale) {
  *
  * @param {Array<{product, qty, mode, variant}>} items
  */
-export function computeCartTotals(items, countryCode, rates, { express = false, promo = null } = {}) {
+export function computeCartTotals(items, countryCode, rates, { express = false, promo = null, loyaltyRedeemed = false } = {}) {
   const country = getCountry(countryCode);
   const currency = country.currency;
   const locale = country.locale;
@@ -87,8 +88,13 @@ export function computeCartTotals(items, countryCode, rates, { express = false, 
   const shipping = roundForCurrency(express ? baseShip * EXPRESS_MULTIPLIER : baseShip, currency);
 
   const promoApplies = Boolean(promo) && orderMode === 'retail';
-  const discount = promoApplies ? roundForCurrency(subtotal * (promo.percent / 100), currency) : 0;
-  const discountedSubtotal = subtotal - discount;
+  const promoDiscount = promoApplies ? roundForCurrency(subtotal * (promo.percent / 100), currency) : 0;
+
+  const loyaltyApplies = loyaltyRedeemed && orderMode === 'retail';
+  const loyaltyDiscount = loyaltyApplies ? roundForCurrency(amountIn(REDEEM_VALUE, currency, rates), currency) : 0;
+
+  const discount = promoDiscount + loyaltyDiscount;
+  const discountedSubtotal = Math.max(0, subtotal - discount);
 
   const tax = roundForCurrency((discountedSubtotal + shipping) * country.taxRate, currency);
   const total = roundForCurrency(discountedSubtotal + shipping + tax, currency);
@@ -101,6 +107,9 @@ export function computeCartTotals(items, countryCode, rates, { express = false, 
     logisticsBase: money(roundForCurrency(baseShip, currency)),
     subtotal, subtotalText: money(subtotal),
     promo: promoApplies ? promo : null,
+    promoDiscount, promoDiscountText: money(promoDiscount),
+    loyaltyApplied: loyaltyApplies,
+    loyaltyDiscount, loyaltyDiscountText: money(loyaltyDiscount),
     discount, discountText: money(discount),
     shipping, shippingText: shipping === 0 ? 'Free' : money(shipping),
     express,

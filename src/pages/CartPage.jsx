@@ -6,12 +6,13 @@ import { useCart } from '../context/CartContext.jsx';
 import { useRegion } from '../context/RegionContext.jsx';
 import { computeCartTotals } from '../services/pricing.js';
 import PromoCodeField from '../components/commerce/PromoCodeField.jsx';
+import LoyaltyRedeemField from '../components/commerce/LoyaltyRedeemField.jsx';
 
 export default function CartPage() {
-  const { items, updateQty, remove, promo } = useCart();
+  const { items, updateQty, remove, promo, loyaltyRedeemed } = useCart();
   const { countryCode, country, rates } = useRegion();
   const navigate = useNavigate();
-  const totals = computeCartTotals(items, countryCode, rates, { promo });
+  const totals = computeCartTotals(items, countryCode, rates, { promo, loyaltyRedeemed });
 
   return (
     <div className="u-wrap page">
@@ -63,10 +64,14 @@ export default function CartPage() {
           <aside className="cartpage__summary">
             <h2 className="summary__title">Summary</h2>
             <PromoCodeField orderMode={totals.orderMode} />
+            <LoyaltyRedeemField orderMode={totals.orderMode} />
             <dl className="summary__rows">
               <div><dt>Subtotal</dt><dd>{totals.subtotalText}</dd></div>
               {totals.promo && (
-                <div><dt>Discount ({totals.promo.code})</dt><dd>−{totals.discountText}</dd></div>
+                <div><dt>Discount ({totals.promo.code})</dt><dd>−{totals.promoDiscountText}</dd></div>
+              )}
+              {totals.loyaltyApplied && (
+                <div><dt>Rewards redeemed</dt><dd>−{totals.loyaltyDiscountText}</dd></div>
               )}
               <div>
                 <dt>{totals.logisticsLabel} to {country.name}</dt>

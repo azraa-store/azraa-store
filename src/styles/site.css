@@ -770,6 +770,20 @@
 .pimg { position: relative; overflow: hidden; background: var(--bg-2); }
 .pimg__photo { width: 100%; height: 100%; object-fit: cover; }
 .pimg svg { width: 100%; height: 100%; display: block; }
+/* Front/back flip: both photos stacked, crossfade on hover (desktop) or
+   whenever a touch device reports hover support's absence as false — see
+   the touch rule below, which flips on tap instead. */
+.pimg--flip .pimg__photo--front, .pimg--flip .pimg__photo--back {
+  position: absolute; inset: 0; transition: opacity 0.45s var(--ease);
+}
+.pimg--flip .pimg__photo--back { opacity: 0; }
+@media (hover: hover) {
+  .pimg--flip:hover .pimg__photo--front { opacity: 0; }
+  .pimg--flip:hover .pimg__photo--back { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pimg--flip .pimg__photo--front, .pimg--flip .pimg__photo--back { transition: none; }
+}
 
 .grid { display: grid; gap: clamp(1rem, 2.4vw, 2rem); }
 .grid--3 { grid-template-columns: repeat(3, 1fr); }
@@ -840,6 +854,7 @@
 .pcard__name { font-family: var(--serif); font-size: 1.15rem; font-weight: 400; color: var(--ink); }
 .pcard__price { font-size: 0.92rem; }
 .pcard__meta { font-size: 0.78rem; color: var(--ink-faint); margin-top: 0.3rem; line-height: 1.5; }
+.pcard__body .star-rating { margin-top: 0.3rem; }
 .pcard__notify { margin-top: 0.6rem; }
 @media (hover: none) { .pcard__quick { display: none; } }
 
@@ -1238,10 +1253,34 @@
 .acc__body li::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 0.4rem; height: 1px; background: var(--ink-faint); }
 .pdp__related { padding-bottom: 6rem; }
 .pdp__related .hsec__title { margin-bottom: 2rem; }
+.pdp__outfit, .pdp__recent { padding-top: 0; padding-bottom: 3.5rem; }
+.pdp__outfit .hsec__title, .pdp__recent .hsec__title { margin-bottom: 1.6rem; }
+.pdp__rating-link { display: inline-block; margin: 0.3rem 0 0.6rem; }
+.pdp__sizeguide-link { margin-left: 0.7rem; text-transform: none; letter-spacing: 0; font-size: 0.74rem; }
 @media (max-width: 900px) {
   .pdp__inner { grid-template-columns: 1fr; }
   .pdp__media { position: static; }
 }
+
+/* ---------- star rating ---------- */
+.star-rating { display: inline-flex; align-items: center; gap: 0.15rem; color: var(--hero-gold, #c9a66b); }
+.star-rating__star { width: var(--star-size, 15px); height: var(--star-size, 15px); display: inline-flex; }
+.star-rating--input .star-rating__star { cursor: pointer; }
+.star-rating__count { margin-left: 0.4rem; font-size: 0.76rem; color: var(--ink-faint); letter-spacing: 0; text-transform: none; }
+
+/* ---------- reviews ---------- */
+.reviews { padding: 3rem 0; border-top: 1px solid var(--line); }
+.reviews__head { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.4rem; flex-wrap: wrap; }
+.reviews__form { display: flex; flex-direction: column; gap: 0.7rem; max-width: 30rem; margin-bottom: 2rem; padding: 1.2rem; background: var(--bg-1); border: 1px solid var(--line); border-radius: var(--radius-md); }
+.reviews__form-label { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); }
+.reviews__textarea { resize: vertical; }
+.reviews__form-actions { display: flex; align-items: center; gap: 1rem; }
+.reviews__done, .reviews__signin { color: var(--ink-dim); margin-bottom: 1.6rem; font-size: 0.86rem; }
+.reviews__list { list-style: none; display: flex; flex-direction: column; gap: 1.4rem; }
+.reviews__item { padding-bottom: 1.4rem; border-bottom: 1px solid var(--line); }
+.reviews__item-title { display: block; margin: 0.4rem 0 0.2rem; font-size: 0.95rem; }
+.reviews__item-body { color: var(--ink-dim); line-height: 1.6; font-size: 0.88rem; margin-bottom: 0.4rem; }
+.reviews__item-meta { font-size: 0.74rem; color: var(--ink-faint); }
 
 /* ============================================================================
    CART PAGE

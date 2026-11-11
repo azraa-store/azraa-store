@@ -18,22 +18,35 @@ export function resolveImage(product, color) {
  * A real photograph where one exists, otherwise a quiet generative "plate" that
  * adapts to the theme. Structured so colour-specific images drop in later.
  */
-export default function ProductImage({ product, color, className = '', ratio = '4 / 5', priority = false, sizes }) {
+export default function ProductImage({ product, color, className = '', ratio = '4 / 5', priority = false, sizes, flip = false }) {
   const { isDark } = useTheme();
   const seed = useMemo(() => hash(product.id + (color || '')), [product.id, color]);
   const src = resolveImage(product, color);
+  // Only flip to a real back photo, never a different colour's front shot.
+  const backSrc = flip && !color ? product.images?.gallery?.[1] : null;
 
   if (src) {
     return (
-      <div className={`pimg ${className}`} style={{ aspectRatio: ratio }}>
+      <div className={`pimg ${backSrc ? 'pimg--flip' : ''} ${className}`} style={{ aspectRatio: ratio }}>
         <img
           src={src}
           alt={`${product.name}${color ? `, ${color}` : ''}`}
           loading={priority ? 'eager' : 'lazy'}
           decoding="async"
           sizes={sizes}
-          className="pimg__photo"
+          className="pimg__photo pimg__photo--front"
         />
+        {backSrc && (
+          <img
+            src={backSrc}
+            alt={`${product.name}, back`}
+            loading="lazy"
+            decoding="async"
+            sizes={sizes}
+            className="pimg__photo pimg__photo--back"
+            aria-hidden="true"
+          />
+        )}
       </div>
     );
   }

@@ -5,7 +5,7 @@ import Button from '../components/ui/Button.jsx';
 import ProductImage from '../components/ui/ProductImage.jsx';
 import ProductCard from '../components/commerce/ProductCard.jsx';
 import Price from '../components/ui/Price.jsx';
-import { getProductBySlug } from '../services/catalog.js';
+import { getProductBySlug, getOutfitPairing } from '../services/catalog.js';
 import { useCart } from '../context/CartContext.jsx';
 import { useWishlist } from '../context/WishlistContext.jsx';
 import { useRegion } from '../context/RegionContext.jsx';
@@ -13,6 +13,13 @@ import { resolvePrice } from '../services/pricing.js';
 import { LOGISTICS } from '../data/logistics.js';
 import { availability, availabilityLabel } from '../services/inventory.js';
 import NotifyMeForm from '../components/commerce/NotifyMeForm.jsx';
+import { sizeChartFor } from '../data/sizeGuide.js';
+import SizeGuideModal from '../components/commerce/SizeGuideModal.jsx';
+import StarRating from '../components/commerce/StarRating.jsx';
+import ProductReviews from '../components/commerce/ProductReviews.jsx';
+import RecentlyViewed from '../components/commerce/RecentlyViewed.jsx';
+import { getSummary } from '../services/reviews.js';
+import { recordView } from '../services/recentlyViewed.js';
 
 export default function ProductPage() {
   const { slug } = useParams();
@@ -29,6 +36,7 @@ export default function ProductPage() {
   const [qty, setQty] = useState(1);
   const [openSection, setOpenSection] = useState('details');
   const [added, setAdded] = useState(false);
+  const [sizeGuideOpen, setSizeGuideOpen] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -39,6 +47,7 @@ export default function ProductPage() {
       setProduct(p);
       setColor(p.colors?.[0]?.name || null);
       setSize(p.sizes?.[0]?.label || null);
+      recordView(p.id);
     });
     return () => { cancelled = true; };
   }, [slug]);
@@ -66,6 +75,9 @@ export default function ProductPage() {
 
   const hasSizes = product.sizes?.length > 0;
   const hasColors = product.colors?.length > 0;
+  const sizeChart = sizeChartFor(product);
+  const reviewSummary = getSummary(product.id);
+  const outfitPairing = getOutfitPairing(product, 4);
   const soldOut = avail === 'out';
   const needsSize = hasSizes && !size;
   const moq = mode === 'wholesale' ? product.wholesale?.moq || 1 : 1;
@@ -102,7 +114,7 @@ export default function ProductPage() {
             <Link to={`/shop/${product.category}`}>{product.category}</Link>
           </nav>
           <div className={`pdp__frame ${product.hero ? 'pdp__frame--hero' : ''}`}>
-            <ProductImage product={product} color={color} priority ratio="4 / 5" />
+            <ProductImage product={product} color={color} priority ratio="4 / 5" flip />
           </div>
           {product.images?.primary == null && (
             <p className="pdp__frame-note">
@@ -128,6 +140,12 @@ export default function ProductPage() {
               {has(product.id) ? 'Saved' : 'Save'}
             </button>
           </div>
+
+          {reviewSummary.count > 0 && (
+            <a href="#reviews" className="pdp__rating-link">
+              <StarRating value={reviewSummary.average} count={reviewSummary.count} size={14} />
+            </a>
+          )}
 
           <div className="pdp__price">
             <Price product={product} mode={mode} />
@@ -179,7 +197,14 @@ export default function ProductPage() {
 
           {hasSizes && (
             <div className="pdp__opt">
-              <span className="pdp__opt-label">Size{size && <> · <strong>{size}</strong></>}</span>
+              <span className="pdp__opt-label">
+                Size{size && <> · <strong>{size}</strong></>}
+                {sizeChart && (
+                  <button type="button" className="link pdp__sizeguide-link" onClick={() => setSizeGuideOpen(true)}>
+                    Size guide
+                  </button>
+                )}
+              </span>
               <div className="sizes">
                 {product.sizes.map((s) => (
                   <button
@@ -265,6 +290,21 @@ export default function ProductPage() {
         </div>
       </div>
 
+      {outfitPairing.length > 0 && (
+        <section className="hsec pdp__outfit u-wrap">
+          <h2 className="hsec__title">Complete the look</h2>
+          <div className="grid grid--4">
+            {outfitPairing.map((p) => <ProductCard key={p.id} product={p} />)}
+          </div>
+        </section>
+      )}
+
+      <div className="u-wrap">
+        <ProductReviews productId={product.id} />
+      </div>
+
+      <RecentlyViewed excludeId={product.id} />
+
       {product.related?.length > 0 && (
         <section className="pdp__related u-wrap">
           <h2 className="hsec__title">You might also like</h2>
@@ -273,6 +313,8 @@ export default function ProductPage() {
           </div>
         </section>
       )}
+
+      {sizeGuideOpen && <SizeGuideModal chart={sizeChart} onClose={() => setSizeGuideOpen(false)} />}
     </article>
   );
 }

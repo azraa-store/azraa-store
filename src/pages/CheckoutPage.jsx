@@ -11,12 +11,13 @@ import { providersForCountry } from '../services/payments/index.js';
 import { createOrder } from '../services/orders.js';
 import { countriesByContinent } from '../data/countries.js';
 import { markPromoRedeemed } from '../services/promotions.js';
+import { earnPoints, redeemPoints } from '../services/loyalty.js';
 
 const STEPS = ['Contact', 'Delivery', 'Shipping', 'Payment', 'Review'];
 
 export default function CheckoutPage() {
   const navigate = useNavigate();
-  const { items, clear, promo } = useCart();
+  const { items, clear, promo, loyaltyRedeemed } = useCart();
   const { countryCode, country, setCountry, rates } = useRegion();
   const { user } = useAuth();
 
@@ -32,7 +33,7 @@ export default function CheckoutPage() {
   const providers = useMemo(() => providersForCountry(countryCode), [countryCode]);
   const [payMethod, setPayMethod] = useState(providers[0]?.id || 'paypal');
 
-  const totals = computeCartTotals(items, countryCode, rates, { express, promo });
+  const totals = computeCartTotals(items, countryCode, rates, { express, promo, loyaltyRedeemed });
 
   if (items.length === 0 && !placing) {
     return (
@@ -84,6 +85,11 @@ export default function CheckoutPage() {
       const result = await provider.confirm(session, { orderId: order.id });
 
       if (totals.promo) markPromoRedeemed(totals.promo.code, contact.email);
+      if (user && totals.orderMode === 'retail') {
+        if (totals.loyaltyApplied) redeemPoints(user.id);
+        const usdSubtotal = totals.lines.reduce((s, l) => s + (l.product.pricing.retail.usd || 0) * l.qty, 0);
+        earnPoints(user.id, usdSubtotal);
+      }
       clear();
       navigate(`/order/${order.id}`, { state: { payment: { provider: provider.id, ...result }, sessionMode: session.mode } });
     } catch (e) {
@@ -252,7 +258,10 @@ export default function CheckoutPage() {
           <dl className="summary__rows">
             <div><dt>Subtotal</dt><dd>{totals.subtotalText}</dd></div>
             {totals.promo && (
-              <div><dt>Discount ({totals.promo.code})</dt><dd>−{totals.discountText}</dd></div>
+              <div><dt>Discount ({totals.promo.code})</dt><dd>−{totals.promoDiscountText}</dd></div>
+            )}
+            {totals.loyaltyApplied && (
+              <div><dt>Rewards redeemed</dt><dd>−{totals.loyaltyDiscountText}</dd></div>
             )}
             <div><dt>{totals.logisticsLabel}{express ? ' (express)' : ''}</dt><dd>{totals.shippingText}</dd></div>
             <div><dt>{totals.taxLabel}</dt><dd>{totals.taxText}</dd></div>
