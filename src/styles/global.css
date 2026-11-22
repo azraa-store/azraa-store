@@ -56,8 +56,8 @@
   --announce-bg: #241b14;
   --announce-ink: #f7f2e7;
 
-  --serif: 'Cormorant Garamond', 'Times New Roman', Georgia, serif;
-  --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --serif: 'Source Serif 4', 'Times New Roman', Georgia, serif;
+  --sans: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
 
   --label: 0.24em;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
