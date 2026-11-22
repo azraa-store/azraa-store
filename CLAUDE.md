@@ -164,3 +164,16 @@ The hero is the full product photograph shown complete and uncropped (`component
 ## Still needs real data
 
 Product photography, final wholesale prices for TBD items, company registration/address/support contacts, legal copy, and live payment credentials are placeholders marked *coming soon*/*to follow* in place, don't treat them as bugs.
+
+Lifestyle/model photography (people wearing or carrying AZRAA products,
+as opposed to flat product shots) is the same kind of placeholder, added
+2026-11-22 in response to an external review calling for more engaging,
+humanised visuals. `src/components/ui/EditorialImage.jsx` renders a real
+photo at a given path if one exists, otherwise a quiet "coming soon"
+plate — used on `/about` (`public/lifestyle/about-banner.jpg`) and each
+shop category page (`public/lifestyle/category-{slug}.jpg`). AI-generation
+prompts for all five images, grounded in the real catalogue per
+category (the "Ladies" category is leather bags/accessories only, not
+clothing, so its prompt reflects that), live in `lifestyle-photography/README.md`.
+Drop a generated file at the matching path and it renders automatically,
+no code changes needed.

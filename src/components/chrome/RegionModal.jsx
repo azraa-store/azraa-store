@@ -23,12 +23,10 @@ export default function RegionModal() {
       <div className="rmodal__scrim" onClick={dismissWelcome} />
       <div className="rmodal__panel">
         <span className="rmodal__mark">AZRAA</span>
-        <h2 id="rmodal-title" className="rmodal__title">Shop AZRAA from anywhere</h2>
+        <h2 id="rmodal-title" className="rmodal__title">Set your country</h2>
         <p className="rmodal__lede">
-          AZRAA is a global store, we ship worldwide and anyone can order,
-          wherever you are. Prices show in USD by default and switch
-          automatically to your local currency and payment options where we
-          support them. You can change this any time from the header.
+          Prices and payment options switch to match it automatically.
+          Change this any time from the header.
         </p>
 
         {detected && (

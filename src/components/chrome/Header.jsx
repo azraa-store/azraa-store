@@ -36,6 +36,7 @@ export const NAV = [
       { to: '/wholesale/enquiry', label: 'Trade Account' },
     ],
   },
+  { to: '/about', label: 'About', end: true },
   { to: '/contact', label: 'Contact', end: true },
 ];
 

@@ -21,6 +21,7 @@ import RecentlyViewed from '../components/commerce/RecentlyViewed.jsx';
 import { getSummary } from '../services/reviews.js';
 import { recordView } from '../services/recentlyViewed.js';
 import AssistantNudge from '../components/commerce/AssistantNudge.jsx';
+import TrustBadges from '../components/commerce/TrustBadges.jsx';
 
 export default function ProductPage() {
   const { slug } = useParams();
@@ -241,6 +242,8 @@ export default function ProductPage() {
           ) : (
             <Button onClick={buyNow} variant="outline" block disabled={needsSize}>Buy now</Button>
           )}
+
+          <TrustBadges mode={mode} className="pdp__trust" />
 
           <div className="pdp__linesum">
             <span>{effectiveQty} × <Price product={product} mode={mode} /></span>

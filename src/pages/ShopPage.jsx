@@ -5,6 +5,7 @@ import Reveal from '../components/ui/Reveal.jsx';
 import ProductCard from '../components/commerce/ProductCard.jsx';
 import { listProducts } from '../services/catalog.js';
 import { activeCategories, getCategory } from '../data/categories.js';
+import EditorialImage from '../components/ui/EditorialImage.jsx';
 
 const CATEGORIES = activeCategories();
 
@@ -64,6 +65,15 @@ export default function ShopPage() {
           </nav>
           <h1 className="shop__title">{title}</h1>
           {cat && <p className="shop__blurb">{cat.blurb}</p>}
+          {cat && (
+            <EditorialImage
+              src={`/lifestyle/category-${cat.slug}.jpg`}
+              alt={`${cat.name} worn and styled`}
+              ratio="21 / 7"
+              className="shop__banner"
+              label="Lifestyle photography — coming soon"
+            />
+          )}
 
           <div className="shop__cats">
             <Link to="/shop" className={`chip ${!category ? 'is-active' : ''}`}>All</Link>

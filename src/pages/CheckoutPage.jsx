@@ -12,6 +12,7 @@ import { createOrder } from '../services/orders.js';
 import { countriesByContinent } from '../data/countries.js';
 import { markPromoRedeemed } from '../services/promotions.js';
 import { earnPoints, redeemPoints } from '../services/loyalty.js';
+import TrustBadges from '../components/commerce/TrustBadges.jsx';
 
 const STEPS = ['Contact', 'Delivery', 'Shipping', 'Payment', 'Review'];
 
@@ -268,6 +269,7 @@ export default function CheckoutPage() {
             <div className="summary__total"><dt>Total</dt><dd>{totals.totalText}</dd></div>
           </dl>
           <p className="summary__note">Charged in {totals.currency}. Confirmed by the payment provider.</p>
+          <TrustBadges mode={totals.orderMode} className="summary__trust" />
         </aside>
       </div>
     </div>

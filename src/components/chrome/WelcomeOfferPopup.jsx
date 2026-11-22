@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { usePromoGate } from '../../context/PromoGateContext.jsx';
 import { useFocusTrap } from '../../hooks/useFocusTrap.js';
 import { PRODUCTS } from '../../data/products.js';
@@ -15,6 +16,7 @@ function editorialProduct() {
 }
 
 export default function WelcomeOfferPopup() {
+  const { pathname } = useLocation();
   const { armed, markInterrupted } = usePromoGate();
   const [visible, setVisible] = useState(false);
   const [email, setEmail] = useState('');
@@ -23,14 +25,19 @@ export default function WelcomeOfferPopup() {
   const trapRef = useFocusTrap(visible);
   const product = useRef(editorialProduct()).current;
 
+  // A retail-only discount isn't relevant to someone actively on the
+  // wholesale pages, and showing it there is exactly the "retail vs.
+  // wholesale disconnect" reviewers flagged — so it doesn't arm here.
+  const onWholesalePages = pathname.startsWith('/wholesale');
+
   useEffect(() => {
-    if (!armed) return;
+    if (!armed || onWholesalePages) return;
     const t = setTimeout(() => {
       setVisible(true);
       markInterrupted();
     }, SHOW_AFTER_MS);
     return () => clearTimeout(t);
-  }, [armed, markInterrupted]);
+  }, [armed, markInterrupted, onWholesalePages]);
 
   useEffect(() => {
     if (!visible) return;
@@ -90,6 +97,10 @@ export default function WelcomeOfferPopup() {
                 <em>{copied ? 'Copied' : 'Copy'}</em>
               </button>
               <p className="promo-modal__fine">Retail orders only, no minimum spend, one use per email.</p>
+              <p className="promo-modal__fine">
+                Buying in volume for a business?{' '}
+                <Link to="/wholesale" onClick={() => setVisible(false)}>See wholesale pricing</Link>.
+              </p>
             </>
           ) : (
             <form onSubmit={unlock}>
@@ -108,6 +119,10 @@ export default function WelcomeOfferPopup() {
               />
               <button type="submit" className="promo-modal__cta">Unlock My Offer</button>
               <p className="promo-modal__fine">Retail orders only, no minimum spend, one use per email.</p>
+              <p className="promo-modal__fine">
+                Buying in volume for a business?{' '}
+                <Link to="/wholesale" onClick={() => setVisible(false)}>See wholesale pricing</Link>.
+              </p>
             </form>
           )}
         </div>

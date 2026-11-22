@@ -78,6 +78,7 @@ export default function Footer() {
             </svg>
             WhatsApp · {WHATSAPP.display}
           </a>
+          <Link className="ftr__about" to="/about">About AZRAA →</Link>
           <div className="ftr__region">
             <span className="label">Shipping to</span>
             <CountryPicker align="left" />
