@@ -63,6 +63,15 @@
   --announce-bg: #211a15;
   --announce-ink: #f5efe5;
 
+  /* same fixed-pair convention for the footer: the spec wants a deep
+     espresso footer with ivory text unconditionally, not just in light
+     theme (--ink/--bg already flip per theme, so referencing them here
+     would make the footer invert too) */
+  --footer-bg: #241a16;
+  --footer-ink: #f5efe5;
+  --footer-ink-dim: rgba(245, 239, 229, 0.78);
+  --footer-ink-faint: rgba(245, 239, 229, 0.56);
+
   /* Every CSS-driven heading and functional element (body, nav, buttons,
      forms, product names) uses Arimo — the hero's own bespoke SVG wordmark
      is kept deliberately separate on Bodoni Moda, per the earlier call to

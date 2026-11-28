@@ -122,13 +122,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: 1px dashed var(--line-strong);
+  border: 1px dashed var(--burgundy);
   border-radius: var(--radius-md);
   padding: 0.9rem 1.1rem;
   margin-bottom: 1rem;
   font-family: var(--serif-display);
   font-size: 1.1rem;
   letter-spacing: 0.08em;
+  color: var(--burgundy);
 }
 .promo-modal__code em { font-family: var(--sans); font-style: normal; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; font-family: var(--caps); font-weight: 500; color: var(--ink-faint); }
 .promo-modal__code:hover { border-color: var(--ink); }

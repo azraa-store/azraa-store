@@ -2,14 +2,12 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import CountryPicker from './CountryPicker.jsx';
 import { useRegion } from '../../context/RegionContext.jsx';
-import { useTheme } from '../../context/ThemeContext.jsx';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { WHATSAPP, whatsappLink } from '../../config/site.js';
 import { cooldownRemaining, markSubmitted } from '../../lib/submitThrottle.js';
 
 export default function Footer() {
   const { country } = useRegion();
-  const { isDark } = useTheme();
   const { isAuthed } = useAuth();
   const [email, setEmail] = useState('');
   const [done, setDone] = useState(false);
@@ -62,7 +60,10 @@ export default function Footer() {
     <footer className="ftr">
       <div className="u-wrap ftr__inner">
         <div className="ftr__brand">
-          <img src={isDark ? '/brand/logo-mono.png' : '/brand/logo-color.png'} alt="AZRAA" width="104" height="101" className="ftr__mark" />
+          {/* the footer is a fixed deep-espresso surface regardless of site
+              theme (see --footer-bg in global.css), so it always needs the
+              light-on-dark logo variant, not the theme-driven light/dark pick */}
+          <img src="/brand/logo-mono.png" alt="AZRAA" width="104" height="101" className="ftr__mark" />
           <p className="ftr__line">
             Wholesale and retail supply of clothing, footwear and accessories,
             shipping worldwide.

@@ -342,8 +342,8 @@
   transition: color 0.25s var(--ease), border-color 0.25s var(--ease);
   white-space: nowrap;
 }
-.hdr__link:hover { color: var(--ink); border-bottom-color: var(--line-strong); }
-.hdr__link.is-active { border-bottom-color: var(--ink); font-weight: 600; }
+.hdr__link:hover { color: var(--ink); border-bottom-color: var(--hero-gold); }
+.hdr__link.is-active { border-bottom-color: var(--hero-gold); font-weight: 600; }
 
 .hdr__group { position: relative; display: flex; }
 .hdr__link--group { background: none; display: inline-flex; align-items: center; gap: 0.3rem; }
@@ -822,7 +822,7 @@
 @media (max-width: 340px) { .grid--3, .grid--4 { grid-template-columns: 1fr; } }
 
 .pcard { display: flex; flex-direction: column; }
-.pcard__media { position: relative; display: block; overflow: hidden; border-radius: var(--radius-sm); }
+.pcard__media { position: relative; display: block; overflow: hidden; border-radius: var(--radius-sm); border: 1px solid var(--stone); }
 .pcard__media .pimg { transition: transform 0.8s var(--ease); }
 .pcard__media:hover .pimg { transform: scale(1.03); }
 .pcard__flag {
@@ -1194,6 +1194,24 @@
 .wholesale-band__figure { position: relative; }
 .wholesale-band__cap { position: absolute; bottom: 0.8rem; left: 0.8rem; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; font-family: var(--caps); font-weight: 500; color: var(--ink-dim); background: var(--surface-flag); padding: 0.3rem 0.5rem; border-radius: var(--radius-sm); }
 @media (max-width: 900px) { .wholesale-band { grid-template-columns: 1fr; } .wholesale-band__figure { max-width: 24rem; } }
+
+/* Heritage Olive editorial block — the one deliberately-chosen "deep
+   olive section" the Atelier Heritage palette calls for, full-bleed via
+   negative margin since .hsec is normally just a padding wrapper on the
+   shared ivory page background. Ivory typography throughout. */
+.hsec--wholesale {
+  background: var(--olive);
+  color: var(--bg);
+  border-top-color: var(--hero-gold);
+}
+.hsec--wholesale .label { color: var(--hero-gold); }
+.hsec--wholesale .hsec__lede { color: rgba(245, 239, 229, 0.82); }
+.hsec--wholesale .hsec__lede strong { color: var(--bg); }
+.hsec--wholesale .wholesale-band__points li { color: rgba(245, 239, 229, 0.82); }
+.hsec--wholesale .wholesale-band__points li::before { background: var(--hero-gold); }
+.hsec--wholesale .wholesale-band__cap { color: var(--ink-dim); }
+.hsec--wholesale .btn--ghost { color: var(--bg); }
+.hsec--wholesale .btn--ghost:hover:not(:disabled) { color: var(--hero-gold); background: rgba(245, 239, 229, 0.1); }
 
 .why { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(1.2rem, 3vw, 2.5rem); }
 .why__item { border-top: 1px solid var(--line-strong); padding-top: 1.2rem; }
@@ -1595,43 +1613,46 @@
 @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
 
 /* ---------- footer ---------- */
-.ftr { border-top: 1px solid var(--line); background: var(--bg-1); position: relative; z-index: 2; }
+/* deep espresso + ivory, fixed regardless of site theme (see --footer-*
+   tokens in global.css) — a deliberate dark editorial contrast block,
+   not the light bg-1 surface the rest of the chrome uses */
+.ftr { border-top: 1px solid var(--hero-gold); background: var(--footer-bg); color: var(--footer-ink); position: relative; z-index: 2; }
 .ftr__inner { display: grid; grid-template-columns: 0.9fr 1.6fr; gap: clamp(2rem, 5vw, 5rem); padding-block: clamp(3rem, 6vw, 5rem); }
-.ftr__mark { width: auto; height: 92px; opacity: 0.85; margin-bottom: 1.2rem; }
-.ftr__line { color: var(--ink-dim); font-size: 0.86rem; line-height: 1.7; max-width: 22rem; }
+.ftr__mark { width: auto; height: 92px; opacity: 0.9; margin-bottom: 1.2rem; }
+.ftr__line { color: var(--footer-ink-dim); font-size: 0.86rem; line-height: 1.7; max-width: 22rem; }
 .ftr__wa {
   margin-top: 1.1rem;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   font-size: 0.82rem;
-  color: var(--ink-dim);
+  color: var(--footer-ink-dim);
   border-bottom: 1px solid transparent;
   transition: color 0.2s var(--ease), border-color 0.2s var(--ease);
 }
 .ftr__wa svg { color: #25d366; flex-shrink: 0; }
-.ftr__wa:hover { color: var(--ink); border-bottom-color: var(--line-strong); }
-.ftr__about { margin-top: 0.8rem; display: block; width: fit-content; font-size: 0.82rem; color: var(--ink-dim); border-bottom: 1px solid transparent; transition: color 0.2s var(--ease), border-color 0.2s var(--ease); }
-.ftr__about:hover { color: var(--ink); border-bottom-color: var(--line-strong); }
+.ftr__wa:hover { color: var(--footer-ink); border-bottom-color: var(--hero-gold); }
+.ftr__about { margin-top: 0.8rem; display: block; width: fit-content; font-size: 0.82rem; color: var(--footer-ink-dim); border-bottom: 1px solid transparent; transition: color 0.2s var(--ease), border-color 0.2s var(--ease); }
+.ftr__about:hover { color: var(--footer-ink); border-bottom-color: var(--hero-gold); }
 .ftr__region { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.6rem; align-items: flex-start; }
-.ftr__region-note { font-size: 0.74rem; color: var(--ink-faint); }
+.ftr__region-note { font-size: 0.74rem; color: var(--footer-ink-faint); }
 /* auto-fit rather than a fixed 4-track grid: the Newsletter column is
    dropped entirely for signed-in customers (see Footer.jsx), so the
    remaining columns need to redistribute the space, not leave a gap. */
 .ftr__cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: clamp(1.2rem, 3vw, 2rem); }
-.ftr__col-title { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; font-family: var(--caps); font-weight: 500; color: var(--ink-faint); margin-bottom: 1rem; }
+.ftr__col-title { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; font-family: var(--caps); font-weight: 500; color: var(--hero-gold); margin-bottom: 1rem; }
 .ftr__col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
-.ftr__col a { color: var(--ink-dim); font-size: 0.85rem; }
-.ftr__col a:hover { color: var(--ink); }
+.ftr__col a { color: var(--footer-ink-dim); font-size: 0.85rem; }
+.ftr__col a:hover { color: var(--footer-ink); }
 .ftr__news-form { display: flex; gap: 0.6rem; margin-bottom: 0.7rem; }
 .ftr__news-form input { flex: 1; min-width: 0; }
-.ftr__news-form button { width: 3rem; flex-shrink: 0; border: 1px solid var(--line-strong); color: var(--ink); border-radius: var(--radius-sm); }
-.ftr__news-form button:hover { background: var(--ink); color: var(--btn-text); }
+.ftr__news-form button { width: 3rem; flex-shrink: 0; border: 1px solid var(--hero-gold); color: var(--footer-ink); border-radius: var(--radius-sm); }
+.ftr__news-form button:hover { background: var(--hero-gold); color: var(--ink-dim); }
 @media (max-width: 520px) { .ftr__news-form { max-width: 26rem; } }
-.ftr__news-fine, .ftr__news-done { font-size: 0.74rem; color: var(--ink-faint); line-height: 1.5; }
-.ftr__bottom { display: flex; justify-content: space-between; gap: 1rem; padding-block: 1.5rem; border-top: 1px solid var(--line); font-size: 0.74rem; color: var(--ink-faint); flex-wrap: wrap; }
+.ftr__news-fine, .ftr__news-done { font-size: 0.74rem; color: var(--footer-ink-faint); line-height: 1.5; }
+.ftr__bottom { display: flex; justify-content: space-between; gap: 1rem; padding-block: 1.5rem; border-top: 1px solid rgba(198, 163, 106, 0.3); font-size: 0.74rem; color: var(--footer-ink-faint); flex-wrap: wrap; }
 .ftr__bottom-meta { display: flex; gap: 1rem; flex-wrap: wrap; }
-.ftr__bottom-meta a:hover { color: var(--ink); }
+.ftr__bottom-meta a:hover { color: var(--footer-ink); }
 @media (max-width: 900px) { .ftr__inner { grid-template-columns: 1fr; } .ftr__cols { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 520px) { .ftr__cols { grid-template-columns: 1fr; } }
 
