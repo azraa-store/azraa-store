@@ -64,7 +64,7 @@
   /* every uppercase/capitalized label, button and badge sitewide (anything
      with text-transform: uppercase) — not the hero wordmark, which keeps
      --hero-wordmark instead */
-  --caps: 'Roboto Slab', Georgia, 'Times New Roman', serif;
+  --caps: 'Cormorant Garamond', 'Times New Roman', Georgia, serif;
 
   --label: 0.24em;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
