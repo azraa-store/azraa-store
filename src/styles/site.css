@@ -141,10 +141,12 @@
   padding: 0;
   color: var(--ink);
   letter-spacing: 0.08em;
+  border: none;
   border-bottom: 1px solid var(--line-strong);
+  border-radius: 0;
   padding-bottom: 3px;
 }
-.btn--link:hover:not(:disabled) { border-color: var(--ink); }
+.btn--link:hover:not(:disabled) { border-bottom-color: var(--ink); }
 
 /* ---------- fields ---------- */
 .field { margin-bottom: 1.15rem; }
