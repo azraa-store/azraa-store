@@ -1062,7 +1062,8 @@
 .home-hero__eyebrow {
   font-size: 0.62rem;
   letter-spacing: var(--label);
-  text-transform: uppercase; font-family: var(--caps); font-weight: 500;
+  /* same thin-serif-at-tiny-size legibility fix as .label */
+  text-transform: uppercase; font-family: var(--caps); font-weight: 700;
   color: var(--hero-eyebrow);
   margin-bottom: clamp(0.9rem, 2.4vw, 1.5rem);
 }

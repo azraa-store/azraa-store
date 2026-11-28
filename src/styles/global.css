@@ -298,7 +298,10 @@ html.lenis body {
   font-weight: 400;
   font-size: clamp(0.62rem, 0.9vw, 0.74rem);
   letter-spacing: var(--label);
-  text-transform: uppercase; font-family: var(--caps); font-weight: 500;
+  /* Libre Baskerville's thin serif strokes read faint at this size even
+     at a dark, high-contrast color — weight 500 wasn't enough "ink" to
+     stay legible, so this one needs bolder than the --caps default. */
+  text-transform: uppercase; font-family: var(--caps); font-weight: 700;
   color: var(--ink-faint);
 }
 
