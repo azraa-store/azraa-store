@@ -29,7 +29,7 @@
   padding: clamp(1.6rem, 4vw, 2.4rem);
   box-shadow: var(--shadow-lg);
 }
-.rmodal__mark { font-family: var(--serif-display); letter-spacing: 0.42em; text-transform: uppercase; font-family: var(--caps); font-weight: 500; font-size: 1rem; color: var(--ink); }
+.rmodal__mark { display: inline-block; color: var(--ink); }
 .rmodal__title { font-family: var(--serif-display); font-weight: 400; font-size: 1.9rem; margin: 0.8rem 0 0.5rem; }
 .rmodal__lede { color: var(--ink-dim); font-size: 0.88rem; line-height: 1.6; margin-bottom: 1.4rem; }
 .rmodal__detected { font-size: 0.82rem; color: var(--ink-dim); margin-top: 1rem; }
@@ -102,7 +102,7 @@
 .promo-modal__media .pimg { width: 100%; height: 100%; }
 .promo-modal__media .pimg__photo { height: 100%; object-fit: cover; }
 .promo-modal__body { padding: clamp(1.6rem, 4vw, 2.4rem); display: flex; flex-direction: column; }
-.promo-modal__mark { font-family: var(--serif-display); letter-spacing: 0.3em; text-transform: uppercase; font-family: var(--caps); font-weight: 500; font-size: 0.8rem; color: var(--ink-faint); }
+.promo-modal__mark { display: inline-block; color: var(--ink-faint); }
 .promo-modal__title { font-family: var(--serif-display); font-weight: 400; font-size: clamp(1.6rem, 3vw, 2rem); margin: 0.6rem 0 0.8rem; }
 .promo-modal__lede { color: var(--ink-dim); font-size: 0.88rem; line-height: 1.6; margin-bottom: 1.2rem; }
 .promo-modal__input { width: 100%; margin-bottom: 0.8rem; }

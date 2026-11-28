@@ -204,9 +204,7 @@
   place-items: center;
 }
 .route-fallback__mark {
-  font-family: var(--serif-display);
-  letter-spacing: 0.5em;
-  font-size: 1.4rem;
+  display: inline-block;
   color: var(--ink-faint);
   animation: pulse 1.6s ease-in-out infinite;
 }
@@ -794,7 +792,7 @@
 .edimg { position: relative; overflow: hidden; border-radius: var(--radius-md); background: var(--bg-2); }
 .edimg img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .edimg--plate { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.6rem; background: var(--hover-wash); border: 1px dashed var(--line-strong); text-align: center; padding: 1.5rem; }
-.edimg__mark { font-family: var(--serif-display); font-size: 0.9rem; letter-spacing: 0.3em; color: var(--ink-faint); }
+.edimg__mark { display: inline-block; color: var(--ink-faint); }
 .edimg__label { font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; font-family: var(--caps); font-weight: 500; color: var(--ink-faint); max-width: 20rem; }
 .pimg { position: relative; overflow: hidden; background: var(--bg-2); }
 .pimg__photo { width: 100%; height: 100%; object-fit: cover; }
@@ -1495,7 +1493,7 @@
   pointer-events: none;
 }
 .auth__panel-inner { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: center; padding: clamp(2rem, 6vw, 5rem); max-width: 34rem; margin-inline: auto; width: 100%; }
-.auth__mark { font-family: var(--serif-display); letter-spacing: 0.45em; text-transform: uppercase; font-family: var(--caps); font-weight: 500; font-size: 1.1rem; color: var(--ink); margin-bottom: 2.5rem; }
+.auth__mark { display: inline-block; color: var(--ink); margin-bottom: 2.5rem; }
 .auth__title { font-family: var(--serif-display); font-weight: 400; font-size: clamp(1.9rem, 4vw, 2.8rem); }
 .auth__intro { color: var(--ink-dim); margin: 0.8rem 0 2rem; line-height: 1.6; }
 .auth__form { display: flex; flex-direction: column; gap: 0.2rem; }
