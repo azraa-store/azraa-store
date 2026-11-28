@@ -403,12 +403,12 @@
 }
 .bot-panel__id { display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; flex: 1; }
 .bot-panel__name {
-  font-family: var(--serif-display);
-  font-weight: 400;
-  font-size: 1rem;
-  letter-spacing: 0.02em;
+  display: inline-block;
   color: var(--ink);
   line-height: 1;
+}
+.bot-panel__name .hero-wordmark {
+  width: 3.4rem;
 }
 .bot-panel__role {
   display: flex;

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAssistant } from '../../context/AssistantContext.jsx';
 import { whatsappLink } from '../../config/site.js';
 import { LANGUAGES, langDir, t } from '../../i18n/assistant.js';
+import HeroWordmark from '../home/HeroWordmark.jsx';
 
 /* ── marks ─────────────────────────────────────────────────────────── */
 
@@ -219,7 +220,10 @@ export default function AzraaBot() {
         <header className="bot-panel__head">
           <span className="bot-panel__avatar"><BotMark size={18} /></span>
           <span className="bot-panel__id">
-            <span className="bot-panel__name">AZRAA</span>
+            <span className="bot-panel__name">
+              <HeroWordmark />
+              <span className="u-visually-hidden">AZRAA</span>
+            </span>
             <span className="bot-panel__role">
               <span className="bot-panel__dot" /> {t(L, 'role')}
             </span>
