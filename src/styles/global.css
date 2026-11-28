@@ -72,12 +72,12 @@
   --footer-ink-dim: rgba(245, 239, 229, 0.78);
   --footer-ink-faint: rgba(245, 239, 229, 0.56);
 
-  /* Every CSS-driven heading and functional element (body, nav, buttons,
-     forms, product names) uses Arimo — the hero's own bespoke SVG wordmark
-     is kept deliberately separate on Bodoni Moda, per the earlier call to
+  /* Headings use Libre Baskerville; body/functional (nav, buttons, forms,
+     product names) stays Arimo. The hero's own bespoke SVG wordmark is
+     kept deliberately separate on Bodoni Moda, per the earlier call to
      make it a unique, standalone mark rather than just another heading. */
-  --serif-display: 'Arimo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-  --serif-secondary: 'Arimo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --serif-display: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
+  --serif-secondary: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
   --sans: 'Arimo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
   /* every uppercase/capitalized label, button and badge sitewide (anything
      with text-transform: uppercase). */
