@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../ui/Button.jsx';
+import HeroWordmark from './HeroWordmark.jsx';
 import ProductImage from '../ui/ProductImage.jsx';
 import { PRODUCTS } from '../../data/products.js';
 import { isStorefrontReady } from '../../services/catalog.js';
@@ -24,7 +25,10 @@ function HeroCopy() {
   return (
     <div className="home-hero__copy">
       <p className="home-hero__eyebrow">Est. supply, worldwide</p>
-      <h1 className="home-hero__word">AZRAA</h1>
+      <h1 className="home-hero__word">
+        <span className="u-visually-hidden">AZRAA</span>
+        <HeroWordmark />
+      </h1>
       <p className="home-hero__tag">Wholesale. Retail.<br />Shipping worldwide.</p>
       <div className="home-hero__cta">
         <Button to="/shop" size="lg">Shop Retail <Arrow /></Button>

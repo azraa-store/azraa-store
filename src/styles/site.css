@@ -118,11 +118,11 @@
 .home-hero__cta .btn--outline {
   background: var(--hero-gold);
   border-color: var(--hero-gold);
-  color: #1d1710;
+  color: var(--ink-dim);
 }
 .home-hero__cta .btn--outline:hover:not(:disabled) {
-  background: #b88f56;
-  border-color: #b88f56;
+  background: var(--hero-gold-deep);
+  border-color: var(--hero-gold-deep);
 }
 :root[data-theme='dark'] .home-hero__cta .btn--outline {
   background: transparent;
@@ -334,7 +334,7 @@
 }
 .hdr__link {
   font-family: var(--sans);
-  font-size: 0.82rem;
+  font-size: 0.75rem;
   font-weight: 400;
   letter-spacing: 0.12em;
   text-transform: uppercase; font-family: var(--caps); font-weight: 500;
@@ -1067,14 +1067,15 @@
 .home-hero--still .home-hero__word { color: var(--hero-text); }
 
 .home-hero__word {
-  font-family: var(--serif-display);
-  font-weight: 500;
-  letter-spacing: clamp(0.05em, 0.6vw, 0.14em);
-  text-transform: uppercase;
-  font-size: clamp(2.8rem, 6.5vw, 5.6rem);
-  line-height: 0.94;
+  display: block;
   color: var(--ink);
-  text-shadow: var(--word-shadow);
+  line-height: 0;
+}
+.home-hero__word .hero-wordmark {
+  display: block;
+  width: clamp(14rem, 34vw, 28rem);
+  height: auto;
+  filter: drop-shadow(var(--word-shadow));
 }
 .home-hero__tag {
   margin-top: clamp(1rem, 2.4vw, 1.8rem);
