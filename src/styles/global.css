@@ -58,17 +58,19 @@
   --announce-ink: #f5efe5;
 
   /* Every CSS-driven heading and functional element (body, nav, buttons,
-     forms, product names) uses Arimo — the hero's own bespoke SVG wordmark
-     is kept deliberately separate on Bodoni Moda, per the earlier call to
-     make it a unique, standalone mark rather than just another heading. */
-  --serif-display: 'Arimo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-  --serif-secondary: 'Arimo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-  --sans: 'Arimo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+     forms, product names) uses Merriweather — the hero's own bespoke SVG
+     wordmark is kept deliberately separate on Bodoni Moda, per the earlier
+     call to make it a unique, standalone mark rather than just another
+     heading. Merriweather is a serif, so the fallback stack is serif too
+     (was sans-serif for Arimo/Roboto/DM Sans). */
+  --serif-display: 'Merriweather', Georgia, 'Times New Roman', serif;
+  --serif-secondary: 'Merriweather', Georgia, 'Times New Roman', serif;
+  --sans: 'Merriweather', Georgia, 'Times New Roman', serif;
   /* every uppercase/capitalized label, button and badge sitewide (anything
      with text-transform: uppercase) — functional text, so it rides the
-     same Arimo as --sans; kept as its own token since callers already
-     reference it directly. */
-  --caps: 'Arimo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+     same Merriweather as --sans; kept as its own token since callers
+     already reference it directly. */
+  --caps: 'Merriweather', Georgia, 'Times New Roman', serif;
 
   --label: 0.24em;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
