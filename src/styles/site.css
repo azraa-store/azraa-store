@@ -266,24 +266,12 @@
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
-.announce__close {
-  position: absolute;
-  right: var(--pad);
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--announce-ink);
-  opacity: 0.6;
-  padding: 0.3rem;
-  background: var(--announce-bg);
-}
-.announce__close:hover { opacity: 1; }
 @media (prefers-reduced-motion: reduce) {
   .announce__track { animation: none; }
 }
 @media (max-width: 600px) {
   .announce__msg, .announce__item { font-size: 0.6rem; letter-spacing: 0.07em; }
   .announce__item { padding-inline: 1.5rem; }
-  .announce__close { right: calc(var(--pad) * 0.6); }
 }
 
 /* ============================================================================

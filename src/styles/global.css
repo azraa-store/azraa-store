@@ -108,11 +108,6 @@
   --maxw: 82rem;
 }
 
-/* dismissed by AnnouncementBar, same convention as ThemeContext's data-theme */
-:root[data-announce-hidden] {
-  --announce-h: 0px;
-}
-
 :root[data-theme='dark'] {
   color-scheme: dark;
 
