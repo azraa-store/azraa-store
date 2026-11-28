@@ -232,7 +232,7 @@ img {
   color: var(--bg);
   font-size: 0.75rem;
   letter-spacing: var(--label);
-  text-transform: uppercase; font-family: var(--caps);
+  text-transform: uppercase; font-family: var(--caps); font-weight: 600;
   transform: translateY(-160%);
   transition: transform 0.3s var(--ease);
 }
@@ -281,7 +281,7 @@ html.lenis body {
   font-weight: 400;
   font-size: clamp(0.62rem, 0.9vw, 0.74rem);
   letter-spacing: var(--label);
-  text-transform: uppercase; font-family: var(--caps);
+  text-transform: uppercase; font-family: var(--caps); font-weight: 600;
   color: var(--ink-faint);
 }
 
@@ -296,7 +296,7 @@ html.lenis body {
   font-family: var(--serif);
   font-weight: 400;
   letter-spacing: 0.22em;
-  text-transform: uppercase; font-family: var(--caps);
+  text-transform: uppercase; font-family: var(--caps); font-weight: 600;
 }
 
 /* reduced motion: nothing eases, nothing drifts */
