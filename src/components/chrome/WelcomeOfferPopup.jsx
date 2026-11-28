@@ -5,6 +5,7 @@ import { useFocusTrap } from '../../hooks/useFocusTrap.js';
 import { PRODUCTS } from '../../data/products.js';
 import { isStorefrontReady } from '../../services/catalog.js';
 import ProductImage from '../ui/ProductImage.jsx';
+import HeroWordmark from '../home/HeroWordmark.jsx';
 import { PROMO_CODES } from '../../services/promotions.js';
 
 const SHOW_AFTER_MS = 6000; // 5-8s window from the spec
@@ -83,7 +84,7 @@ export default function WelcomeOfferPopup() {
         </div>
 
         <div className="promo-modal__body">
-          <span className="promo-modal__mark">AZRAA</span>
+          <span className="promo-modal__mark"><HeroWordmark /><span className="u-visually-hidden">AZRAA</span></span>
           <h2 id="welcome-offer-title" className="promo-modal__title">Welcome to AZRAA</h2>
 
           {unlocked ? (

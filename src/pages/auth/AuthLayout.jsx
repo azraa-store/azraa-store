@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import Seo from '../../components/ui/Seo.jsx';
+import HeroWordmark from '../../components/home/HeroWordmark.jsx';
 
 export default function AuthLayout({ title, intro, children, alt }) {
   return (
@@ -7,7 +8,7 @@ export default function AuthLayout({ title, intro, children, alt }) {
       <Seo title={title} />
       <div className="auth__panel">
         <div className="auth__panel-inner">
-          <Link to="/" className="auth__mark">AZRAA</Link>
+          <Link to="/" className="auth__mark" aria-label="AZRAA, home"><HeroWordmark /></Link>
           <h1 className="auth__title">{title}</h1>
           {intro && <p className="auth__intro">{intro}</p>}
           {children}

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import HeroWordmark from '../home/HeroWordmark.jsx';
 
 /**
  * A real lifestyle/editorial photograph where one exists at `src`, otherwise
@@ -20,7 +21,7 @@ export default function EditorialImage({ src, alt, ratio = '16 / 9', label, clas
 
   return (
     <div className={`edimg edimg--plate ${className}`} style={{ aspectRatio: ratio }} role="img" aria-label={alt}>
-      <span className="edimg__mark">AZRAA</span>
+      <span className="edimg__mark"><HeroWordmark /></span>
       <span className="edimg__label">{label || 'Lifestyle photography — coming soon'}</span>
     </div>
   );

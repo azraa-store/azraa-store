@@ -1077,6 +1077,16 @@
   height: auto;
   filter: drop-shadow(var(--word-shadow));
 }
+
+/* default small size for every other "azraa" brand-mark echo sitewide
+   (region/promo modals, auth, loading state, editorial placeholder) —
+   the hero's own instance above overrides this with its much larger size */
+.hero-wordmark {
+  display: inline-block;
+  width: 5.5rem;
+  height: auto;
+  vertical-align: middle;
+}
 .home-hero__tag {
   margin-top: clamp(1rem, 2.4vw, 1.8rem);
   font-size: clamp(0.78rem, 1.1vw, 0.95rem);

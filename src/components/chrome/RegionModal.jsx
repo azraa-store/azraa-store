@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useRegion } from '../../context/RegionContext.jsx';
 import { COUNTRIES, countriesByContinent } from '../../data/countries.js';
+import HeroWordmark from '../home/HeroWordmark.jsx';
 
 /** First-visit welcome. Never blocks, visitors can skip and use USD. */
 export default function RegionModal() {
@@ -22,7 +23,7 @@ export default function RegionModal() {
     <div className="rmodal" role="dialog" aria-modal="true" aria-labelledby="rmodal-title">
       <div className="rmodal__scrim" onClick={dismissWelcome} />
       <div className="rmodal__panel">
-        <span className="rmodal__mark">AZRAA</span>
+        <span className="rmodal__mark"><HeroWordmark /><span className="u-visually-hidden">AZRAA</span></span>
         <h2 id="rmodal-title" className="rmodal__title">Set your country</h2>
         <p className="rmodal__lede">
           Prices and payment options switch to match it automatically.

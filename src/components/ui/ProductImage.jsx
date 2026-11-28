@@ -85,7 +85,7 @@ export default function ProductImage({ product, color, className = '', ratio = '
         <rect width="400" height="500" fill={`url(#${gid}-s)`} />
         <rect width="400" height="500" filter={`url(#${gid}-n)`} opacity="0.6" />
         <rect x="16" y="16" width="368" height="468" fill="none" stroke={`rgba(${ink}, 0.18)`} />
-        <text x="30" y="42" fontFamily="Cormorant Garamond, Georgia, serif" fontSize="15" letterSpacing="6" fill={`rgba(${ink}, ${markOp})`}>AZRAA</text>
+        <text x="30" y="42" fontFamily="Cormorant Garamond, Georgia, serif" fontSize="15" letterSpacing="6" fill={`rgba(${ink}, ${markOp})`}>azraa</text>
         <text x="200" y="288" textAnchor="middle" fontFamily="Cormorant Garamond, Georgia, serif" fontSize="140" fontWeight="300" fill={`rgba(${ink}, ${motifOp})`} letterSpacing="6">{motif}</text>
         <line x1="30" y1="440" x2="120" y2="440" stroke={`rgba(${ink}, 0.4)`} />
         <text x="30" y="464" fontFamily="Inter, sans-serif" fontSize="11" letterSpacing="4" fill={`rgba(${ink}, ${labelOp})`}>
