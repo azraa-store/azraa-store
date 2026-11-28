@@ -61,6 +61,10 @@
   /* reserved for the hero AZRAA wordmark only — a distinct, richer display
      face, not a sitewide token, so it stays unique to that one mark */
   --hero-wordmark: 'Bodoni Moda', 'Times New Roman', Georgia, serif;
+  /* every uppercase/capitalized label, button and badge sitewide (anything
+     with text-transform: uppercase) — not the hero wordmark, which keeps
+     --hero-wordmark instead */
+  --caps: 'Roboto Slab', Georgia, 'Times New Roman', serif;
 
   --label: 0.24em;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -228,7 +232,7 @@ img {
   color: var(--bg);
   font-size: 0.75rem;
   letter-spacing: var(--label);
-  text-transform: uppercase;
+  text-transform: uppercase; font-family: var(--caps);
   transform: translateY(-160%);
   transition: transform 0.3s var(--ease);
 }
@@ -277,7 +281,7 @@ html.lenis body {
   font-weight: 400;
   font-size: clamp(0.62rem, 0.9vw, 0.74rem);
   letter-spacing: var(--label);
-  text-transform: uppercase;
+  text-transform: uppercase; font-family: var(--caps);
   color: var(--ink-faint);
 }
 
@@ -292,7 +296,7 @@ html.lenis body {
   font-family: var(--serif);
   font-weight: 400;
   letter-spacing: 0.22em;
-  text-transform: uppercase;
+  text-transform: uppercase; font-family: var(--caps);
 }
 
 /* reduced motion: nothing eases, nothing drifts */
