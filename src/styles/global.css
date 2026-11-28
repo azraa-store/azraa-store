@@ -80,13 +80,8 @@
   --serif-secondary: 'Arimo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
   --sans: 'Arimo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
   /* every uppercase/capitalized label, button and badge sitewide (anything
-     with text-transform: uppercase). Caladea — a free, open-licensed
-     serif metrically identical to Cambria (which isn't a legitimate web
-     font: it's Microsoft-licensed, and the only way to pull it from
-     Google's API is an internal Docs/Slides compatibility endpoint not
-     meant for public embedding) — stands in for the Cambria look asked
-     for here. */
-  --caps: 'Caladea', Cambria, Georgia, 'Times New Roman', serif;
+     with text-transform: uppercase). */
+  --caps: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
 
   --label: 0.24em;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
