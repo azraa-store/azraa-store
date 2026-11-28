@@ -1067,9 +1067,9 @@
 .home-hero--still .home-hero__word { color: var(--hero-text); }
 
 .home-hero__word {
-  font-family: var(--serif);
-  font-weight: 400;
-  letter-spacing: clamp(0.04em, 0.5vw, 0.12em);
+  font-family: var(--hero-wordmark);
+  font-weight: 500;
+  letter-spacing: clamp(0.05em, 0.6vw, 0.14em);
   text-transform: uppercase;
   font-size: clamp(2.8rem, 6.5vw, 5.6rem);
   line-height: 0.94;
