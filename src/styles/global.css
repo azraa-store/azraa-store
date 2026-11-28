@@ -5,22 +5,28 @@
 :root {
   color-scheme: light;
 
-  /* LIGHT — Ivory/Warm Cream/Champagne Gold luxury palette */
-  --bg: #f5efe5;                        /* Ivory */
+  /* LIGHT — "Atelier Heritage": Champagne Ivory / Midnight Espresso /
+     Antique Champagne Gold, with Warm Stone, Heritage Olive and Oxblood
+     Burgundy as restrained, selectively-used accents (see site.css for
+     where olive/burgundy actually get applied — not sitewide). */
+  --bg: #f5efe5;                        /* Champagne Ivory */
   --bg-1: #efe6d7;
-  --bg-2: #e9ddc9;   /* Warm Cream — raised surfaces: cards, drawers, summary panels */
+  --stone: #d9cbbb;                     /* Warm Stone */
+  --bg-2: var(--stone);                 /* raised surfaces: cards, drawers, summary panels */
   --bg-3: #e1d2b8;   /* inputs, chips */
+  --olive: #68704b;                     /* Heritage Olive — selected editorial/wholesale sections only */
+  --burgundy: #542b35;                  /* Oxblood Burgundy — selected promo/limited-edition accents only */
 
-  --ink: #11100e;                       /* Soft Black — primary text */
-  --ink-dim: #211a15;                   /* Deep Espresso — body, metadata */
+  --ink: #241a16;                       /* Midnight Espresso — primary text, nav, buttons, headings, icons */
+  --ink-dim: #211a15;                   /* body, metadata */
   --ink-faint: #4f463c;                 /* labels, captions — clear dark grey */
   --ink-disabled: #8f8b7f;
 
-  --line: rgba(17, 16, 14, 0.16);
-  --line-strong: rgba(17, 16, 14, 0.42);
+  --line: rgba(36, 26, 22, 0.16);
+  --line-strong: rgba(36, 26, 22, 0.42);
 
   --btn-text: var(--bg);                /* text sitting on a filled --ink button */
-  --hover-wash: rgba(17, 16, 14, 0.055);
+  --hover-wash: rgba(36, 26, 22, 0.055);
   --scrim: rgba(33, 26, 21, 0.46);
   --header-solid: rgba(245, 239, 229, 0.9);
   --header-over: linear-gradient(180deg, rgba(245, 239, 229, 0.85), rgba(245, 239, 229, 0.4));
@@ -35,7 +41,7 @@
   --hero-scrim: linear-gradient(90deg, rgba(245, 239, 229, 0.68) 0%, rgba(245, 239, 229, 0.46) 28%, rgba(245, 239, 229, 0.26) 46%, rgba(245, 239, 229, 0.06) 64%, rgba(245, 239, 229, 0) 78%);
   --hero-scrim-mobile: linear-gradient(180deg, rgba(245, 239, 229, 0.42), rgba(245, 239, 229, 0.82) 46%, rgba(245, 239, 229, 0.96));
   --hero-concrete: #d4cdc1;
-  --hero-text: #11100e;
+  --hero-text: var(--ink);
   --hero-text-dim: #211a15;
   --hero-eyebrow: #83603f;
   --hero-gold: #c6a36a;                 /* Champagne Gold */
