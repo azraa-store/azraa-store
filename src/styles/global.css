@@ -5,47 +5,48 @@
 :root {
   color-scheme: light;
 
-  /* LIGHT — creamy warm ivory, editorial luxury commerce */
-  --bg: #f7f2e7;
-  --bg-1: #f1ebdc;
-  --bg-2: #e9e2d0;   /* raised surfaces: cards, drawers, summary panels */
-  --bg-3: #e3dbc5;   /* inputs, chips */
+  /* LIGHT — Ivory/Warm Cream/Champagne Gold luxury palette */
+  --bg: #f5efe5;                        /* Ivory */
+  --bg-1: #efe6d7;
+  --bg-2: #e9ddc9;   /* Warm Cream — raised surfaces: cards, drawers, summary panels */
+  --bg-3: #e1d2b8;   /* inputs, chips */
 
-  --ink: #0d0c0a;                       /* dark black — primary text */
-  --ink-dim: #23211c;                   /* body, metadata — near-black, fully legible */
-  --ink-faint: #4a473f;                 /* labels, captions — clear dark grey */
+  --ink: #11100e;                       /* Soft Black — primary text */
+  --ink-dim: #211a15;                   /* Deep Espresso — body, metadata */
+  --ink-faint: #4f463c;                 /* labels, captions — clear dark grey */
   --ink-disabled: #8f8b7f;
 
-  --line: rgba(13, 12, 10, 0.16);
-  --line-strong: rgba(13, 12, 10, 0.42);
+  --line: rgba(17, 16, 14, 0.16);
+  --line-strong: rgba(17, 16, 14, 0.42);
 
   --btn-text: var(--bg);                /* text sitting on a filled --ink button */
-  --hover-wash: rgba(13, 12, 10, 0.055);
-  --scrim: rgba(24, 21, 15, 0.46);
-  --header-solid: rgba(247, 242, 231, 0.9);
-  --header-over: linear-gradient(180deg, rgba(247, 242, 231, 0.85), rgba(247, 242, 231, 0.4));
-  --surface-flag: rgba(247, 242, 231, 0.94);
-  --shadow-lg: 0 30px 70px rgba(40, 33, 18, 0.18);
-  --word-shadow: 0 2px 30px rgba(40, 33, 18, 0.12);
+  --hover-wash: rgba(17, 16, 14, 0.055);
+  --scrim: rgba(33, 26, 21, 0.46);
+  --header-solid: rgba(245, 239, 229, 0.9);
+  --header-over: linear-gradient(180deg, rgba(245, 239, 229, 0.85), rgba(245, 239, 229, 0.4));
+  --surface-flag: rgba(245, 239, 229, 0.94);
+  --shadow-lg: 0 30px 70px rgba(33, 26, 21, 0.18);
+  --word-shadow: 0 2px 30px rgba(33, 26, 21, 0.12);
   --img-aside-filter: brightness(0.98) contrast(1.02);
   /* controlled exposure: pull highlights down, add contrast/depth instead of
      flattening — the old 1.02/0.99/0.95 combo read as bright and washed out */
   --hero-img-filter: brightness(0.93) contrast(1.08) saturate(1.02);
-  --hero-wash: linear-gradient(180deg, rgba(247, 242, 231, 0.08), rgba(247, 242, 231, 0) 28%, rgba(247, 242, 231, 0.04) 74%, rgba(247, 242, 231, 0.16));
-  --hero-scrim: linear-gradient(90deg, rgba(247, 242, 231, 0.68) 0%, rgba(247, 242, 231, 0.46) 28%, rgba(247, 242, 231, 0.26) 46%, rgba(247, 242, 231, 0.06) 64%, rgba(247, 242, 231, 0) 78%);
-  --hero-scrim-mobile: linear-gradient(180deg, rgba(247, 242, 231, 0.42), rgba(247, 242, 231, 0.82) 46%, rgba(247, 242, 231, 0.96));
+  --hero-wash: linear-gradient(180deg, rgba(245, 239, 229, 0.08), rgba(245, 239, 229, 0) 28%, rgba(245, 239, 229, 0.04) 74%, rgba(245, 239, 229, 0.16));
+  --hero-scrim: linear-gradient(90deg, rgba(245, 239, 229, 0.68) 0%, rgba(245, 239, 229, 0.46) 28%, rgba(245, 239, 229, 0.26) 46%, rgba(245, 239, 229, 0.06) 64%, rgba(245, 239, 229, 0) 78%);
+  --hero-scrim-mobile: linear-gradient(180deg, rgba(245, 239, 229, 0.42), rgba(245, 239, 229, 0.82) 46%, rgba(245, 239, 229, 0.96));
   --hero-concrete: #d4cdc1;
-  --hero-text: #0d0c0a;
-  --hero-text-dim: #23211c;
+  --hero-text: #11100e;
+  --hero-text-dim: #211a15;
   --hero-eyebrow: #83603f;
-  --hero-gold: #c9a66b;
+  --hero-gold: #c6a36a;                 /* Champagne Gold */
+  --hero-gold-deep: #a98545;            /* Antique Gold — hover/secondary states */
 
-  --plate-ink: 23, 21, 15;             /* rgb for generative product plates */
+  --plate-ink: 33, 26, 21;             /* rgb for generative product plates */
   --plate-0: #e7e0cf;
   --plate-1: #d3ccb9;
 
-  --accent: #a83228;                   /* from the Azraa mark — used sparingly */
-  --accent-soft: rgba(168, 50, 40, 0.12);
+  --accent: var(--hero-gold-deep);     /* brand accent — Antique Gold, used sparingly */
+  --accent-soft: rgba(169, 133, 69, 0.14);
   --ok: #4c7a54;
   --warn: #8a5e1c;
   --err: #b23b34;
@@ -53,18 +54,20 @@
   /* fixed dark-espresso / warm-white pair for the announcement bar — not
      redeclared in the dark theme block below, so it never inverts; the bar
      reads the same in both themes, as a top utility bar conventionally does */
-  --announce-bg: #241b14;
-  --announce-ink: #f7f2e7;
+  --announce-bg: #211a15;
+  --announce-ink: #f5efe5;
 
-  --serif: 'Commissioner', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-  --sans: 'Commissioner', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-  /* reserved for the hero AZRAA wordmark only — a distinct, richer display
-     face, not a sitewide token, so it stays unique to that one mark */
-  --hero-wordmark: 'Bodoni Moda', 'Times New Roman', Georgia, serif;
+  /* Luxury 3-font system: Bodoni Moda for large editorial display, Cormorant
+     Garamond for supporting editorial copy, DM Sans for everything functional
+     (body, nav, buttons, forms, product names). */
+  --serif-display: 'Bodoni Moda', Georgia, 'Times New Roman', serif;
+  --serif-secondary: 'Cormorant Garamond', 'Times New Roman', Georgia, serif;
+  --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
   /* every uppercase/capitalized label, button and badge sitewide (anything
-     with text-transform: uppercase) — not the hero wordmark, which keeps
-     --hero-wordmark instead */
-  --caps: 'Cormorant Garamond', 'Times New Roman', Georgia, serif;
+     with text-transform: uppercase) — functional text, so it rides the
+     same DM Sans as --sans; kept as its own token since callers already
+     reference it directly. */
+  --caps: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
 
   --label: 0.24em;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -232,7 +235,7 @@ img {
   color: var(--bg);
   font-size: 0.75rem;
   letter-spacing: var(--label);
-  text-transform: uppercase; font-family: var(--caps); font-weight: 600;
+  text-transform: uppercase; font-family: var(--caps); font-weight: 500;
   transform: translateY(-160%);
   transition: transform 0.3s var(--ease);
 }
@@ -281,22 +284,22 @@ html.lenis body {
   font-weight: 400;
   font-size: clamp(0.62rem, 0.9vw, 0.74rem);
   letter-spacing: var(--label);
-  text-transform: uppercase; font-family: var(--caps); font-weight: 600;
+  text-transform: uppercase; font-family: var(--caps); font-weight: 500;
   color: var(--ink-faint);
 }
 
 .display {
-  font-family: var(--serif);
+  font-family: var(--serif-display);
   font-weight: 400;
   line-height: 0.98;
   letter-spacing: -0.01em;
 }
 
 .wordmark {
-  font-family: var(--serif);
+  font-family: var(--serif-display);
   font-weight: 400;
   letter-spacing: 0.22em;
-  text-transform: uppercase; font-family: var(--caps); font-weight: 600;
+  text-transform: uppercase; font-family: var(--caps); font-weight: 500;
 }
 
 /* reduced motion: nothing eases, nothing drifts */
