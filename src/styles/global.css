@@ -57,18 +57,18 @@
   --announce-bg: #211a15;
   --announce-ink: #f5efe5;
 
-  /* Every CSS-driven heading (page/section titles, modal titles, brand-mark
-     echoes) uses Commissioner — the hero's own bespoke SVG wordmark is kept
-     deliberately separate on Bodoni Moda, per the earlier call to make it a
-     unique, standalone mark rather than just another heading style. */
-  --serif-display: 'Commissioner', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-  --serif-secondary: 'Commissioner', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-  --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  /* Every CSS-driven heading and functional element (body, nav, buttons,
+     forms, product names) uses Roboto — the hero's own bespoke SVG wordmark
+     is kept deliberately separate on Bodoni Moda, per the earlier call to
+     make it a unique, standalone mark rather than just another heading. */
+  --serif-display: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --serif-secondary: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --sans: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
   /* every uppercase/capitalized label, button and badge sitewide (anything
      with text-transform: uppercase) — functional text, so it rides the
-     same DM Sans as --sans; kept as its own token since callers already
+     same Roboto as --sans; kept as its own token since callers already
      reference it directly. */
-  --caps: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --caps: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
 
   --label: 0.24em;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
